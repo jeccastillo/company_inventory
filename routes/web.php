@@ -10,6 +10,7 @@ use App\Http\Controllers\POS\UnitsController;
 use App\Http\Controllers\POS\CategoriesController;
 use App\Http\Controllers\POS\ProductsController;
 use App\Http\Controllers\POS\PurchasesController;
+use App\Http\Controllers\POS\StocksController;
 
 
 Route::get('/', function () {
@@ -91,6 +92,9 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
  });
 
+ Route::controller(StocksController::class)->group(function(){
+   Route::get('/stocks/all','StocksAll')->name('stocks.all');
+});
 Route::get('/dashboard', function () {
     return view('admin.index');
 })->middleware(['auth'])->name('dashboard'); // middleware is used to authenticate user and redirect to a specific location in app.

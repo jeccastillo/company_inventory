@@ -17,9 +17,17 @@
                          <span>Dashboard</span>
                      </a>
                  </li>
-
-
-
+                 <!-- ____________TO IMPLEMENT ___________________________-->
+                 {{-- <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-mail-send-line"></i>
+                        <span>Manage Users</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{ route('supplier.all') }}>All Suppliers</a></li>
+                    </ul>
+                </li> --}}
+                <!-- ____________TO IMPLEMENT ___________________________-->
                  <li>
                      <a href="javascript: void(0);" class="has-arrow waves-effect">
                          <i class="ri-mail-send-line"></i>
@@ -78,13 +86,41 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-mail-send-line"></i>
-                        <span>Manage Purchase</span>
+                        <span>Manage Purchases</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{ route('purchases.all') }}>All Purchases</a></li>
                     </ul>
                 </li>
-                 
+                 <!-- ____________TO IMPLEMENT ___________________________-->
+                 {{-- <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-mail-send-line"></i>
+                        <span>Manage Stock Transfers</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{ route('purchases.all') }}>All Purchases</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-mail-send-line"></i>
+                        <span>Manage Deliveries</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{ route('purchases.all') }}>All Purchases</a></li>
+                    </ul>
+                </li> --}}
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-mail-send-line"></i>
+                        <span>Manage Working Stocks</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{ route('stocks.all') }}>All Stocks</a></li>
+                    </ul>
+                </li> --}}
+                <!-- ____________TO IMPLEMENT ___________________________-->
 
                  
 

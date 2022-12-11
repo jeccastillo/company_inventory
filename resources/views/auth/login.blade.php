@@ -15,15 +15,14 @@
         <link href="{{ asset('backend/assets/css/bootstrap.min.css') }}" id="bootstrap-style" rel="stylesheet" type="text/css" />
         <!-- Icons Css -->
         <link href="{{ asset('backend/assets/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
-        <!-- App Css-->
-        <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />
-
+        <!-- App Css-->        
+        <link href="{{ asset('backend/assets/css/app.min.css') }}" id="app-style" rel="stylesheet" type="text/css" />        
         <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
-
+        
     </head>
 
-    <body class="auth-body-bg" >
-        <div class="bg-overlay"></div>
+    <body class="auth-body-bg"  >
+        <div class="bg-overlay" ></div>
         <div class="wrapper-page">
             <div class="container-fluid p-0">
                 <div class="card">
@@ -32,13 +31,13 @@
                         <div class="text-center mt-4">
                             <div class="mb-3">
                                 <a href="index.html" class="auth-logo">
-                                    <img src="{{ asset('backend/assets/images/logo1.jpg') }}" height="100" width="100" class="logo-dark mx-auto" alt="">
+                                    <img src="{{ asset('backend/assets/images/caparal logo.png') }}" height="100" width="92%" class="logo-dark mx-auto" alt="">
                                     <img src="{{ asset('backend/assets/images/logo-light.png') }}" height="30" class="logo-light mx-auto" alt="">
                                 </a>
                             </div>
                         </div>
     
-                        <h4 class="text-muted text-center font-size-18"><b>Sign In</b></h4>
+                        <h4 class="text-muted text-center font-size-18 test"><b>Sign In</b></h4>
     
                         <div class="p-3">
      
