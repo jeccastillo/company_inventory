@@ -11,16 +11,25 @@ use App\Http\Controllers\POS\CategoriesController;
 use App\Http\Controllers\POS\ProductsController;
 use App\Http\Controllers\POS\PurchasesController;
 use App\Http\Controllers\POS\StocksController;
+use App\Http\Controllers\POS\UsersController;
+use Illuminate\Support\Auth;
+
 
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+// handles error 404 incorrect url
+Route::fallback(function (){
+   return view('admin.index');
+});
+// end of handles error 404 incorrect url
+
 
 Route::controller(DemoController::class)->group(function () {
     Route::get('/about', 'Index')->name('about.page')->middleware('check');
-    Route::get('/contact', 'ContactMethod')->name('cotact.page');
+    Route::get('/contact', 'ContactMethod')->name('cotact.page');    
 });
 
 
@@ -34,6 +43,17 @@ Route::controller(AdminController::class)->group(function () {
     Route::get('/change/password', 'ChangePassword')->name('change.password');
     Route::post('/update/password', 'UpdatePassword')->name('update.password');
      
+});
+
+// Users All Route 
+
+Route::controller(UsersController::class)->group(function(){
+   Route::get('/users/all', 'UsersAll')->name('users.all');
+   Route::get('/user/add','UserAdd')->name('user.add');
+   Route::post('/user/store', 'UserStore')->name('user.store');
+   Route::get('/user/delete/{id}', 'UserDelete')->name('user.delete');
+   Route::get('/user/edit/{id}', 'UserEdit')->name('user.edit');
+   Route::post('/user/update', 'UserUpdate')->name('user.update');
 });
 
  // Supplier All Route 
