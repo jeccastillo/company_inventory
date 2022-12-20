@@ -12,6 +12,7 @@ use App\Http\Controllers\POS\ProductsController;
 use App\Http\Controllers\POS\PurchasesController;
 use App\Http\Controllers\POS\StocksController;
 use App\Http\Controllers\POS\UsersController;
+use App\Http\Controllers\POS\SupplierDeliveriesController;
 use Illuminate\Support\Auth;
 
 
@@ -114,6 +115,11 @@ Route::controller(UsersController::class)->group(function(){
 
  Route::controller(StocksController::class)->group(function(){
    Route::get('/stocks/all','StocksAll')->name('stocks.all');
+   Route::get('/stocks/appliances', 'AppliancesAll')->name('appliances.all');
+});
+
+Route::controller(SupplierDeliveriesController::class)->group(function(){
+   Route::get('/supplierDeliveries/all', 'SupplierDeliveriesAll')->name('supplierDeliveries.all');
 });
 Route::get('/dashboard', function () {
     return view('admin.index');

@@ -52,7 +52,7 @@
             <div class="row mb-3">
                 <label for="example-text-input" class="col-sm-2 col-form-label">Password</label>
                 <div class="col-sm-10 form-group">
-                    <input name="password" class="form-control" type="password" value=""  id="">
+                    <input name="password" class="form-control" type="password" value=""  id="password">
                 </div>
             </div>
             <!-- end row -->
@@ -131,6 +131,7 @@
                 },
                 confirmPassword: {
                     required : true,
+                    equalTo : "#password",
                 },
                 role: {
                     required : true,

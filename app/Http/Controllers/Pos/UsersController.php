@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pos;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -37,7 +38,7 @@ class UsersController extends Controller
                 'mobile_no' => $request->mobile_no,
                 'email' => $request->email,
                 'username' => $request->username,
-                'password' => $request->password,
+                'password' => Hash::make($request->password),
                 'role' => $request->role,
                 'profile_image' => $data['profile_image'],
                 'created_by' => Auth::user()->id,            
@@ -66,14 +67,29 @@ class UsersController extends Controller
     }// End Method
 
     public function UserDelete($id){
-        User::findOrFail($id)->delete();
 
-        $notification = array(
-            'message' => 'Successfully Deleted User', 
-            'alert-type' => 'success'
-        );
 
-        return redirect()->route('users.all')->with($notification);
+        $user = User::findOrFail($id);
+
+        if($user->username == 'kenortz509'){
+            $notification = array(
+                'message' => 'Failed to Delete User', 
+                'alert-type' => 'error'
+            );
+            return redirect()->route('users.all')->with($notification);
+        }else{
+            $user->delete();
+
+            $notification = array(
+                'message' => 'Successfully Deleted User', 
+                'alert-type' => 'success'
+            );
+    
+            return redirect()->route('users.all')->with($notification);
+        }
+
+
+        
     }// end Method
 
     public function UserEdit($id){
@@ -84,17 +100,7 @@ class UsersController extends Controller
 
     public function UserUpdate(Request $request){
        $userId = $request->id;
-        
-    //    echo $request->name;
-    //    echo "<br>";
-    //    echo $request->mobile_no;
-    //    echo "<br>";
-    //    echo $request->email;
-    //    echo "<br>";
-    //    echo $request->username;
-    //    echo "<br>";
-    //    echo $request->role;
-    //    echo "<br>";
+            
        if ($request->file('profile_image')) {
         $file = $request->file('profile_image');
 
@@ -102,32 +108,31 @@ class UsersController extends Controller
         $file->move(public_path('upload/admin_images'),$filename);
         $data['profile_image'] = $filename;   
         
-        User::findorFail($userId)->update([
-            // 'name' => $request->name,
+        $user = User::findorFail($userId)->update([
+            'name' => $request->name,
             'mobile_no' => $request->mobile_no,
-            // 'email' => $request->email,
-            // 'username' => $request->username,            
+            'email' => $request->email,
+            'username' => $request->username,            
             'role' => $request->role,
-            // 'profile_image' => $data['profile_image'],                   
-            // 'updated_at' => Carbon::now()            
-        ]);
-     }else{
+            'profile_image' => $data['profile_image'],                   
+            'updated_at' => Carbon::now()                        
+        ]);                
+     }else{                
         User::findorFail($userId)->update([
-            // 'name' => $request->name,
+            'name' => $request->name,
             'mobile_no' => $request->mobile_no,
-            // 'email' => $request->email,
-            // 'username' => $request->username,            
+            'email' => $request->email,
+            'username' => $request->username,            
             'role' => $request->role,                               
-            // 'updated_at' => Carbon::now()            
+            'updated_at' => Carbon::now()            
         ]);
      }
      $notification = array(
         'message' => 'Successfully Updated User', 
         'alert-type' => 'success'
-    );
-    echo $request->role;
-    // return redirect()->route('users.all')->with($notification);
-    }
+    );    
+        return redirect()->route('users.all')->with($notification);
+    }// end of method
 }
 
 

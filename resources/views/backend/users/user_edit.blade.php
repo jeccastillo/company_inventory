@@ -55,11 +55,10 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Account Role</label>
                 <div class="col-sm-10 form-group">
-                    <select name="role" class="form-select" aria-label="Default select example">
-                        <option selected="" value="{{$existingUser->role}}">{{ $existingUser->role == 2 ? 'Inventory Clerk' : ($existingUser->role == 3 ? 'Sales Clerk' : 'Admin') }}</option>
-                        <option  value="1">Admin</option>
-                        <option  value="2">Inventory Clerk</option>
-                        <option  value="3">Sales Clerk</option>                        
+                    <select name="role" class="form-select" aria-label="Default select example">                        
+                        <option  value="1" {{$existingUser->role == '1' ? 'selected':''}}>Admin</option>
+                        <option  value="2" {{$existingUser->role == '2' ? 'selected':''}}>Inventory Clerk</option>
+                        <option  value="3" {{$existingUser->role == '3' ? 'selected':''}}>Sales Clerk</option>                        
                     </select>
                 </div>
             </div>
@@ -112,13 +111,7 @@
                 },                
                 username: {
                     required : true,
-                },
-                password: {
-                    required : true,
-                },
-                confirmPassword: {
-                    required : true,
-                },
+                },                           
                 role: {
                     required : true,
                 },
@@ -135,13 +128,7 @@
                 },                
                 username: {
                     required : 'Please Enter Username',
-                },
-                password: {
-                    required : 'Please Enter Password',
-                },
-                confirmPassword: {
-                    required : 'Please Confirm Password',
-                },
+                },                
                 role: {
                     required : 'Please Select Role',
                 },

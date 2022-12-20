@@ -114,12 +114,25 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-mail-send-line"></i>
+                        <span>Manage Deliveries</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('supplierDeliveries.all')}}">Supplier Deliveries</a></li>
+                    </ul>                    
+                </li><!-- end list -->
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-mail-send-line"></i>
                         <span>Manage Working Stocks</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{ route('stocks.all') }}>All Stocks</a></li>
                     </ul>
-                </li> --}}
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{ route('appliances.all') }}>Appliances</a></li>
+                    </ul>
+                </li> 
                 <!-- ____________TO IMPLEMENT ___________________________-->
 
                  
