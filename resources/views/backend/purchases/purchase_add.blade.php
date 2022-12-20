@@ -74,11 +74,41 @@
                             </div>
 
                         </div> <!--end row-->
-                        
-
-
-
                     </div> <!--end card body-->
+         <!-------------------------------------------------------------------------> 
+         
+                <div class="card-body">
+                    <form method="post" action="">
+                        @csrf
+                        <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;">
+                            <thead>
+                                <tr>
+                                    <th>Category</th>
+                                    <th>Product Name</th>
+                                    <th>Pcs</th>
+                                    <th>Unit Price</th>
+                                    <th>Description</th>
+                                    <th>Total Price</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody id="addRow" class="addRow">
+
+                            </tbody>
+                            <tbody>
+                                <td colspan="5"></td>
+                                <td>
+                                    <input type="text" name="estimated_amount" value="0" id="estimated_amount" class="form-control estimated_amount" style="background-color: #ddd;" readonly>
+                                    <td></td>
+                                </td>
+                            </tbody>
+                        </table><br>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-info" id="storeButton">Save Purchase</button>
+                        </div>
+                    </form>
+                </div><!--end card body-->
+
                 </div><!--end card -->
             </div> <!-- end col -->
         </div> <!--end row-->
