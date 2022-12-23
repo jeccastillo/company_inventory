@@ -13,6 +13,8 @@ use App\Http\Controllers\POS\PurchasesController;
 use App\Http\Controllers\POS\StocksController;
 use App\Http\Controllers\POS\UsersController;
 use App\Http\Controllers\POS\SupplierDeliveriesController;
+use App\Http\Controllers\POS\AppliancesDeliveriesController;
+use App\Http\Controllers\POS\BrandsController;
 use Illuminate\Support\Auth;
 
 
@@ -111,13 +113,34 @@ Route::controller(UsersController::class)->group(function(){
  Route::controller(PurchasesController::class)->group(function(){
     Route::get('/purchases/all', 'PurchasesAll')->name('purchases.all');
     Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
+    Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
+    Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
+    Route::get('/purchase/pending', 'PurchasePending')->name('purchases.pending');
+    Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
  });
 
  Route::controller(StocksController::class)->group(function(){
    Route::get('/stocks/all','StocksAll')->name('stocks.all');
    Route::get('/stocks/appliances', 'AppliancesAll')->name('appliances.all');
-});
+});//end controller
 
+//appliances deliveries controller
+ Route::controller(AppliancesDeliveriesController::class)->group(function(){
+   Route::get('/appliances/deliveries/all', 'AppliancesDeliveriesAll')->name('appliancesDeliveries.all');
+   Route::get('/appliances/deliveries/add', 'AppliancesDeliveriesAdd')->name('appliancesDeliveries.add');
+   Route::post('/appliances/deliveries/store', 'AppliancesDeliveriesStore')->name('appliancesDeliveries.store');
+ });
+
+ // Brands Controller
+ Route::controller(BrandsController::class)->group(function(){
+   Route::get('/brands/all', 'BrandsAll')->name('brands.all');
+   Route::get('/brands/add', 'BrandAdd')->name('brand.add');
+   Route::post('brand/store', 'BrandStore')->name('brand.store');
+   Route::get('brand/edit/{id}', 'BrandEdit')->name('brand.edit');
+   Route::post('brand/update', 'BrandUpdate')->name('brand.update');
+ });
+
+//Supplier Deliveries Controller
 Route::controller(SupplierDeliveriesController::class)->group(function(){
    Route::get('/supplierDeliveries/all', 'SupplierDeliveriesAll')->name('supplierDeliveries.all');
 });

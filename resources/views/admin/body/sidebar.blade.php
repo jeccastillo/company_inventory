@@ -53,6 +53,16 @@
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-mail-send-line"></i>
+                        <span>Manage Brands</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{ route('brands.all') }}>All Brands</a></li>
+                    </ul>
+                </li>
+                <!-- end Manage Brands -->
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-mail-send-line"></i>
                         <span>Manage Units</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
@@ -88,9 +98,13 @@
                         <i class="ri-mail-send-line"></i>
                         <span>Manage Purchases</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('purchases.all') }}>All Purchases</a></li>
-                    </ul>
+                    
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href={{ route('purchases.all') }}>All Purchases</a></li>
+                        </ul>
+                        <ul class="sub-menu" aria-expanded="false">
+                            <li><a href={{ route('purchases.pending') }}>Approval Purchases</a></li>
+                        </ul>                    
                 </li>
                  <!-- ____________TO IMPLEMENT ___________________________-->
                  {{-- <li>
@@ -118,7 +132,10 @@
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('supplierDeliveries.all')}}">Supplier Deliveries</a></li>
-                    </ul>                    
+                    </ul>   
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('appliancesDeliveries.all')}}">Appliances Deliveries</a></li>
+                    </ul>                  
                 </li><!-- end list -->
 
                 <li>

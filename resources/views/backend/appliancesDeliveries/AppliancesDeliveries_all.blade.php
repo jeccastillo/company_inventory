@@ -9,7 +9,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0">All Purchases</h4>
+                                    <h4 class="mb-sm-0">Appliances Deliveries Page</h4>
                                 </div>
                             </div>
                         </div>
@@ -20,21 +20,25 @@
             <div class="card">
                 <div class="card-body">
 
-    <a href="{{route('purchase.add')}}" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Add Purchase </a> <br>  <br>               
+    <a href="{{route('appliancesDeliveries.add')}}" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Add Deliveries </a> <br>  <br>               
 
-                    <h4 class="card-title">Purchases Data </h4>
+                    <h4 class="card-title">Appliances Deliveries Data </h4>
 
 
                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                         <tr>
                             <th>Sl</th>
-                            <th>Purchase No.</th> 
+                            <th>Ref No.</th> 
                             <th>Date</th>                             
                             <th>Supplier</th> 
                             <th>Category</th>
+                            <th>Brand</th>
+                            <th>Description</th>
+                            <th>Model</th>
+                            <th>Serial #</th>
                             <th>Qty</th>
-                            <th>Product Name</th>
+                            <th>Unit Cost</th>                            
                             <th>Status</th> 
                             <th>Action</th>
 
@@ -43,15 +47,19 @@
 
                         <tbody>
 
-                        	@foreach($purchaseData as $key => $item)
+                        	@foreach($appliancesDeliveries as $key => $item)
                         <tr>
                             <td> {{ $key+1}} </td>
-                            <td> {{ $item->purchase_number }} </td>
-                            <td> {{ $item->date }} </td>  
+                            <td> {{ $item->reference}} </td>
+                            <td> {{ $item->date_in }} </td>  
                             <td> {{ $item['supplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
                             <td> {{ $item['category']['name']}} </td>
-                            <td> {{ $item->buying_qty}} </td>                                    
-                            <td> {{ $item['product']['name']}} </td>  
+                            <td> {{ $item['brand']['name']}} </td>                            
+                            <td> {{ $item->product_description}} </td>  
+                            <td> {{ $item->product_model}} </td>  
+                            <td> {{ $item->serial_number}} </td>  
+                            <td> {{ $item->qty}} </td>                                    
+                            <td> {{ $item->unit_cost}}</td>  
                             <td>
                                 @if($item->status == '0')
                                     <span class="btn btn-warning">Pending</span> 
