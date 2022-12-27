@@ -13,18 +13,16 @@
 
                         <h4 class="card-title">Add Category Page </h4><br><br>
 
-                        <form method="post" action="{{ route('category.store') }}" id="myForm">
+                        <form method="post" action="{{ route('appliancesCategory.update') }}" id="myForm">
                             @csrf
 
+                            <input type="hidden" name="id" value="{{$category->id}}">
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Category Name</label>
                                 <div class="form-group col-sm-10">
-                                    <input name="name" class="form-control" type="text" id="unitName">
+                                    <input name="name" class="form-control" type="text" value="{{$category->name}}">
                                 </div>
                             </div> <!-- end row -->
-                            
-
-                            
 
                             <input type="submit" class="btn btn-info waves-effect waves-light" value="Save Category">
                         </form>

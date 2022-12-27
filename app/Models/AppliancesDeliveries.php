@@ -24,6 +24,6 @@ class AppliancesDeliveries extends Model
     }
     
     public function product(){
-        return $this->belongsTo(Products::class,'product_id','id');
+        return $this->belongsTo(ProductsCap::class,'product_id','id');
     }
 }

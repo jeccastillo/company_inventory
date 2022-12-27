@@ -11,22 +11,21 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title">Add Category Page </h4><br><br>
+                        <h4 class="card-title">Edit Product Page </h4><br><br>
 
-                        <form method="post" action="{{ route('category.store') }}" id="myForm">
+                        <form method="post" action="{{ route('productCap.update') }}" id="myForm">
                             @csrf
 
+                            <input type="hidden" name="id" value="{{$productEdit->id}}">
                             <div class="row mb-3">
-                                <label for="example-text-input" class="col-sm-2 col-form-label">Category Name</label>
+                                <label for="example-text-input" class="col-sm-2 col-form-label">Product Name</label>
                                 <div class="form-group col-sm-10">
-                                    <input name="name" class="form-control" type="text" id="unitName">
+                                    <input name="name" class="form-control" type="text" id="brandName" value="{{$productEdit->name}}">
                                 </div>
-                            </div> <!-- end row -->
-                            
+                            </div>
+                            <!-- end row -->
 
-                            
-
-                            <input type="submit" class="btn btn-info waves-effect waves-light" value="Save Category">
+                            <input type="submit" class="btn btn-info waves-effect waves-light" value="Update Product">
                         </form>
                     </div>
                 </div>
@@ -49,7 +48,7 @@
             },
             messages :{
                 name: {
-                    required : 'Please Enter Category',
+                    required : 'Please Enter Brand Name',
                 },
                 
             },

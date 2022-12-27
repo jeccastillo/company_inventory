@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('users', function (Blueprint $table) { //Schema::create('tableName', function (Blueprint $table)
             $table->id();
             $table->string('name');
             $table->string('profile_image')->nullable();
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->integer('role')->default(0); 
+            $table->integer('role')->default(0)->comment('1=admin, 2=inventory clerk, 3=sales clerk');; 
             $table->tinyInteger('created_by')->nullable();           
             $table->rememberToken();
             $table->timestamps();

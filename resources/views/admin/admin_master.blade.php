@@ -13,10 +13,13 @@
         <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
  
  <!-- Select 2 -->
-<link href="{{ asset('backend/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ asset('backend/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
   <!-- end Select 2  -->
 
-
+        <!-- test css -->
+        <link href="{{ asset('backend/assets/css/test.css') }}" rel="stylesheet" type="text/css">
+        <!-- end test css -->
+        
         <!-- jquery.vectormap css -->
         <link href="{{ asset('backend/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet" type="text/css" />
 

@@ -17,8 +17,7 @@ return new class extends Migration
             $table->id();                        
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('supplier_id');
-            $table->unsignedBigInteger('brand_id');
-            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('brand_id');            
             $table->string('product_model');
             $table->string('serial_number')->nullable();
             $table->integer('qty')->default('1');
@@ -33,7 +32,7 @@ return new class extends Migration
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('restrict'); // $table->foreign('field on current table')->references('id')->on('related table')->onDelete('restrict')
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('restrict');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('restrict');              
+            $table->foreign('product_id')->references('id')->on('products_caps')->onDelete('restrict');              
             $table->timestamps();
         });
     }

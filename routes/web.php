@@ -15,6 +15,13 @@ use App\Http\Controllers\POS\UsersController;
 use App\Http\Controllers\POS\SupplierDeliveriesController;
 use App\Http\Controllers\POS\AppliancesDeliveriesController;
 use App\Http\Controllers\POS\BrandsController;
+use App\Http\Controllers\POS\ProductsCapController;  
+use App\Http\Controllers\POS\FurnituresDeliveriesController;
+use App\Http\Controllers\POS\FurnituresController;  
+use App\Http\Controllers\POS\AppliancesSalesController;
+use App\Http\Controllers\POS\TestCategoryController;
+use App\Http\Controllers\POS\AppliancesCategoriesController; 
+use App\Http\Controllers\POS\AppliancesProductsController;              
 use Illuminate\Support\Auth;
 
 
@@ -110,6 +117,16 @@ Route::controller(UsersController::class)->group(function(){
     Route::get('/products/delete/{id}', 'ProductDelete')->name('product.delete');
  });
 
+ //Products Cap all Route
+ Route::controller(ProductsCapController::class)->group(function(){
+   Route::get('/caparal/products/all', 'ProductsCapAll')->name('productsCap.all');
+   Route::get('/caparal/products/add', 'ProductsCapAdd')->name('productCap.add');
+   Route::post('/caparal/products/store', 'ProductCapStore')->name('productCap.store');
+   Route::get('/caparal/products/edit/{id}', 'ProductCapEdit')->name('productCap.edit');
+   Route::post('/caparal/products/update', 'ProductCapUpdate')->name('productCap.update');
+   Route::get('/caparal/products/delete/{id}', 'ProductCapDelete')->name('productCap.delete');
+ });
+
  Route::controller(PurchasesController::class)->group(function(){
     Route::get('/purchases/all', 'PurchasesAll')->name('purchases.all');
     Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
@@ -119,6 +136,7 @@ Route::controller(UsersController::class)->group(function(){
     Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
  });
 
+//StocksController
  Route::controller(StocksController::class)->group(function(){
    Route::get('/stocks/all','StocksAll')->name('stocks.all');
    Route::get('/stocks/appliances', 'AppliancesAll')->name('appliances.all');
@@ -129,6 +147,14 @@ Route::controller(UsersController::class)->group(function(){
    Route::get('/appliances/deliveries/all', 'AppliancesDeliveriesAll')->name('appliancesDeliveries.all');
    Route::get('/appliances/deliveries/add', 'AppliancesDeliveriesAdd')->name('appliancesDeliveries.add');
    Route::post('/appliances/deliveries/store', 'AppliancesDeliveriesStore')->name('appliancesDeliveries.store');
+   Route::get('/appliances/deliveries/delete/{id}', 'AppliancesDeliveriesDelete')->name('appliancesDeliveries.delete');
+ });
+
+ // appliancesProducts controller
+ Route::controller(AppliancesProductsController::class)->group(function(){
+   Route::get('/appliances/products/all', 'AppliancesProductsAll')->name('appliancesProducts.all');
+   Route::get('/appliances/products/add', 'AppliancesProductsAdd')->name('appliancesProducts.add');
+   Route::post('appliances/save', 'AppliancesSave')->name('appliances.save');
  });
 
  // Brands Controller
@@ -136,14 +162,47 @@ Route::controller(UsersController::class)->group(function(){
    Route::get('/brands/all', 'BrandsAll')->name('brands.all');
    Route::get('/brands/add', 'BrandAdd')->name('brand.add');
    Route::post('brand/store', 'BrandStore')->name('brand.store');
-   Route::get('brand/edit/{id}', 'BrandEdit')->name('brand.edit');
+   Route::get('/brand/edit/{id}', 'BrandEdit')->name('brand.edit');
    Route::post('brand/update', 'BrandUpdate')->name('brand.update');
+ });
+
+ Route::controller(AppliancesCategoriesController::class)->group(function(){
+   Route::get('/appliances/categories/all', 'AppliancesCategoriesAll')->name('appliancesCategories.all');
+   Route::get('/appliances/categories/add', 'AppliancesCategoriesAdd')->name('appliancesCategories.add');
+   Route::post('appliances/categories/store', 'AppliancesCategoriesStore')->name('appliancesCategory.store');
+   Route::get('/appliances/categories/delete/{id}', 'AppliancesCategoriesDelete')->name('appliancesCategory.delete');
+   Route::get('/appliances/categories/edit/{id}', 'AppliancesCategoriesEdit')->name('appliancesCategory.edit');   
+   Route::post('appliances/categories/update', 'AppliancesCategoriesUpdate')->name('appliancesCategory.update');
  });
 
 //Supplier Deliveries Controller
 Route::controller(SupplierDeliveriesController::class)->group(function(){
    Route::get('/supplierDeliveries/all', 'SupplierDeliveriesAll')->name('supplierDeliveries.all');
 });
+
+// furniture deliveries controller
+Route::controller(FurnituresDeliveriesController::class)->group(function(){
+   Route::get('/furnitures/deliveries/all', 'FurnitureDeliveriesAll')->name('furnitureDeliveries.all');
+   Route::get('/furnitures/deliveries/add', 'FurnitureDeliveriesAdd')->name('furnitureDeliveries.add');
+
+});
+
+// furnitures controller
+Route::controller(FurnituresController::class)->group(function(){
+   Route::get('/furnitures/all', 'FurnituresAll')->name('furnitures.all');
+});
+
+//appliances sales controller
+Route::controller(AppliancesSalesController::class)->group(function(){
+   Route::get('/appliances/sales/all', 'AppliancesSalesAll')->name('appliancesSales.all');
+   Route::get('/appliances/sales/add', 'AppliancesSalesAdd')->name('appliancesSales.add');
+});//end of function
+
+//test category controller
+Route::controller(TestCategoryController::class)->group(function(){
+   Route::get('/test/category/all', 'TestCategoryAll')->name('testCategory.all');
+});
+
 Route::get('/dashboard', function () {
     return view('admin.index');
 })->middleware(['auth'])->name('dashboard'); // middleware is used to authenticate user and redirect to a specific location in app.

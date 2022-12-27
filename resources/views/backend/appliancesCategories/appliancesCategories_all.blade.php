@@ -9,7 +9,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0">All Categories</h4>
+                                    <h4 class="mb-sm-0">Appliances Categories</h4>
                                 </div>
                             </div>
                         </div>
@@ -20,7 +20,7 @@
             <div class="card">
                 <div class="card-body">
 
-    <a href="{{route('category.add')}}" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Add Category </a> <br>  <br>               
+    <a href="{{route('appliancesCategories.add')}}" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Add Category </a> <br>  <br>               
 
                     <h4 class="card-title">Categories Data </h4>
 
@@ -46,7 +46,7 @@
                             <td>
                                 @forelse($category->getProducts as $products)
                                     <ul>
-                                        <li>{{$products['name']}}</li>
+                                        <li>{{$products['product_model']}}</li>
                                     </ul>
                                 @empty
                                     <p>No products related</p>
@@ -54,9 +54,9 @@
                             </td>
                             
                             <td>
-                                <a href="{{route('category.edit', $category->id)}} " class="btn btn-info sm" title="Edit Data">  <i class="fas fa-edit"></i> </a>
+                                <a href="{{route('appliancesCategory.edit', $category->id)}} " class="btn btn-info sm" title="Edit Data">  <i class="fas fa-edit"></i> </a>
                                 
-                                <a href="{{route('category.delete', $category->id)}} " class="btn btn-danger sm " title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a>
+                                <a href="{{route('appliancesCategory.delete', $category->id)}} " class="btn btn-danger sm " title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a>
                            
                             </td>
 

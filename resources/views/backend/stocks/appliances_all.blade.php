@@ -9,7 +9,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0">All Purchases</h4>
+                                    <h4 class="mb-sm-0">All Appliances</h4>
                                 </div>
                             </div>
                         </div>
@@ -22,28 +22,29 @@
 
     {{-- <a href="{{route('purchase.add')}}" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Add Purchase </a> <br>  <br>                --}}
 
-                    <h4 class="card-title">Appliances Data </h4>
+                    <h4 class="card-title">Appliances Inventory </h4>
 
 
                     <table id="datatable" class="table table-bordered dt-responsive  text-break" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
-                        <tr>
-                            <th>Sl</th>
-                            <th>Supplier</th>                             
-                            <th>Brand</th>                             
-                            <th>Description</th> 
-                            <th>Model</th>
-                            <th>Serial #</th>
-                            <th>Qty</th>
-                            <th>Unit Cost</th> 
-                            <th>SRP</th>
-                            <th>Date-in</th>
-                            <th>Date-out</th>                             
-                            <th>Ref in</th> 
-                            <th>Ref out</th> 
-                            <th>Remarks</th>
-                            
-
+                            <tr>
+                                <th>Sl</th>
+                                <th>Supplier</th>                             
+                                <th>Brand</th>                             
+                                <th>Product Name / Desc</th> 
+                                <th>Model</th>
+                                <th>Serial #</th>
+                                <th>Qty</th>
+                                <th>Unit Cost</th> 
+                                <th>SRP</th>
+                                <th>Date-in</th>
+                                <th>Date-out</th>                             
+                                <th>Ref in</th> 
+                                <th>Ref out</th> 
+                                <th>Status</th>
+                                <th>Remarks</th>
+                                
+                            </tr>
                         </thead>
 
 
@@ -51,12 +52,13 @@
 
                         	@foreach($appliances as $key => $stock)
                         <tr>
+                            {{$stat = $stock->status;}}
                             <td> {{ $key+1}} </td>
-                            <td> {{ $stock->supplier}} </td>                              
-                            <td> {{ $stock->product_brand}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
-                            <td> {{ $stock->product_description}} </td>
+                            <td> {{ $stock['supplier']['name']}} </td>                              
+                            <td> {{ $stock['brand']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
+                            <td> {{ $stock['product']['name']}} </td>
                             <td> {{ $stock->product_model}} </td>
-                            <td> {{ $stock->serial_number}} </td>
+                            <td title="{{$stock->serial_number}}"> {{ substr($stock->serial_number, 0, 5).'...'}} </td>
                             <td> {{ $stock->qty}} </td>
                             <td> {{ $stock->unit_cost}} </td>
                             <td> {{ $stock->srp}} </td>
@@ -64,6 +66,11 @@
                             <td> {{ $stock->date_out}} </td>
                             <td> {{ $stock->reference_in}} </td>
                             <td> {{ $stock->reference_out}} </td>
+                            <td title="{{$stat == 0 ? 'Prestine':'Defective'}}">@if($stat == '0')
+                                <span class="btn btn-success" title="Prestine" ><i class="fas fa-check-circle" title="Prestine" onClick="myFunction()"></i></span> 
+                            @elseif($stat == '1')
+                            <span class="btn btn-danger">X</span>
+                            @endif</td>
                             <td> {{ $stock->remarks}} </td>
                             
                             

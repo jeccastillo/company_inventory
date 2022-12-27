@@ -5,12 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Categories extends Model
+class TestCategories extends Model
 {
     use HasFactory;
     protected $guarded = []; // to avoid data breach. [] <- means all columns
 
-    public function getProducts(){
-        return $this->hasMany(ProductsCap::class,'category_id', 'id');
+
+    public function getProduct(){
+        return $this->hasMany(TestProducts::class,'category_id', 'id'); //(relatedModel::class,'related id on related model', 'your id')
     }
 }

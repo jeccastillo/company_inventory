@@ -9,7 +9,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0">Appliances Deliveries Page</h4>
+                                    <h4 class="mb-sm-0">Furniture Deliveries Page</h4>
                                 </div>
                             </div>
                         </div>
@@ -20,53 +20,51 @@
             <div class="card">
                 <div class="card-body">
 
-    <a href="{{route('appliancesDeliveries.add')}}" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Add Deliveries </a> <br>  <br>               
+                   
 
-                    <h4 class="card-title">Appliances Deliveries Data </h4>
+                    <h4 class="card-title">Furniture Deliveries Data </h4>
 
 
                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                         <tr>
                             <th>Sl</th>
-                            <th>Ref No.</th> 
-                            <th>Date</th>                             
-                            <th>Supplier</th> 
-                            <th>Category</th>
-                            <th>Brand</th>
-                            <th>Description</th>
+                            <th>Date</th>
+                            <th>Ref No.</th>                                                          
+                            <th>Supplier</th>                             
+                            <th>Product Name / Desc</th>
                             <th>Model</th>
-                            <th>Serial #</th>
+                            <th>Color</th>
+                            <th>Job Order</th>
                             <th>Qty</th>
                             <th>Unit Cost</th>                            
-                            <th>Status</th>                                                                                                             
-                            <th>Action</th>                                                                
-                        
-                            
-
+                            <th>GDP/SRP</th>
+                            <th>TOTAL GDP</th> 
+                            <th>Action</th>                                                                                                                    
                         </thead>
 
 
                         <tbody>
 
-                        	@foreach($appliancesDeliveries as $key => $item)
+                        	@foreach($furnitures as $key => $item)
                         <tr>
                             <td> {{ $key+1}} </td>
-                            <td> {{ $item->reference}} </td>
-                            <td> {{ $item->date_in }} </td>  
-                            <td> {{ $item['supplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
-                            <td> {{ $item['category']['name']}} </td>
-                            <td> {{ $item['brand']['name']}} </td>                            
-                            <td> {{ $item->product_description}} </td>  
+                            <td> {{ $item->date_in }} </td>
+                            <td> {{ $item->reference}} </td>                              
+                            <td> {{ $item['supplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->                                                   
+                            <td> {{ $item['product']['name']}} </td>  
                             <td> {{ $item->product_model}} </td>  
-                            <td> {{ $item->serial_number}} </td>  
+                            <td> {{ $item->color}} </td> 
+                            <td> {{ $item->job_order}} </td> 
                             <td> {{ $item->qty}} </td>                                    
-                            <td> {{ $item->unit_cost}}</td>  
+                            <td> {{ $item->unit_cost}}</td>   
+                            <td> {{ $item->srp_gdp}}</td> 
+                            <td> {{ $item->total_gdp}}</td>
                             <td>
                                 @if($item->status == '0')
                                     <span class="btn btn-success" title="Prestine" ><i class="fas fa-check-circle" title="Prestine" onClick="myFunction()"></i></span> 
                                 @elseif($item->status == '1')
-                                <span class="btn btn-danger">Defective</span>
+                                <span class="btn btn-success">Approved</span>
                                 @endif
                             </td> 
                             

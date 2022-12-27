@@ -13,8 +13,9 @@ use Illuminate\Database\QueryException;
 class CategoriesController extends Controller
 {
     public function CategoriesAll(){
-        $categories = Categories::latest()->get();
-
+        $categories = Categories::all();
+        
+        
         return view('backend.categories.categories_all', compact('categories'));
     }// end of function
 

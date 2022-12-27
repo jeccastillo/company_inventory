@@ -33,7 +33,7 @@
                 <label for="supplier_id" class="form-label">Supplier Name </label>
                 <select id="supplier_id" name="supplier_id" class="form-select select2 " aria-label="Default select example">
                     <option selected="" value="" >Open this select menu</option>
-                    @foreach($supplier as $supp)
+                    @foreach($suppliers as $supp)
                     <option value="{{ $supp->id }}" >{{ $supp->name }}</option>
                     @endforeach
                 </select>
@@ -70,12 +70,25 @@
                 <label for="example-text-input" class="form-label">Product Name / Description </label>
                 <select name="product_id" id="product_id" class="form-select select2" aria-label="Default select example">
                     <option selected="" value="">Open this select menu</option>
-                    @foreach($productsCap as $product)
-                        <option value="{{ $product->id }}">{{ $product->name }}</option>            
+                    @foreach($existingProducts as $product)
+                        <option value="{{ $product->id }}">{{ $product['product']['name'] }}</option>                                    
                     @endforeach
                 </select>
             </div>
         </div>
+        <!--test data -->
+        <div class="col-md-3">
+            <div class="md-3">
+                <label for="example-text-input" class="form-label">Product Name / Description </label>
+                <select name="product_id" id="product_id" class="form-select select2" aria-label="Default select example">
+                    <option selected="" value="">Open this select menu</option>
+                    @foreach($existingAppliances as $test)                        
+                        <option value="{{ $test->id }}">{{ $test->serial_number }}</option>            
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <!--end test data -->
         <div class="col-md-3">
             <div class="md-3">
                 <label for="example-text-input" class="form-label">Model</label>
@@ -93,18 +106,18 @@
     <div class="row">   
         <div class="col-md-3">
             <div class="md-3">
-                <label for="example-text-input" class="form-label">Status</label>
-                <select name="status" id="status" class="form-select select2" aria-label="Default select example">
+                <label for="example-text-input" class="form-label">Payment Mode</label>
+                <select name="mode_of_payment" id="mode_of_payment" class="form-select select2" aria-label="Default select example">
                     <option selected="" value="">Open this select menu</option>                    
-                        <option value="0">Pristine</option> 
-                        <option value="1">Defective</option>                               
+                        <option value="0">Credit</option> 
+                        <option value="1">Cash</option>                               
                 </select>
             </div>
         </div>
         <div class="col-md-3">
             <div class="md-3">
                 <label for="example-text-input" class="form-label" style="margin-top:43px;">  </label>        
-                <i class="btn btn-secondary btn-rounded waves-effect waves-light fas fa-plus-circle addeventmore"> Add </i>
+                <i class="btn btn-secondary btn-rounded waves-effect waves-light fas fa-plus-circle addeventmore" > Add this</i>
             </div>
         </div>
     </div> <!-- end row --> 
@@ -182,24 +195,24 @@
         <input type="hidden" name="reference[]" value="@{{reference}}">
         <input type="hidden" name="supplier_id[]" value="@{{supplier_id}}"> 
         <input type="hidden" name="brand_id[]" value="@{{brand_id}}"> 
-        <input type="hidden" name="status[]" value="@{{status}}"> 
+        <input type="hidden" name="mode_of_payment[]" value="@{{mode_of_payment}}"> 
     <td>
-        <input type="hidden" name="category_id[]" value="@{{category_id}}">
+        <input type="hidden" name="category_id[]" value="@{{category_id}}"> <!-- value="@id of element" -->
         @{{ category_name }}
     </td>
 
      <td>
-        <input type="hidden" name="product_id[]" value="@{{product_id}}">
+        <input type="hidden" name="product_id[]" value="@{{product_id}}"> <!-- value="@id of element" -->
         @{{ product_name }}
     </td>
 
     <td>
-        <input type="hidden" name="product_model[]" value="@{{product_model}}">
+        <input type="hidden" name="product_model[]" value="@{{product_model}}"> <!-- value="@id of element" -->
         @{{ product_model }}
     </td>
 
     <td>
-        <input type="hidden" name="serial[]" value="@{{serial_number}}">
+        <input type="hidden" name="serial[]" value="@{{serial_number}}"> <!-- value="@id of element" -->
         @{{ serial_number }}
     </td>
      <td>
@@ -245,7 +258,7 @@
             var product_name = $('#product_id').find('option:selected').text();
             var product_model = $('#product_model').val();
             var serial_number = $('#serial_number').val();
-            var status = $('#status').val();
+            var mode_of_payment = $('#mode_of_payment').val();
 
             if(date == ''){
                     $.notify("Date is Required" ,  {globalPosition: 'top right', className:'error' }); //(message, {position, className:type})
@@ -276,8 +289,8 @@
                     $.notify("Product Model is Required" ,  {globalPosition: 'top right', className:'error' });
                     return false;
                  }
-                 if(status == ''){
-                    $.notify("Product Status is Required" ,  {globalPosition: 'top right', className:'error' });
+                 if(mode_of_payment == ''){
+                    $.notify("Payment Mode is Required" ,  {globalPosition: 'top right', className:'error' });
                     return false;
                  }
 
@@ -296,7 +309,7 @@
                     product_id:product_id,
                     product_name:product_name,
                     serial_number:serial_number,
-                    status:status
+                    mode_of_payment:mode_of_payment
                  };
                  var html = template(data);
                  $("#addRow").append(html); 

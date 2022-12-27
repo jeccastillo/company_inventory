@@ -22,7 +22,7 @@
 
     <a href="{{route('category.add')}}" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Add Category </a> <br>  <br>               
 
-                    <h4 class="card-title">Categories Data </h4>
+                    <h4 class="card-title">Test Categories Data </h4>
 
 
                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
@@ -30,7 +30,7 @@
                         <tr>
                             <th width="10%">Sl</th>
                             <th>Name</th>
-                            <th>Products</th>                                                         
+                            <th>Products</th>                             
                             <th width="20%">Action</th>
 
                         </thead>
@@ -39,19 +39,17 @@
                         <tbody>
 
                         	@foreach($categories as $key => $category)
+                                
                         <tr>
                             <td> {{ $key+1}} </td>
-                            
-                            <td> {{ $category->name }} </td> 
+                            <td> {{ $category->name }} </td>
                             <td>
-                                @forelse($category->getProducts as $products)
-                                    <ul>
-                                        <li>{{$products['name']}}</li>
-                                    </ul>
-                                @empty
-                                    <p>No products related</p>
-                                @endforelse
-                            </td>
+                                <ul>
+                                    @foreach($category->getProduct as $product)
+                                        <li>{{$product['name']}}</li>  
+                                    @endforeach                                      
+                                </ul>  
+                            </td>  
                             
                             <td>
                                 <a href="{{route('category.edit', $category->id)}} " class="btn btn-info sm" title="Edit Data">  <i class="fas fa-edit"></i> </a>
