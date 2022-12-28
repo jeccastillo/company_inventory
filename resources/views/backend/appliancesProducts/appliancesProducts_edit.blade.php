@@ -19,7 +19,7 @@
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Product Name</label>
                                 <div class="form-group col-sm-10">
-                                    <input name="name" class="form-control" type="text" id="supplierName">
+                                    <input name="name" class="form-control" type="text" id="supplierName" value="{{$appliances->product_model}}">
                                 </div>
                             </div>
                             <!-- end row -->
@@ -30,7 +30,7 @@
                                     <select name="supplier_id" class="form-select" aria-label="Default select example">
                                         <option selected="" value="">select supplier</option>
                                         @foreach($suppliers as $key => $supplier)
-                                            <option value="{{$supplier->id}}">{{$supplier->name}}</option>
+                                            <option value="{{$supplier->id}}" {{ $supplier->id == $appliances->supplier_id ? 'selected':''}}>{{$supplier->name}}</option>
                                         @endforeach
                                         </select>
                                 </div>

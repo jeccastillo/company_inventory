@@ -154,7 +154,9 @@ Route::controller(UsersController::class)->group(function(){
  Route::controller(AppliancesProductsController::class)->group(function(){
    Route::get('/appliances/products/all', 'AppliancesProductsAll')->name('appliancesProducts.all');
    Route::get('/appliances/products/add', 'AppliancesProductsAdd')->name('appliancesProducts.add');
-   Route::post('appliances/save', 'AppliancesSave')->name('appliances.save');
+   Route::post('/appliances/products/store', 'AppliancesProductStore')->name('appliancesProduct.store');
+   Route::get('/appliances/products/delete/{id}', 'AppliancesProductDelete')->name('appliancesProduct.delete');
+   Route::get('/appliances/products/edit/{id}', 'AppliancesProductEdit')->name('appliancesProduct.edit');
  });
 
  // Brands Controller

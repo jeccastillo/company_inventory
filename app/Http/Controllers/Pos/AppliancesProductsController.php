@@ -27,7 +27,7 @@ class AppliancesProductsController extends Controller
     }
       
 
-    public function AppliancesSave(Request $request){
+    public function AppliancesProductStore(Request $request){
 
         
         $supplier = Supplier::findOrFail($request->supplier_id);
@@ -50,6 +50,23 @@ class AppliancesProductsController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->route('appliancesProducts.all')->with($notification);
+    }// end of function
+
+    public function AppliancesProductDelete($id){
+        Appliances::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => 'Data Deleted successfully', 
+            'alert-type' => 'success'
+        );
+        return redirect()->route('appliancesProducts.all')->with($notification);
+
+    }// end of function
+
+    public function AppliancesProductEdit($id){                
+        $appliances             = Appliances::findOrFail($id);
+        $suppliers              = Supplier::all();
+        $appliancesCategories   = AppliancesCategories::all();
+        return view('backend.appliancesProducts.appliancesProducts_edit', compact('appliances','suppliers', 'appliancesCategories'));
     }
-    
 }

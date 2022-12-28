@@ -43,12 +43,13 @@
                             <td> {{ $key+1}} </td>
                             <td> {{ $product->product_model}} </td>
                             <td>{{$product->description}}</td>                            
-                                                         
+                            {{-- <input type="hidden" name="category_id" value="{{$product->category_id}}">
+                            <input type="hidden" name="supplier_id" value="{{$product->supplier_id}}">                             --}}
                             
                             <td>
-                                 <a href="{{route('productCap.edit',$product->id)}} " class="btn btn-info sm" title="Edit Data">  <i class="fas fa-edit"></i> </a>
+                                 <a href="{{route('appliancesProduct.edit',$product->id)}} " class="btn btn-info sm" title="Edit Data">  <i class="fas fa-edit"></i> </a>
 
-                                <a href="{{route('productCap.delete',$product->id)}}" class="btn btn-danger sm " title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a>
+                                <a href="{{route('appliancesProduct.delete',$product->id)}}" class="btn btn-danger sm " title="Delete Data" id="delete">  <i class="fas fa-trash-alt"></i> </a>
 
                             </td>
 
