@@ -65,13 +65,26 @@ class AppliancesProductsController extends Controller
     }// end of function
 
     public function AppliancesProductDelete($id){
-        Appliances::findOrFail($id)->delete();
 
-        $notification = array(
-            'message' => 'Data Deleted successfully', 
-            'alert-type' => 'success'
-        );
-        return redirect()->route('appliancesProducts.all')->with($notification);
+        try {
+            Appliances::findOrFail($id)->delete();
+            $notification = array(
+                'message' => 'Data Deleted successfully', 
+                'alert-type' => 'success'
+            );
+            return redirect()->route('appliancesProducts.all')->with($notification);
+        } catch (\Exception $e) {
+            report($e);
+     
+            $notification = array(
+                'message' => 'Deletion Failed', 
+                'alert-type' => 'error'
+            );
+            return redirect()->route('appliancesProducts.all')->with($notification);
+        }
+        
+
+        
 
     }// end of function
 

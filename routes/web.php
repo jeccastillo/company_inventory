@@ -168,6 +168,7 @@ Route::controller(UsersController::class)->group(function(){
    Route::post('brand/store', 'BrandStore')->name('brand.store');
    Route::get('/brand/edit/{id}', 'BrandEdit')->name('brand.edit');
    Route::post('brand/update', 'BrandUpdate')->name('brand.update');
+   Route::get('/brand/delete/{id}', 'BrandDelete')->name('brand.delete');
  });
 
  Route::controller(AppliancesCategoriesController::class)->group(function(){

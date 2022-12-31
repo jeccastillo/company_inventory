@@ -62,7 +62,7 @@
 
         <div class="col-md-4">
             <div class="md-4">
-                <label for="example-text-input" class="form-label">Product Model</label>
+                <label for="example-text-input" class="form-label">Brand</label>
                 <select name="brand_id" id="brand_id" class="form-select select2" aria-label="Default select example" disabled>
                     <option selected="" value="">Open this select menu</option> 
                                        

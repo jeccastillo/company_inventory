@@ -126,7 +126,9 @@ class AppliancesDeliveriesController extends Controller
                     
                     $deliveryQty = $currentDelivery->qty + $appliances->qty;
 
-                    $appliances->qty = $deliveryQty;
+                    $appliances->qty        = $deliveryQty;
+                    $appliances->unit_cost  = $request->unit_cost[$i];
+                    $appliances->srp        = $request->srp[$i];
                     $appliances->save();
 
                     // print_r($currentDelivery->product_model_id.'<br>');
@@ -165,10 +167,10 @@ class AppliancesDeliveriesController extends Controller
     }//end of function
 
     public function AppliancesDeliveriesDelete($id){
-
+    
         $itemToDelete2  = AppliancesDeliveries::findOrFail($id);
         $delivery_id = $itemToDelete2->id;
-        $itemToDelete1  = Appliances::where('appliances_deliveries_id','=',$delivery_id)->delete();
+        //$itemToDelete1  = Appliances::where('appliances_deliveries_id','=',$delivery_id)->delete();
         $itemToDelete2->delete();
         
         $notification = array(
