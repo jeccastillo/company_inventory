@@ -8,5 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Brands extends Model
 {
     use HasFactory;
-    protected $guarded = []; // to avoid data breach. [] <- means all columns
+    protected $guarded = [];
+    public function getProducts(){
+        return $this->hasMany(Appliances::class, 'brand_id','id');
+    }
+
+    public function getDeliveries(){
+        return $this->hasMany(AppliancesDeliveries::class,'brand_id','id');
+    }
+
 }

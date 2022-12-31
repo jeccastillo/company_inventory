@@ -29,8 +29,9 @@
                         <thead>
                         <tr>
                             <th>Sl</th>
-                            <th>Name</th> 
-                            <th>Mobile Number </th>
+                            <th>Name</th>
+                            <th>Products</th> 
+                            <th>Mobile Number</th>
                             <th>Email</th>
                             <th>Address</th> 
                             <th>Action</th>
@@ -44,6 +45,16 @@
                         <tr>
                             <td> {{ $key+1}} </td>
                             <td> {{ $item->name }} </td> 
+                            <td>
+                                @forelse($item->getProducts as $products)
+                                    <ul>
+                                        <li>{{$products->description}}</li>
+                                    </ul>
+                                @empty
+                                    <p>No products related</p>    
+                                    
+                                @endforelse
+                            </td>
                             <td> {{ $item->mobileNo }} </td> 
                             <td> {{ $item->email }} </td> 
                             <td> {{ $item->address }} </td> 

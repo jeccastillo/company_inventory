@@ -13,9 +13,10 @@
 
                         <h4 class="card-title">Add Product Page </h4><br><br>
 
-                        <form method="post" action="{{ route('appliancesProduct.store') }}" id="myForm">
+                        <form method="post" action="{{ route('appliancesProduct.update') }}" id="myForm">
                             @csrf
 
+                            <input type="hidden" name="id" value="{{$appliances->id}}">
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Product Name</label>
                                 <div class="form-group col-sm-10">
@@ -43,7 +44,7 @@
                                     <select name="category_id" class="form-select" aria-label="Default select example">
                                         <option selected="" value="">select category</option>
                                         @foreach($appliancesCategories as $category)
-                                            <option value="{{$category->id}}">{{$category->name}}</option>
+                                            <option value="{{$category->id}}" {{$category->id == $appliances->category_id ? 'selected':''}}>{{$category->name}}</option>
                                         @endforeach
                                         </select>
                                 </div>
@@ -52,7 +53,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Description</label>
                                 <div class="col-sm-10 form-group">
-                                    <input type="text" name="description" class="form-control">
+                                    <input type="text" name="description" class="form-control" value="{{$appliances->description}}">
                                 </div>
                             </div>
                             <!-- end row -->

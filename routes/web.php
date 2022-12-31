@@ -21,7 +21,8 @@ use App\Http\Controllers\POS\FurnituresController;
 use App\Http\Controllers\POS\AppliancesSalesController;
 use App\Http\Controllers\POS\TestCategoryController;
 use App\Http\Controllers\POS\AppliancesCategoriesController; 
-use App\Http\Controllers\POS\AppliancesProductsController;              
+use App\Http\Controllers\POS\AppliancesProductsController;    
+use App\Http\Controllers\POS\DefaultController;          
 use Illuminate\Support\Auth;
 
 
@@ -139,7 +140,7 @@ Route::controller(UsersController::class)->group(function(){
 //StocksController
  Route::controller(StocksController::class)->group(function(){
    Route::get('/stocks/all','StocksAll')->name('stocks.all');
-   Route::get('/stocks/appliances', 'AppliancesAll')->name('appliances.all');
+   Route::get('/stocks/appliances/all', 'StockAppliancesAll')->name('stockAppliances.all');
 });//end controller
 
 //appliances deliveries controller
@@ -157,6 +158,7 @@ Route::controller(UsersController::class)->group(function(){
    Route::post('/appliances/products/store', 'AppliancesProductStore')->name('appliancesProduct.store');
    Route::get('/appliances/products/delete/{id}', 'AppliancesProductDelete')->name('appliancesProduct.delete');
    Route::get('/appliances/products/edit/{id}', 'AppliancesProductEdit')->name('appliancesProduct.edit');
+   Route::post('/appliances/products/update', 'AppliancesProductUpdate')->name('appliancesProduct.update');
  });
 
  // Brands Controller
@@ -203,6 +205,13 @@ Route::controller(AppliancesSalesController::class)->group(function(){
 //test category controller
 Route::controller(TestCategoryController::class)->group(function(){
    Route::get('/test/category/all', 'TestCategoryAll')->name('testCategory.all');
+});
+
+//default Controller
+Route::controller(DefaultController::class)->group(function(){
+   Route::get('/get-category', 'GetCategory')->name('get-category');
+   Route::get('/get-products', 'GetProduct')->name('get-product');
+   Route::get('/get-brands', 'GetBrands')->name('get-brands');
 });
 
 Route::get('/dashboard', function () {

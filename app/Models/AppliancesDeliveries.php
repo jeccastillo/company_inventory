@@ -16,14 +16,19 @@ class AppliancesDeliveries extends Model
     }
 
     public function category(){
-        return $this->belongsTo(Categories::class,'category_id','id');
+        return $this->belongsTo(AppliancesCategories::class,'category_id','id');
     }
 
-    public function brand(){
+    public function getBrand(){
         return $this->belongsTo(Brands::class,'brand_id','id');
     }
     
-    public function product(){
-        return $this->belongsTo(ProductsCap::class,'product_id','id');
+    public function getProducts(){
+        return $this->belongsTo(Appliances::class,'product_model_id','id');    
     }
+
+    public function getSerials(){
+        return $this->belongsTo(Serials::class,'serial_number', 'id');
+    }
+
 }

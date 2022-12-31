@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->String('name')->nullable();
-            $table->tinyInteger('status')->default('1');
-            $table->tinyInteger('created_by')->nullable();
-            $table->tinyInteger('updated_by')->nullable();            
+            $table->string('name');
+            $table->integer('updated_by')->nullable();  
+            $table->integer('created_by')->nullable(); 
             $table->timestamps();
         });
     }

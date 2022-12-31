@@ -33,8 +33,7 @@
                             <th>Date</th>                             
                             <th>Supplier</th> 
                             <th>Category</th>
-                            <th>Brand</th>
-                            <th>Description</th>
+                            <th>Brand</th>                            
                             <th>Model</th>
                             <th>Serial #</th>
                             <th>Qty</th>
@@ -55,11 +54,11 @@
                             <td> {{ $item->reference}} </td>
                             <td> {{ $item->date_in }} </td>  
                             <td> {{ $item['supplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
-                            <td> {{ $item['category']['name']}} </td>
-                            <td> {{ $item['brand']['name']}} </td>                            
-                            <td> {{ $item->product_description}} </td>  
-                            <td> {{ $item->product_model}} </td>  
-                            <td> {{ $item->serial_number}} </td>  
+                            <td> {{ $item['category']['name']}} </td> <!--BUGGED   -->
+                            <td> {{ $item['getBrand']['name']}} </td>                            
+                            
+                            <td> {{ $item['getProducts']['product_model']}} </td>                                                                                                                                                  
+                            <td> {{ $item['getSerials']['name'] }} </td>  
                             <td> {{ $item->qty}} </td>                                    
                             <td> {{ $item->unit_cost}}</td>  
                             <td>

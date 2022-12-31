@@ -50,6 +50,18 @@
                             </div>
                             <!-- end row -->
                             <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">Brand</label>
+                                <div class="col-sm-10 form-group">
+                                    <select name="brand_id" class="form-select" aria-label="Default select example">
+                                        <option selected="" value="">select brand</option>
+                                        @foreach($brands as $brand)
+                                            <option value="{{$brand->id}}">{{$brand->name}}</option>
+                                        @endforeach
+                                        </select>
+                                </div>
+                            </div>
+                            <!-- end row -->
+                            <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Description</label>
                                 <div class="col-sm-10 form-group">
                                     <input type="text" name="description" class="form-control">

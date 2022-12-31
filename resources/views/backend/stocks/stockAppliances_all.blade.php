@@ -31,7 +31,7 @@
                                 <th>Sl</th>
                                 <th>Supplier</th>                             
                                 <th>Brand</th>                             
-                                <th>Product Name / Desc</th> 
+                                <th>Description</th> 
                                 <th>Model</th>
                                 <th>Serial #</th>
                                 <th>Qty</th>
@@ -55,8 +55,8 @@
                             {{$stat = $stock->status;}}
                             <td> {{ $key+1}} </td>
                             <td> {{ $stock['supplier']['name']}} </td>                              
-                            <td> {{ $stock['brand']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
-                            <td> {{ $stock['product']['name']}} </td>
+                            <td> {{ $stock->brand}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
+                            <td> {{ $stock->description}} </td>
                             <td> {{ $stock->product_model}} </td>
                             <td title="{{$stock->serial_number}}"> {{ substr($stock->serial_number, 0, 5).'...'}} </td>
                             <td> {{ $stock->qty}} </td>

@@ -22,19 +22,31 @@ class AppliancesCategoriesController extends Controller
     }// end method
 
     public function AppliancesCategoriesStore(Request $request){
-        AppliancesCategories::insert([
-            'name'          => $request->name,
-            'created_by'    => Auth::user()->id,
-            'created_at'    => Carbon::now(),
-
-        ]);
-
-        $notification = array(
-            'message' => 'New Category Created Successfully', 
-            'alert-type' => 'success'
-        );
-
-        return redirect()->route('appliancesCategories.all')->with($notification);
+        $categories = AppliancesCategories::all();
+        $exist = 0;
+        if(AppliancesCategories::where('name', $request->name )->exists()) {
+            $notification = array(
+                'message' => 'Existing Category', 
+                'alert-type' => 'error'
+            );
+            
+            return redirect()->back()->with($notification);
+        }else{
+            AppliancesCategories::insert([
+                'name'          => $request->name,
+                'created_by'    => Auth::user()->id,
+                'created_at'    => Carbon::now(),
+    
+            ]);
+    
+            $notification = array(
+                'message' => 'New Category Created Successfully', 
+                'alert-type' => 'success'
+            );
+    
+            return redirect()->route('appliancesCategories.all')->with($notification);
+        }
+        
     }// end of function
 
     public function AppliancesCategoriesDelete($id){

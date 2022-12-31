@@ -15,9 +15,9 @@ class StocksController extends Controller
         return view('backend.stocks.stocks_all',compact('workingStocks'));
     }
 
-    public function AppliancesAll(){
+    public function StockAppliancesAll(){
         $appliances = Appliances::all();
 
-        return view('backend.stocks.appliances_all', compact('appliances'));
+        return view('backend.stocks.stockAppliances_all', compact('appliances'));
     }
 }

@@ -30,7 +30,8 @@
                         <tr>
                             <th width="5%">Id</th>
                             <th>Model</th>   
-                            <th>Description</th>                           
+                            <th>Description</th>   
+                            {{-- <th>Serials</th>                         --}}
                             <th width="20%">Action</th>
 
                         </thead>
@@ -42,7 +43,14 @@
                         <tr>
                             <td> {{ $key+1}} </td>
                             <td> {{ $product->product_model}} </td>
-                            <td>{{$product->description}}</td>                            
+                            <td>{{$product->description}}</td>
+                            {{-- <td>
+                                @foreach($product->getSerials as $serials)
+                                    <ul>
+                                        <li>{{$serials->name}}</li>    
+                                    </ul>
+                                @endforeach    
+                            </td>                             --}}
                             {{-- <input type="hidden" name="category_id" value="{{$product->category_id}}">
                             <input type="hidden" name="supplier_id" value="{{$product->supplier_id}}">                             --}}
                             

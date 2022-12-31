@@ -39,20 +39,12 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{route('appliancesCategories.all')}}>Appliances</a></li>
                     </ul>
-                    <ul class="sub-menu" aria-expanded="false">
+                    {{-- <ul class="sub-menu" aria-expanded="false">
                         <li><a href='' >Furnitures</a></li>
-                    </ul>
+                    </ul> --}}
                 </li><!-- end Manage Categories -->
                 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
-                        <span>Manage Products</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('appliancesProducts.all') }}>Appliances</a></li>
-                    </ul>
-                </li><!-- end Manage Products -->
+                
                 <!-- ____________TO IMPLEMENT ___________________________-->
                  <li>
                      <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -86,6 +78,17 @@
                     </ul>
                 </li>
                 <!-- end Manage Brands -->
+
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="ri-mail-send-line"></i>
+                        <span>Manage Products</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{ route('appliancesProducts.all') }}>Appliances</a></li>
+                    </ul>
+                </li><!-- end Manage Products -->
+                
                 {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-mail-send-line"></i>
@@ -170,18 +173,19 @@
                         <i class="ri-mail-send-line"></i>
                         <span>Manage Working Stocks</span>
                     </a>
+
                     {{-- <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{ route('stocks.all') }}>All Stocks</a></li>
                     </ul> --}}
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('appliances.all') }}>Appliances</a></li>
+                        <li><a href={{ route('stockAppliances.all') }}>Appliances</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{ route('furnitures.all') }}>Furnitures</a></li>
                     </ul>
                 </li> 
                 <!-- ____________TO IMPLEMENT ___________________________-->
-                <li>
+                {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-mail-send-line"></i>
                         <span>Test Category</span>
@@ -189,7 +193,7 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('testCategory.all')}}">testCategory all</a></li>
                     </ul>                  
-                </li><!-- end list -->
+                </li><!-- end list --> --}}
                  
 
                  <li class="menu-title">Pages</li>

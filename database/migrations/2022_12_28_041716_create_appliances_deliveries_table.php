@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('appliances_deliveries', function (Blueprint $table) {
             $table->id();                        
             $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('supplier_id');
+            $table->unsignedBigInteger('supplier_id');                       
+            $table->unsignedBigInteger('product_model_id');
+            $table->unsignedBigInteger('serial_number')->nullable();
             $table->unsignedBigInteger('brand_id');            
-            $table->string('product_model');
-            $table->string('serial_number')->nullable();
             $table->integer('qty')->default('1');
             $table->double('unit_cost',15,2);
             $table->double('srp',15,2);
@@ -30,9 +30,10 @@ return new class extends Migration
             $table->integer('updated_by')->nullable();  
             $table->integer('created_by')->nullable(); 
             $table->foreign('supplier_id')->references('id')->on('suppliers')->onDelete('restrict'); // $table->foreign('field on current table')->references('id')->on('related table')->onDelete('restrict')
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');
-            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('restrict');
-            $table->foreign('product_id')->references('id')->on('products_caps')->onDelete('restrict');              
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('restrict');            
+            $table->foreign('product_model_id')->references('id')->on('appliances')->onDelete('restrict'); 
+            $table->foreign('serial_number')->references('id')->on('serials')->onDelete('restrict');
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('restrict');            
             $table->timestamps();
         });
     }

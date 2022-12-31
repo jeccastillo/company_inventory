@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 use App\Models\Appliances;
 use App\Models\AppliancesCategories;
 use App\Models\Supplier;
+use App\Models\Brands;
 
 
 class AppliancesProductsController extends Controller
@@ -22,34 +23,45 @@ class AppliancesProductsController extends Controller
     public function AppliancesProductsAdd(){
         $appliancesCategories = AppliancesCategories::all();
         $suppliers = Supplier::all();
+        $brands = Brands::all();
 
-        return view('backend.appliancesProducts.appliancesProducts_add', compact('appliancesCategories', 'suppliers'));
+        return view('backend.appliancesProducts.appliancesProducts_add', compact('appliancesCategories', 'suppliers','brands'));
     }
       
 
     public function AppliancesProductStore(Request $request){
 
-        
-        $supplier = Supplier::findOrFail($request->supplier_id);
-        $category = AppliancesCategories::findOrFail($request->category_id);
-        
+        if(Appliances::where('product_model', $request->name )->exists()) {
+            $notification = array(
+                'message' => 'Existing Product', 
+                'alert-type' => 'error'
+            );
+            
+            return redirect()->back()->with($notification);
+        }else{
+            $supplier               = Supplier::findOrFail($request->supplier_id);
+            $category               = AppliancesCategories::findOrFail($request->category_id);
+            
 
-         $product = new Appliances;
-         $product->product_model = $request->name;
-         $product->supplier_id = $request->supplier_id;
-         $product->description = $request->description;
-         $category->getProducts()->save($product);
+            $product                = new Appliances;
+            $product->product_model = $request->name;
+            $product->supplier_id   = $request->supplier_id;
+            $product->brand_id      = $request->brand_id;
+            $product->description   = $request->description;
+            $category->getProducts()->save($product);
 
 
-        //  $category->getProducts->create([
-        //      'name' => $request->name,
-        //  ])
+            //  $category->getProducts->create([
+            //      'name' => $request->name,
+            //  ])
         
-        $notification = array(
-            'message' => 'Data saved successfully', 
-            'alert-type' => 'success'
-        );
-        return redirect()->route('appliancesProducts.all')->with($notification);
+            $notification = array(
+                'message' => 'Data saved successfully', 
+                'alert-type' => 'success'
+            );
+            return redirect()->route('appliancesProducts.all')->with($notification);
+        }
+        
     }// end of function
 
     public function AppliancesProductDelete($id){
@@ -68,5 +80,31 @@ class AppliancesProductsController extends Controller
         $suppliers              = Supplier::all();
         $appliancesCategories   = AppliancesCategories::all();
         return view('backend.appliancesProducts.appliancesProducts_edit', compact('appliances','suppliers', 'appliancesCategories'));
-    }
+    }//end of function
+
+    public function AppliancesProductUpdate(Request $request){
+        // $appliances = AppliancesCategories::findOrFail($request->category_id)
+        //         ->getProducts()->where('id', $request->id)->first();
+
+        
+        // $appliances->product_model = $request->name;
+        // $appliances->supplier_id = $request->supplier_id;
+        // $appliances->description = $request->description;
+        // $appliances->category_id = $request->category_id;
+        // $appliances->update();  
+        
+        $appliances = Appliances::findOrFail($request->id)->update([
+            'product_model' => $request->name,
+            'supplier_id' => $request->supplier_id,
+            'category_id' => $request->category_id,
+            'description' => $request->description,            
+        ]);
+    
+        $notification = array(
+            'message' => 'Data Updated successfully', 
+            'alert-type' => 'success'
+        );
+        return redirect()->route('appliancesProducts.all')->with($notification);
+    }// end of function
+
 }

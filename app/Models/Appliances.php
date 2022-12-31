@@ -14,15 +14,23 @@ class Appliances extends Model
     }
 
     public function category(){
-        return $this->belongsTo(Categories::class,'category_id','id');
+        return $this->belongsTo(AppliancesCategories::class,'category_id','id');
     }
 
     // public function brand(){
     //     return $this->belongsTo(Brands::class,'brand_id','id');
     // }
     
-    public function product(){
-        return $this->belongsTo(ProductsCap::class,'product_id','id');
+    public function getDeliveries(){
+        return $this->belongsTo(AppliancesDeliveries::class,'product_model_id','id');
+    }
+    
+    public function getSerials(){
+        return $this->hasMany(Serials::class,'product_id','id');
+    }
+
+    public function getBrand(){
+        return $this->belongsTo(Brands::class, 'brand_id','id');
     }
 }
 
