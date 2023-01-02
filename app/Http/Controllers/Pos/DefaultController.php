@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AppliancesCategories;
 use App\Models\Appliances;
+use App\Models\AppliancesWorkingStocks;
 use App\Models\Brands;
 
 class DefaultController extends Controller
@@ -35,16 +36,33 @@ class DefaultController extends Controller
         return response()->json($allProducts);
     }// end function
 
+    public function GetWorkingProducts(Request $request){
+        $category_id = $request->category_id;
+
+        $workingProducts = AppliancesWorkingStocks::with('getProduct')->where('category_id',$category_id)->groupBy('product_model_id')->get();                        
+        
+        return response()->json($workingProducts);
+    }
+
     public function GetBrands(Request $request){
         $brands = Brands::all();
         
         $allBrands = Appliances::with('getBrand')->select('brand_id')->where('id', $request->product_model)->get();
-      
-        // foreach($allBrands as $brand){
-        //     print_r($brand['getBrand']['name']);
-        // }
+              
         return response()->json($allBrands);
-    }
+    }// end function
+    
+    public function GetSerials(Request $request){        
 
+        $product = AppliancesWorkingStocks::with('getSerial')->select('serial_id','unit_cost','srp')->where('product_model_id',$request->product_model_id)->where('qty','>=',1)->get();                            
+        
+        // foreach($product as $serial){
+        //     print_r($serial.'<br>');
+        // }
+
+        return response()->json($product);
+    }//end function
+
+    
 
 }

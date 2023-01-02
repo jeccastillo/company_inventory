@@ -140,7 +140,7 @@ Route::controller(UsersController::class)->group(function(){
 //StocksController
  Route::controller(StocksController::class)->group(function(){
    Route::get('/stocks/all','StocksAll')->name('stocks.all');
-   Route::get('/stocks/appliances/all', 'StockAppliancesAll')->name('stockAppliances.all');
+   Route::get('/stocks/appliances/all', 'AppliancesWorkingStocks')->name('appliancesWorkingStocks.all');
 });//end controller
 
 //appliances deliveries controller
@@ -201,6 +201,7 @@ Route::controller(FurnituresController::class)->group(function(){
 Route::controller(AppliancesSalesController::class)->group(function(){
    Route::get('/appliances/sales/all', 'AppliancesSalesAll')->name('appliancesSales.all');
    Route::get('/appliances/sales/add', 'AppliancesSalesAdd')->name('appliancesSales.add');
+   Route::post('/appliances/sales/store', 'AppliancesSalesStore')->name('appliancesSales.store');
 });//end of function
 
 //test category controller
@@ -213,6 +214,8 @@ Route::controller(DefaultController::class)->group(function(){
    Route::get('/get-category', 'GetCategory')->name('get-category');
    Route::get('/get-products', 'GetProduct')->name('get-product');
    Route::get('/get-brands', 'GetBrands')->name('get-brands');
+   Route::get('/get-serials', 'GetSerials')->name('get-serials');
+   Route::get('/get-working-products', 'GetWorkingProducts')->name('get-working-products');
 });
 
 Route::get('/dashboard', function () {

@@ -13,6 +13,7 @@ use App\Models\Appliances;
 use App\Models\ProductsCap;
 use App\Models\AppliancesCategories;
 use App\Models\Serials;
+use App\Models\AppliancesWorkingStocks;
 use Auth;
 use Illuminate\Support\Carbon;
 
@@ -48,124 +49,78 @@ class AppliancesDeliveriesController extends Controller
 
             return redirect()->back()->with($notification);
         }else{
-            $count_category = count($request->category_id); // counts the instance of rows in table
-
+            $count_category = count($request->category_id); // counts the instance of rows in table            
+            //check existing serial number
+            $exist = false;
             for($i = 0; $i < $count_category; $i++){
-                
-                $qty = $request->qty[$i];
-                if($qty > 1){                    
-                    for($j = 0;$j<$qty;$j++){
-                        // $deliveries = new AppliancesDeliveries();
-                        // $deliveries->date_in        = $request->date[$i];
-                        // $deliveries->reference      = $request->reference[$i];
-                        // $deliveries->supplier_id    = $request->supplier_id[$i];                        
-                        // $deliveries->category_id    = $request->category_id[$i];
-                      
-                        // $deliveries->product_model_id = $request->product_model[$i];
-                        // $deliveries->serial_number  = $request->serial[$i];
-                        // $deliveries->qty            = '1';
-                        // $deliveries->unit_cost      = $request->unit_cost[$i];
-                        // $deliveries->srp            = $request->srp[$i];
-                        // $deliveries->remarks        = $request->remarks[$i];
-                        // //$deliveries->buying_price = $request->buying_price[$i];
-                        // $deliveries->created_by     = Auth::user()->id;
-                        // $deliveries->status         = $request->status1[$i];
-                        // //$deliveries->save();  
-                        
-                        // $appliances = new Appliances();
-                        // $appliances->appliances_deliveries_id = $deliveries->id;
-                        // $appliances->date_in        = $request->date[$i];
-                        // $appliances->reference_in   = $request->reference[$i];
-                        // $appliances->supplier_id    = $request->supplier_id[$i];
-                        // $appliances->brand_id       = $request->brand_id[$i];
-                        // $appliances->category_id    = $request->category_id[$i];
-                      
-                        // $appliances->product_model  = $request->product_model[$i];
-                        // $appliances->serial_number  = $request->serial[$i];
-                        // $appliances->qty            = '1';
-                        // $appliances->unit_cost      = $request->unit_cost[$i];
-                        // $appliances->srp            = $request->srp[$i];
-                        // $appliances->remarks        = $request->remarks[$i];
-                        // //$deliveries->buying_price   = $request->buying_price[$i];
-                        // $appliances->created_by     = Auth::user()->id;
-                        // $appliances->status         = $request->status1[$i];
-                        // //$appliances->save();
-                    }                                                         
-                }else{
-                     
-                    $serialNumber   = Serials::insert([
-                        'name' => $request->serial[$i],
-                        'product_id' => $request->product_model_id[$i],
-                        'created_by' => Auth::user()->id,
-                        'created_at' => Carbon::now(),
-                    ]);
-
-                    $serial_id = Serials::latest()->first();
-
-                    
-                    
-                    $deliveries = new AppliancesDeliveries();
-                    $deliveries->date_in        = $request->date[$i];
-                    $deliveries->reference      = $request->reference[$i];
-                    $deliveries->supplier_id    = $request->supplier_id[$i];
-                    $deliveries->brand_id       = $request->brand_id[$i];
-                    $deliveries->category_id    = $request->category_id[$i];                    
-                    $deliveries->product_model_id  = $request->product_model_id[$i];
-                    $deliveries->serial_number  = $serial_id->id;
-                    $deliveries->qty            = $request->qty[$i];
-                    $deliveries->unit_cost      = $request->unit_cost[$i];
-                    $deliveries->srp            = $request->srp[$i];
-                    $deliveries->remarks        = $request->remarks[$i];
-                    //$deliveries->buying_price   = $request->buying_price[$i];
-                    $deliveries->created_by     = Auth::user()->id;
-                    $deliveries->status         = $request->status1[$i];
-                    $deliveries->save();
-                    
-                    $currentDelivery = AppliancesDeliveries::latest()->first();
-                    $appliances = Appliances::where('id',$currentDelivery->product_model_id)->first();  
-                    
-                    $deliveryQty = $currentDelivery->qty + $appliances->qty;
-
-                    $appliances->qty        = $deliveryQty;
-                    $appliances->unit_cost  = $request->unit_cost[$i];
-                    $appliances->srp        = $request->srp[$i];
-                    $appliances->save();
-
-                    // print_r($currentDelivery->product_model_id.'<br>');
-
-                    // print_r($currentDelivery->qty.'<br>');
-                    // $appliances = new Appliances();
-                    
-                    // $appliances->date_in        = $request->date[$i];
-                    // $appliances->reference_in   = $request->reference[$i];
-                    // $appliances->supplier_id    = $request->supplier_id[$i];
-                    // $appliances->brand          = $request->brand[$i];            
-                    // $appliances->category_id    = $request->category_id[$i];                                       
-                    // $appliances->product_model  = $request->product_model[$i];
-                    // $appliances->serial_id      = $serial_id->id;
-                    // $appliances->qty            = $request->qty[$i];
-                    // $appliances->unit_cost      = $request->unit_cost[$i];
-                    // $appliances->srp            = $request->srp[$i];
-                    // $appliances->status         = $request->status1[$i];
-                    // $appliances->remarks        = $request->remarks[$i];
-                    // $deliveries->buying_price   = $request->buying_price[$i];
-                    // $appliances->created_by     = Auth::user()->id;                    
-                    // $appliances->save();
-                    
-                }    
-                
-        
-                                            
-            }//end for loop
-            $notification = array(
-                    'message' => 'Data saved successfully', 
-                    'alert-type' => 'success'
+                $ExsistingSerial = Serials::where('name',$request->serial[$i])->exists();
+                if($ExsistingSerial){
+                    $exist = true;
+                }
+            } // end check existing serial number
+            
+            if($exist){
+                $notification = array(
+                    'message' => 'Failed to Save, Duplicate Serial Number Detected!', 
+                    'alert-type' => 'error'
                 );
-             return redirect()->route('appliancesDeliveries.all')->with($notification);
-        } // end else
+                return redirect()->back()->with($notification);
+            }
 
+            for($i = 0; $i < $count_category; $i++){  
+                echo 'count'.'<br>';                              
+                $serialNumber   = Serials::insert([
+                    'name' => $request->serial[$i],
+                    'product_id' => $request->product_model_id[$i],
+                    'created_by' => Auth::user()->id,
+                    'created_at' => Carbon::now(),
+                ]);
+                $serial_id = Serials::latest()->first();
+                sleep(1);                                
+                $deliveries = new AppliancesDeliveries();
+                $deliveries->date_in            = $request->date[$i];
+                $deliveries->reference          = $request->reference[$i];
+                $deliveries->supplier_id        = $request->supplier_id[$i];
+                $deliveries->brand_id           = $request->brand_id[$i];
+                $deliveries->category_id        = $request->category_id[$i];                    
+                $deliveries->product_model_id   = $request->product_model_id[$i];
+                $deliveries->serial_number      = $serial_id->id;
+                $deliveries->qty                = $request->qty[$i];
+                $deliveries->unit_cost          = $request->unit_cost[$i];
+                $deliveries->srp                = $request->srp[$i];
+                $deliveries->remarks            = $request->remarks[$i];
+                //$deliveries->buying_price   = $request->buying_price[$i];
+                $deliveries->created_by         = Auth::user()->id;
+                $deliveries->status             = $request->status1[$i];
+                $deliveries->save();
+
+                
+                $newAppliancesStock                     = new AppliancesWorkingStocks();
+                $newAppliancesStock->date_in            = $request->date[$i];
+                $newAppliancesStock->reference_in       = $request->reference[$i];
+                $newAppliancesStock->supplier_id        = $request->supplier_id[$i];
+                $newAppliancesStock->brand_id           = $request->brand_id[$i];
+                $newAppliancesStock->category_id        = $request->category_id[$i];
+                $newAppliancesStock->product_model_id   = $request->product_model_id[$i];
+                $newAppliancesStock->serial_id          = $serial_id->id;
+                $newAppliancesStock->qty                = $request->qty[$i];
+                $newAppliancesStock->unit_cost          = $request->unit_cost[$i];
+                $newAppliancesStock->srp                = $request->srp[$i];
+                $newAppliancesStock->remarks            = $request->remarks[$i];
+                $newAppliancesStock->status             = $request->status1[$i];
+                $newAppliancesStock->created_by         = Auth::user()->id;
+                $newAppliancesStock->created_at         = Carbon::now();
+                $newAppliancesStock->save();
+                                  
+            } //end for loop   
+            $notification = array(
+                        'message' => 'Data saved successfully', 
+                        'alert-type' => 'success'
+                    );
+            return redirect()->route('appliancesDeliveries.all')->with($notification);                                    
+        }// end else
     }//end of function
-
+//************************************************************** */
     public function AppliancesDeliveriesDelete($id){
     
         $itemToDelete2  = AppliancesDeliveries::findOrFail($id);

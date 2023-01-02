@@ -50,15 +50,15 @@
 
                         <tbody>
 
-                        	@foreach($appliancesSales as $key => $item)
+                        	@foreach($appliancesWorkingStock as $key => $item)
                         <tr>
                             <td> {{ $key+1}} </td>
                             <td> {{ $item->date_out }} </td> 
                             <td> {{ $item->reference_out}} </td> 
-                            <td> {{ $item['product']['name']}} </td>            
-                            <td> {{ $item['supplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
-                            <td> {{ $item['category']['name']}} </td>
-                            <td> {{ $item['brand']['name']}} </td>                            
+                            <td> {{ $item['getProduct']['name']}} </td>            
+                            <td> {{ $item['getSupplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
+                            <td> {{ $item['getCategory']['name']}} </td>
+                            <td> {{ $item['getBrand']['name']}} </td>                            
                             
                             <td> {{ $item->product_model}} </td>  
                             <td> {{ $item->serial_number}} </td>  

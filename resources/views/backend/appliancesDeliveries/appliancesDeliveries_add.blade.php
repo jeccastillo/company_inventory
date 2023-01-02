@@ -367,7 +367,7 @@
                 url:"{{ route('get-category') }}",      //this function will send a request to this route route('get-category')
                 type: "GET",                            // type is a method GET or POST
                 data:{supplier_id:supplier_id},         //<<-{key: value from $(this).val();}
-                success:function(data){                 //function(your data as parameter) // success means if this ajax function successfully get a response then success function will be executed                                        
+                success:function(data){                 //function(your data as parameter) // success means if this ajax function successfully get a response then success function will be executed                                                            
                     var html = '<option value="">Select Category</option>';
                     $.each(data,function(key,value){ 
                         html += '<option value=" '+value.category_id+' "> '+value.category.name+'</option>'; //v.category.name == v.eloquentRelation.field                        

@@ -48,17 +48,17 @@
                         </thead>
 
 
-                        <tbody>
+                        <tbody id="example">
 
-                        	@foreach($appliances as $key => $stock)
-                        <tr>
+                        	@foreach($appliancesWorkingStocks as $key => $stock)
+                        <tr >
                             {{$stat = $stock->status;}}
                             <td> {{ $key+1}} </td>
-                            <td> {{ $stock['supplier']['name']}} </td>                              
-                            <td> {{ $stock->brand}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
-                            <td> {{ $stock->description}} </td>
-                            <td> {{ $stock->product_model}} </td>
-                            <td title="{{$stock->serial_number}}"> {{ substr($stock->serial_number, 0, 5).'...'}} </td>
+                            <td> {{ $stock['getSupplier']['name']}} </td>                              
+                            <td> {{ $stock['getBrand']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
+                            <td> {{ $stock['getProduct']['description']}} </td>
+                            <td> {{ $stock['getProduct']['product_model']}} </td>
+                            <td title="{{$stock['getSerial']['name']}}" >{{substr($stock['getSerial']['name'],0,4)."..."}}</td>
                             <td> {{ $stock->qty}} </td>
                             <td> {{ $stock->unit_cost}} </td>
                             <td> {{ $stock->srp}} </td>
@@ -91,9 +91,6 @@
                                 </div>
                             </div> <!-- end col -->
                         </div> <!-- end row -->
-
-
-
                     </div> <!-- container-fluid -->
                 </div>
 

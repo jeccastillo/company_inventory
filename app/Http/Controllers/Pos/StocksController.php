@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Stock;
 use App\Models\Appliances;
+use App\Models\AppliancesWorkingStocks;
 
 class StocksController extends Controller
 {
@@ -15,9 +16,9 @@ class StocksController extends Controller
         return view('backend.stocks.stocks_all',compact('workingStocks'));
     }
 
-    public function StockAppliancesAll(){
-        $appliances = Appliances::all();
+    public function AppliancesWorkingStocks(){
+        $appliancesWorkingStocks = AppliancesWorkingStocks::all();
 
-        return view('backend.stocks.stockAppliances_all', compact('appliances'));
+        return view('backend.stocks.appliancesWorkingStocks_all', compact('appliancesWorkingStocks'));
     }
 }

@@ -178,7 +178,7 @@
                         <li><a href={{ route('stocks.all') }}>All Stocks</a></li>
                     </ul> --}}
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('stockAppliances.all') }}>Appliances</a></li>
+                        <li><a href={{ route('appliancesWorkingStocks.all') }}>Appliances</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{ route('furnitures.all') }}>Furnitures</a></li>
