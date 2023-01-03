@@ -19,7 +19,8 @@ return new class extends Migration
             $table->unsignedBigInteger('supplier_id');                       
             $table->unsignedBigInteger('product_model_id');
             $table->unsignedBigInteger('serial_number')->nullable();
-            $table->unsignedBigInteger('brand_id');            
+            $table->unsignedBigInteger('brand_id'); 
+            $table->string('description')->nullable();           
             $table->integer('qty')->default('1');
             $table->double('unit_cost',15,2);
             $table->double('srp',15,2);

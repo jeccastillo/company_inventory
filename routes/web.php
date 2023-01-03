@@ -128,14 +128,14 @@ Route::controller(UsersController::class)->group(function(){
    Route::get('/caparal/products/delete/{id}', 'ProductCapDelete')->name('productCap.delete');
  });
 
- Route::controller(PurchasesController::class)->group(function(){
-    Route::get('/purchases/all', 'PurchasesAll')->name('purchases.all');
-    Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
-    Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
-    Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
-    Route::get('/purchase/pending', 'PurchasePending')->name('purchases.pending');
-    Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
- });
+//  Route::controller(PurchasesController::class)->group(function(){
+//     Route::get('/purchases/all', 'PurchasesAll')->name('purchases.all');
+//     Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
+//     Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
+//     Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
+//     Route::get('/purchase/pending', 'PurchasePending')->name('purchases.pending');
+//     Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
+//  });
 
 //StocksController
  Route::controller(StocksController::class)->group(function(){

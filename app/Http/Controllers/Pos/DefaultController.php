@@ -54,7 +54,7 @@ class DefaultController extends Controller
     
     public function GetSerials(Request $request){        
 
-        $product = AppliancesWorkingStocks::with('getSerial')->select('serial_id','unit_cost','srp')->where('product_model_id',$request->product_model_id)->where('qty','>=',1)->get();                            
+        $product = AppliancesWorkingStocks::with('getSerial')->select('*')->where('product_model_id',$request->product_model_id)->where('qty','>=',1)->get();                            
         
         // foreach($product as $serial){
         //     print_r($serial.'<br>');

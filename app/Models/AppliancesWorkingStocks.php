@@ -29,4 +29,8 @@ class AppliancesWorkingStocks extends Model
     public function getCategory(){
         return $this->belongsTo(AppliancesCategories::class,'category_id','id');
     }//end of function
+
+    public function getDr(){
+        return $this->belongsTo(AppliancesDeliveries::class,'dr_id','id');
+    }
 }

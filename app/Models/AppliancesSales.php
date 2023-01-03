@@ -21,7 +21,7 @@ class AppliancesSales extends Model
     }//end of function
 
     public function getSerial(){
-        return $this->belongsTo(Serials::class,'serial_id','id');
+        return $this->belongsTo(Serials::class,'serial_number','id');
     }//end of function
 
     public function getCategory(){

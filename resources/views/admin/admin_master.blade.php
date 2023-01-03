@@ -12,9 +12,9 @@
         <!-- App favicon -->
         <link rel="shortcut icon" href="{{ asset('backend/assets/images/favicon.ico') }}">
  
- <!-- Select 2 -->
+        <!-- Select 2 -->
         <link href="{{ asset('backend/assets/libs/select2/css/select2.min.css') }}" rel="stylesheet" type="text/css">
-  <!-- end Select 2  -->
+        <!-- end Select 2  -->
 
         <!-- test css -->
         <link href="{{ asset('backend/assets/css/test.css') }}" rel="stylesheet" type="text/css">

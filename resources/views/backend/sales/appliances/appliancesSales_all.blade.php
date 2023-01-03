@@ -31,11 +31,11 @@
                             <th>Sl</th>
                             <th>Date</th>      
                             <th>Ref No.</th>
-                            <th>Product Name / Desc</th>                                                      
+                            <th>Product Model</th>                                                      
                             <th>Supplier</th> 
                             <th>Category</th>
                             <th>Brand</th>                            
-                            <th>Model</th>
+                            <th>Description</th>
                             <th>Serial #</th>
                             <th>Qty</th>
                             <th>Unit Cost</th> 
@@ -50,28 +50,26 @@
 
                         <tbody>
 
-                        	@foreach($appliancesWorkingStock as $key => $item)
+                        	@foreach($appliancesSales as $key => $item)
                         <tr>
+                            
                             <td> {{ $key+1}} </td>
-                            <td> {{ $item->date_out }} </td> 
-                            <td> {{ $item->reference_out}} </td> 
-                            <td> {{ $item['getProduct']['name']}} </td>            
+                            <td> {{ date("M-d-Y", strtotime($item->date_out)) }} </td> 
+                            <td> {{ $item->reference}} </td> 
+                            <td> {{ $item['getProduct']['product_model']}} </td>            
                             <td> {{ $item['getSupplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
                             <td> {{ $item['getCategory']['name']}} </td>
                             <td> {{ $item['getBrand']['name']}} </td>                            
-                            
-                            <td> {{ $item->product_model}} </td>  
-                            <td> {{ $item->serial_number}} </td>  
+                            <td> {{ $item->description}} </td>                             
+                            <td> {{ $item['getSerial']['name']}} </td>  
                             <td> {{ $item->qty}} </td>                                    
                             <td> {{ $item->unit_cost}}</td>
-                            <td> {{ $item->remarks}} </td>
-                            
-                                
+                            <td> {{ $item->remarks}} </td>                                                                                        
                             <td>
-                                @if($item->mode_of_payment == '0')
-                                <span class="btn btn-info">Credit</span>
-                                @elseif($item->status == '1')
-                                <span class="btn btn-success">Cash</span>
+                                @if($item->payment_mode == '0')
+                                    <p>Loan</p>
+                                @elseif($item->payment_mode == '1')
+                                    <p>Cash</p>
                                 @endif
                             </td> 
                             

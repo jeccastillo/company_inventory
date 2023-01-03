@@ -46,7 +46,7 @@
             <div class="md-4">
                 <label for="supplier_id" class="form-label">Category Name </label>
                 <select id="category_id" name="category_id" class="form-select select2 " aria-label="Default select example" disabled >
-                        <option selected="" value="" >Open this select menu</option>
+                        <option selected="" value="" id="no_val_category" >Open this select menu</option>
                     @foreach($categories as $category)                    
                         <option value="{{ $category->id }}" >{{ $category->name }}</option>
                     @endforeach
@@ -58,9 +58,10 @@
             <div class="md-4">
                 <label for="supplier_id" class="form-label">Product Name </label>
                 <select id="product_model_id" name="product_model_id" class="form-select select2 " aria-label="Default select example" disabled>
-                        <option selected="" value="">Open this select menu</option>
+                        <option selected="" value="" id="no_val_product">Open this select menu</option>
                         <option hidden value="" id="hidden_option"></option>
                 </select>
+                
             </div>
         </div><!-- end column -->   
 
@@ -68,8 +69,10 @@
             <div class="md-4">
                 <label for="example-text-input" class="form-label">Serial Number</label>
                 <select name="serial_number" id="serial_number" class="form-select select2" aria-label="Default select example" disabled>
-                    <option selected="" value="" id='selected'>Open this select menu</option>                                     
+                    <option selected="" value="" id='no_val_serial'>Open this select menu</option>                                     
                 </select>
+                <input type="hidden" name="unit_price" value="" id="unit_price">
+
             </div>
         </div> <!-- end column -->                                                    
     </div> <!-- end row -->  
@@ -88,7 +91,7 @@
         <div class="card-body">
         <form method="post" action="{{route('appliancesSales.store')}}" id="myForm"> 
             @csrf
-            <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;">
+            <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;" id='myTable'>
                 <thead>
                     <tr>
                         <th>Category</th>                                            
@@ -96,10 +99,10 @@
                         <th>Serial #</th>
                         <th>Qty.</th>
                         <th>Unit Price </th> 
-                        <th>SRP</th>
+                        {{-- <th>SRP</th> --}}
                         <th>Payment Mode</th>                       
                         <th>Remarks</th>                        
-                        <th>Total Price</th>
+                        {{-- <th>Total Price</th> --}}
                         <th>Action</th> 
                     </tr>
                 </thead>
@@ -109,7 +112,7 @@
                 </tbody>
 
                 <tbody>
-                    <tr>
+                    {{-- <tr>
                         <td colspan="8"></td>
                             <td>
                                 <input type="text" name="estimated_amount" value="0" id="estimated_amount" class="form-control estimated_amount" readonly style="background-color: #ddd;" >
@@ -117,7 +120,7 @@
                         <td>
 
                         </td>
-                    </tr>
+                    </tr> --}}
 
                 </tbody>                
             </table><br>
@@ -172,12 +175,12 @@
     </td>
     
     <td id="append_text">
-        <input type="number" class="form-control  form-group unit_price text-right" name="unit_cost[]" value="" id="test" >         
+        <input type="text" class="form-control  form-group unit_price text-right" name="unit_cost[]" value="@{{unit_price}}" id="test" readonly>         
     </td>
 
-    <td>
+    {{-- <td>
         <input type="number" class="form-control srp text-right" name="srp[]" value=""  > 
-    </td>
+    </td> --}}
     
     <td>
         <input type="hidden" name="payment_mode[]" value="@{{payment_mode}}" >
@@ -188,9 +191,9 @@
         <input type="text" class="form-control" name="remarks[]"> 
     </td>
     
-     <td>
+     {{-- <td>
         <input type="number" class="form-control buying_price text-right" name="buying_price[]" value="0" readonly> 
-    </td>
+    </td> --}}
 
      <td>
         <i class="btn btn-danger btn-sm fas fa-window-close removeeventmore"></i>
@@ -239,7 +242,7 @@
 <!-- ADD ROW-->
 <script type="text/javascript">
     $(document).ready(function(){
-        $(document).on("click",".addeventmore", function(){            
+        $(document).on("click",".addeventmore", function(){                   
             var date                = $('#date').val();  //checked          
             var reference           = $('#reference_no').val();  //checked                                                      
             var product_model       = $('#product_model_id').find('option:selected').text();//checked    
@@ -250,6 +253,7 @@
             var product_mode_text   = $('#payment_mode').find('option:selected').text(); //checked        
             var category_id         = $('#category_id').val();
             var category_text       = $('#category_id').find('option:selected').text();
+            var unit_price          = $('#unit_price').val();
                      
             if(date == ''){
                 $.notify("Date is Required" ,  {globalPosition: 'top right', className:'error' }); //(message, {position, className:type})
@@ -290,6 +294,7 @@
                 product_mode_text   :product_mode_text,
                 category_id         :category_id,
                 category_text       :category_text,
+                unit_price          :unit_price,
             };
             var html = template(data);
             $("#addRow").append(html); 
@@ -298,6 +303,7 @@
         $(document).on("click",".removeeventmore",function(event){//(event,classname, callback function)
             $(this).closest(".delete_add_more_item").remove(); //$(thisDocument).closest(class).remove;
             totalAmountPrice();
+            
         });
 
         $(document).on('keyup click','.unit_price,.buying_qty', function(){ //(event,classname, callback function)
@@ -306,6 +312,22 @@
             var total = unit_price * qty;
             $(this).closest("tr").find("input.buying_price").val(total);
             totalAmountPrice();
+        });
+        $(document).on('keyup click','.addeventmore', function(){
+            console.log('addeventmore keyup');
+            $('#no_val_category').attr('selected','selected');
+        })
+        $(document).on('change','#serial_number', function(){
+            var data = JSON.parse(localStorage.getItem('data'))
+            var serial_id = $(this).val();
+            
+            $.each(data, function(index,value){
+                // console.log(value);                
+                if(value.serial_id == serial_id){
+                    $('#unit_price').val(value.unit_cost);
+                }
+            })
+            
         });
 
         $(document).on('change','#payment_mode', function(){
@@ -325,6 +347,7 @@
             $('#estimated_amount').val(sum);
         }  
 
+        
     });
 
 
@@ -341,15 +364,17 @@
                 data:{
                     category_id:category_id,                    
                 },
-                success:function(data){      
+                success:function(data){                         
                      if(data==''){
                         var html = '<option value="">No related products</option>';                                                
                      }else{
                         var html = '<option value="">Select Product</option>';
                      }     
                      
-                     $.each(data,function(key,v){               
+                     $.each(data,function(key,v){
+                        //console.log(v.unit_price);               
                         html += '<option value=" '+v.get_product.id+' "> '+v.get_product.product_model+'</option>';                                              
+                        
                      });
                     
                      $('#product_model_id').html(html);
@@ -373,14 +398,15 @@
                     product_model_id:product_model_id,                    
                 },
                 success:function(data){
-                    console.log(data);
+                     var response =  JSON.stringify(data);
+                     localStorage.setItem('data', response);
                     if(data==''){
                         var html = '<option value="">No related serial number</option>';                        
                      }else{
                         var html = '<option value="">Select Serial</option>';
                      } 
                     var html = '<option value="">Select Serial</option>';
-                    $.each(data,function(key,v){                                                                                                                      
+                    $.each(data,function(key,v){                                                                                                                                              
                         html += '<option value=" '+v.get_serial.id+' "> '+v.get_serial.name+'</option>';                                                                                              
                     });                    
                     $('#serial_number').html(html);
