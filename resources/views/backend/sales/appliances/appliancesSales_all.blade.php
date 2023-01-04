@@ -75,7 +75,7 @@
                             
                             <td> 
                                 @if(Auth::user()->id == 1) <!-- 1=admin 0=user -->                                                                                           
-                                    <a href="{{route('appliancesDeliveries.delete',$item->id)}}" class="btn btn-danger sm " title="Delete Data" id="delete"> <i class="fas fa-trash-alt"></i> </a>                                                               
+                                    <a href="{{route('appliancesSales.delete',$item->id)}}" class="btn btn-danger sm " title="Delete Data" id="delete"> <i class="fas fa-trash-alt"></i> </a>                                                               
                                 @endif
                             </td>
 

@@ -133,52 +133,57 @@ class AppliancesDeliveriesController extends Controller
     }//end of function
 //************************************************************** */
     public function AppliancesDeliveriesDelete($id){
-        
+        //algo
+        //check if the delivered item is not sold.
+        //if sold return back with notification. else perform deletion       
         //delete the related working stocks **checked
         //delete the related serial
         //delete the delivery
-
-        DB::beginTransaction();
-
-        try {
-            $deliveryToDelete  = AppliancesDeliveries::findOrFail($id);
         
-            $serial_id = $deliveryToDelete->serial_number;
+        $deliveryToDeleteCheck  = AppliancesWorkingStocks::where('dr_id',$id)->first();
         
-            $workingAppliancesToDelete = AppliancesWorkingStocks::where([            
-                ['serial_id', '=', $deliveryToDelete->serial_number],        
-                ['dr_id', '=', $deliveryToDelete->id],                    
-            ])->delete();
-
-            $deliveryToDelete->delete();
-            $serialToDelete = Serials::where('id', $serial_id )->delete();
-            
-            DB::commit();
-            // all good
-        } catch (\Exception $e) {
-            DB::rollback();
+        if($deliveryToDeleteCheck->si_id){
             $notification = array(
-                'message' => 'Failed to Delete, Something Went Wrong!', 
+                'message' => 'Failed to Delete, Sold Item!', 
                 'alert-type' => 'error',
             );
             return redirect()->back()->with($notification);
-        }
+        }else{
+            DB::beginTransaction();
 
+            try {
+                $deliveryToDelete  = AppliancesDeliveries::findOrFail($id);
+            
+                $serial_id = $deliveryToDelete->serial_number;
+            
+                $workingAppliancesToDelete = AppliancesWorkingStocks::where([            
+                    ['serial_id', '=', $deliveryToDelete->serial_number],        
+                    ['dr_id', '=', $deliveryToDelete->id],                    
+                ])->delete();
+
+                $deliveryToDelete->delete();
+                $serialToDelete = Serials::where('id', $serial_id )->delete();
+                
+                DB::commit();
+                // all good
+            } catch (\Exception $e) {
+                DB::rollback();
+                $notification = array(
+                    'message' => 'Failed to Delete, Something Went Wrong!', 
+                    'alert-type' => 'error',
+                );
+                return back()->with($notification);
+            }// end try catch
+                                            
+            $notification = array(
+                'message' => 'Data Deleted successfully', 
+                'alert-type' => 'success'
+            );
+            return redirect()->route('appliancesDeliveries.all')->with($notification);
+           
+        }// end else
         
 
-        
-        
-        
-        // $delivery_id = $itemToDelete2->id;
-        // //$itemToDelete1  = Appliances::where('appliances_deliveries_id','=',$delivery_id)->delete();
-        // $itemToDelete2->delete();
-        
-        $notification = array(
-            'message' => 'Data Deleted successfully', 
-            'alert-type' => 'success'
-        );
-        return redirect()->route('appliancesDeliveries.all')->with($notification);
-
-    }
+    }// end of function
     
 }

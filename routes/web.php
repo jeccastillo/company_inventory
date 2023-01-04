@@ -202,6 +202,7 @@ Route::controller(AppliancesSalesController::class)->group(function(){
    Route::get('/appliances/sales/all', 'AppliancesSalesAll')->name('appliancesSales.all');
    Route::get('/appliances/sales/add', 'AppliancesSalesAdd')->name('appliancesSales.add');
    Route::post('/appliances/sales/store', 'AppliancesSalesStore')->name('appliancesSales.store');
+   Route::get('/appliances/sales/delete/{id}', 'AppliancesSalesDelete')->name('appliancesSales.delete');
 });//end of function
 
 //test category controller

@@ -33,4 +33,7 @@ class AppliancesWorkingStocks extends Model
     public function getDr(){
         return $this->belongsTo(AppliancesDeliveries::class,'dr_id','id');
     }
+    public function getSi(){
+        return $this->belongsTo(AppliancesSales::class,'si_id','id');
+    }
 }

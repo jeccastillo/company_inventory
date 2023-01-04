@@ -58,8 +58,8 @@
                                         <td> {{ $stock->srp}} </td>
                                         <td> {{ $stock->date_in}} </td>
                                         <td> {{ $stock->date_out}} </td>
-                                        <td> {{ $stock['getDr']['reference'] }}</td>
-                                        <td> {{ $stock->reference_out}} </td>
+                                        <td> {{ $stock['getDr']['reference'] }}</td> <!-- NOTE: TO IMPLEMENT DR/SI/TS/MRS -->
+                                        <td> {{ $stock->si_id == null ? '--':$stock['getSi']['reference']}} </td> <!-- NOTE: TO IMPLEMENT DR/SI/TS/MRS -->
                                         <td title="{{$stat == 0 ? 'Prestine':'Defective'}}">
                                             @if($stat == '0')
                                                 <span class="btn btn-success" title="Prestine" ><i class="fas fa-check-circle" title="Prestine" onClick="myFunction()"></i></span> 
