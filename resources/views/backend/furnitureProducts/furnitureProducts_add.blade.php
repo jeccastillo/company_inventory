@@ -11,9 +11,9 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title">Appliances Add Product Page </h4><br><br>
+                        <h4 class="card-title">Furnitures Add Product Page </h4><br><br>
 
-                        <form method="post" action="{{ route('appliancesProduct.store') }}" id="myForm">
+                        <form method="post" action="{{ route('furnitureProduct.store') }}" id="myForm">
                             @csrf
 
                             <div class="row mb-3">
@@ -42,24 +42,14 @@
                                 <div class="col-sm-10 form-group">
                                     <select name="category_id" class="form-select" aria-label="Default select example">
                                         <option selected="" value="">select category</option>
-                                        @foreach($appliancesCategories as $category)
+                                        @foreach($categories as $category)
                                             <option value="{{$category->id}}">{{$category->name}}</option>
                                         @endforeach
                                         </select>
                                 </div>
                             </div>
                             <!-- end row -->
-                            <div class="row mb-3">
-                                <label class="col-sm-2 col-form-label">Brand</label>
-                                <div class="col-sm-10 form-group">
-                                    <select name="brand_id" class="form-select" aria-label="Default select example">
-                                        <option selected="" value="">select brand</option>
-                                        @foreach($brands as $brand)
-                                            <option value="{{$brand->id}}">{{$brand->name}}</option>
-                                        @endforeach
-                                        </select>
-                                </div>
-                            </div>
+
                             <!-- end row -->
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Description</label>

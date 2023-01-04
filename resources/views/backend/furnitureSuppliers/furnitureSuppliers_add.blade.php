@@ -11,7 +11,7 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title">Add Furniture Supplier Page </h4><br><br>
+                        <h4 class="card-title">Furniture Add Supplier Page </h4><br><br>
 
                         <form method="post" action="{{ route('furnitureSupplier.store') }}" id="myForm">
                             @csrf

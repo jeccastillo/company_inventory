@@ -4,20 +4,20 @@ namespace App\Http\Controllers\Pos;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\FunitureCategories;
+use App\Models\FurnitureCategories;
 use Auth;
 use Illuminate\Support\Carbon;
 
 class FurnitureCategoriesController extends Controller
 {
     public function FurnitureCategoriesAll(){
-        $categories = FunitureCategories::all();
+        $categories = FurnitureCategories::all();
 
         return view('backend.furnitureCategories.furnitureCategories_all', compact('categories'));
     }//end of FurnitureCategoriesAll
 
     public function FurnitureCategoriesEdit($id){
-        $category = FunitureCategories::findOrFail($id);
+        $category = FurnitureCategories::findOrFail($id);
         
         return view('backend.furnitureCategories.furnitureCategory_edit', compact('category'));
     }// end of FurnitureCategoriesEdit
@@ -25,7 +25,7 @@ class FurnitureCategoriesController extends Controller
     public function FurnitureCategoriesUpdate(Request $request){
        
         try{
-            $update = FunitureCategories::findOrFail($request->id)->update([
+            $update = FurnitureCategories::findOrFail($request->id)->update([
                 'name' => $request->name,
                 'updated_by' => Auth::user()->id,
                 'updated_at' => Carbon::now(),
@@ -51,7 +51,7 @@ class FurnitureCategoriesController extends Controller
     }// end of FurnitureCategoriesAdd
 
     public function FurnitureCategoriesStore(Request $request){
-        $duplicate = FunitureCategories::where('name',$request->name)->exists();
+        $duplicate = FurnitureCategories::where('name',$request->name)->exists();
         
         if($duplicate){
             $notification = array(
@@ -61,7 +61,7 @@ class FurnitureCategoriesController extends Controller
             return back()->with($notification);
         }else{
             try{
-                FunitureCategories::insert([
+                FurnitureCategories::insert([
                     'name' => $request->name,
                     'created_by' => Auth::user()->id,
                     'created_at' => Carbon::now(),
@@ -83,7 +83,7 @@ class FurnitureCategoriesController extends Controller
     }// end of FurnitureCategoriesStore 
     public function FurnitureCategoriesDelete($id){
         try{
-            FunitureCategories::findOrFail($id)->delete();
+            FurnitureCategories::findOrFail($id)->delete();
 
             $notification = array(
                 'message' => 'Deleted successfully!', 

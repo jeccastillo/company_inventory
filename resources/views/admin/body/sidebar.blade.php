@@ -87,6 +87,9 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{ route('appliancesProducts.all') }}>Appliances</a></li>
                     </ul>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{ route('furnitureProducts.all') }}>Furnitures</a></li>
+                    </ul>
                 </li><!-- end Manage Products -->
                 
                 {{-- <li>

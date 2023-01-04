@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('funiture_categories', function (Blueprint $table) {
+        Schema::create('furniture_categories', function (Blueprint $table) {
             $table->id();
             $table->String('name')->nullable();
             $table->tinyInteger('status')->default(1);

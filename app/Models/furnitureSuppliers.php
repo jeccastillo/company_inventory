@@ -11,4 +11,7 @@ class furnitureSuppliers extends Model
 
     protected $guarded =[];
     
+    public function getProducts(){
+        return $this->hasMany(furnitureProducts::class, 'supplier_id', 'id');
+    }
 }
