@@ -11,9 +11,9 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title">Edit Appliances Category Page </h4><br><br>
+                        <h4 class="card-title">Edit Furniture Category Page </h4><br><br>
 
-                        <form method="post" action="{{ route('appliancesCategory.update') }}" id="myForm">
+                        <form method="post" action="{{ route('furnitureCategory.update') }}" id="myForm">
                             @csrf
 
                             <input type="hidden" name="id" value="{{$category->id}}">
@@ -24,7 +24,7 @@
                                 </div>
                             </div> <!-- end row -->
 
-                            <input type="submit" class="btn btn-info waves-effect waves-light" value="Save Category">
+                            <input type="submit" class="btn btn-info waves-effect waves-light" value="Update">
                         </form>
                     </div>
                 </div>

@@ -22,7 +22,9 @@ use App\Http\Controllers\POS\AppliancesSalesController;
 use App\Http\Controllers\POS\TestCategoryController;
 use App\Http\Controllers\POS\AppliancesCategoriesController; 
 use App\Http\Controllers\POS\AppliancesProductsController;    
-use App\Http\Controllers\POS\DefaultController;          
+use App\Http\Controllers\POS\DefaultController;     
+use App\Http\Controllers\POS\FurnitureCategoriesController; 
+use App\Http\Controllers\POS\furnitureSupplierController;    
 use Illuminate\Support\Auth;
 
 
@@ -67,9 +69,19 @@ Route::controller(UsersController::class)->group(function(){
    Route::post('/user/update', 'UserUpdate')->name('user.update');
 });
 
- // Supplier All Route 
+ // furniture suppliers all route
+ Route::controller(furnitureSupplierController::class)->group(function(){
+   Route::get('/supplier/furniture/all', 'FurnitureSupplierAll')->name('furnitureSuppliers.all');
+   Route::get('/supplier/furniture/add', 'FurnitureSupplierAdd')->name('supplierfurniture.add');
+   Route::post('/supplier/furniture/store', 'FurnitureSupplierStore')->name('furnitureSupplier.store');
+   Route::get('/supplier/furniture/delete/{id}', 'FurnitureSupplierDelete')->name('furnitureSupplier.delete');
+   Route::get('/supplier/furniture/edit/{id}', 'FurnitureSupplierEdit')->name('furnitureSupplier.edit');
+   Route::post('/supplier/furniture/update', 'FurnitureSupplierUpdate')->name('furnitureSupplier.update');
+
+ });
+ // appliances suppliers  All Route     ****to edit url***
  Route::controller(SupplierController::class)->group(function () { // must create a controller and model for this route
-    Route::get('/supplier/all', 'SupplierAll')->name('supplier.all'); // name() to use when generating URL  or redirects via laravel's route.  
+    Route::get('/supplier/appliances/all', 'SupplierAll')->name('appLiancesSupplier.all'); // name() to use when generating URL  or redirects via laravel's route.  
     Route::get('/supplier/add','SupplierAdd')->name('supplier.add');
     Route::post('/supplier/store', 'SupplierStore')->name('supplier.store');     
     Route::get('/supplier/edit/{id}','SupplierEdit')->name('supplier.edit'); 
@@ -183,6 +195,16 @@ Route::controller(UsersController::class)->group(function(){
 //Supplier Deliveries Controller
 Route::controller(SupplierDeliveriesController::class)->group(function(){
    Route::get('/supplierDeliveries/all', 'SupplierDeliveriesAll')->name('supplierDeliveries.all');
+});
+
+//furniture categories controller
+Route::controller(FurnitureCategoriesController::class)->group(function(){
+   Route::get('/furniture/categories/all', 'FurnitureCategoriesAll')->name('furnitureCategories.all');
+   Route::get('/furniture/categories/edit/{id}', 'FurnitureCategoriesEdit')->name('furnitureCategory.edit');
+   Route::get('/furniture/categories/delete/{id}', 'FurnitureCategoriesDelete')->name('furnitureCategory.delete');
+   Route::post('/furniture/categories/update', 'FurnitureCategoriesUpdate')->name('furnitureCategory.update');
+   Route::get('/furniture/categories/add', 'FurnitureCategoriesAdd')->name('furnitureCategory.add');   
+   Route::post('/furniture/categories/store', 'FurnitureCategoriesStore')->name('furnitureCategory.store');
 });
 
 // furniture deliveries controller

@@ -25,11 +25,11 @@ class SupplierController extends Controller
         
 
         
-    }// End Method
+    }// End SupplierAll
 
     public function SupplierAdd(){
         return view('backend.supplier.supplier_add');
-    }// End Method
+    }// End SupplierAdd
 
     public function SupplierStore(Request $request){
         Supplier::insert([
@@ -64,7 +64,7 @@ class SupplierController extends Controller
             'email' => $request->email,
             'address' => $request->address,
             'updatedBy' => Auth::user()->id,            
-            'created_at' => Carbon::now()           
+            'updated_at' => Carbon::now()           
         ]);
 
         $notification = array(

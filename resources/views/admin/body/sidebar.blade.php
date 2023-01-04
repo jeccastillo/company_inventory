@@ -32,16 +32,13 @@
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="ri-mail-send-line"></i>
                         <span>Manage Categories</span>
-                    </a>
-                    {{-- <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('categories.all') }}>All Categories</a></li>
-                    </ul> --}}
+                    </a>                    
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{route('appliancesCategories.all')}}>Appliances</a></li>
                     </ul>
-                    {{-- <ul class="sub-menu" aria-expanded="false">
-                        <li><a href='' >Furnitures</a></li>
-                    </ul> --}}
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{route('furnitureCategories.all')}} >Furnitures</a></li>
+                    </ul>
                 </li><!-- end Manage Categories -->
                 
                 
@@ -52,8 +49,11 @@
                          <span>Manage Suppliers</span>
                      </a>
                      <ul class="sub-menu" aria-expanded="false">
-                         <li><a href={{ route('supplier.all') }}>All Suppliers</a></li>
+                         <li><a href={{ route('appLiancesSupplier.all') }}>Appliances Suppliers</a></li>
                      </ul>
+                     <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{ route('furnitureSuppliers.all') }}>Furniture Suppliers</a></li>
+                    </ul>
                  </li>
                  <!-- end Manage Suppliers -->
 
@@ -195,7 +195,7 @@
                     </ul>                  
                 </li><!-- end list --> --}}
                  
-
+                 
                  <li class="menu-title">Pages</li>
 
                  <li>

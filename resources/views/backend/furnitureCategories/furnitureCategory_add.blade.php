@@ -11,16 +11,15 @@
                 <div class="card">
                     <div class="card-body">
 
-                        <h4 class="card-title">Edit Appliances Category Page </h4><br><br>
+                        <h4 class="card-title">Add Furniture Category Page </h4><br><br>
 
-                        <form method="post" action="{{ route('appliancesCategory.update') }}" id="myForm">
+                        <form method="post" action="{{ route('furnitureCategory.store') }}" id="myForm">
                             @csrf
 
-                            <input type="hidden" name="id" value="{{$category->id}}">
                             <div class="row mb-3">
                                 <label for="example-text-input" class="col-sm-2 col-form-label">Category Name</label>
                                 <div class="form-group col-sm-10">
-                                    <input name="name" class="form-control" type="text" value="{{$category->name}}">
+                                    <input name="name" class="form-control" type="text" >
                                 </div>
                             </div> <!-- end row -->
 
