@@ -42,7 +42,8 @@ class AppliancesDeliveriesController extends Controller
 
     public function AppliancesDeliveriesStore(Request $request){
 
-        DB::transaction(function() use ($request){ // DB::transaction(function param, data parameter)
+        DB::beginTransaction();
+        try{
             if($request->category_id == null){
                 $notification = array(
                     'message' => 'No data added', 
@@ -52,31 +53,40 @@ class AppliancesDeliveriesController extends Controller
                 return redirect()->back()->with($notification);
             }else{
                 $count_category = count($request->category_id); // counts the instance of rows in table            
-                //check existing serial number
-                $exist = false;
-                for($i = 0; $i < $count_category; $i++){
-                    $ExsistingSerial = Serials::where('name',$request->serial[$i])->exists();
-                    if($ExsistingSerial){
-                        $exist = true;
-                    }
-                } // end check existing serial number
                 
-                if($exist){
-                    $notification = array(
-                        'message' => 'Failed to Save, Duplicate Serial Number Detected!', 
-                        'alert-type' => 'error'
-                    );
-                    return redirect()->back()->with($notification);
-                }
-    
-                for($i = 0; $i < $count_category; $i++){  
-                                                 
+                //check existing serial number
+                // $exist = false;
+                // for($i = 0; $i < $count_category; $i++){   
+                //     $ExsistingSerial = Serials::where('name',$request->serial[$i])->exists();                 
+                //     if($ExsistingSerial > 0){
+                //         //$exist = true;
+                //         $notification = array(
+                //             'message' => 'Failed to Save, Duplicate Serial Number Detected!', 
+                //             'alert-type' => 'error'
+                //         );
+                //         return redirect()->back()->with($notification);
+                //     }
+                // } // end check existing serial number
+                
+                
+                for($i = 0; $i < $count_category; $i++){ 
+                    $ExsistingSerial = Serials::where('name',$request->serial[$i])->exists();                 
+                    if($ExsistingSerial > 0){
+                        //$exist = true;
+                        $notification = array(
+                            'message' => 'Failed to Save, Duplicate Serial Number Detected!', 
+                            'alert-type' => 'error'
+                        );
+                        return redirect()->back()->with($notification);
+                    }    
+
                     $serialNumber   = Serials::insert([
                         'name' => $request->serial[$i],
                         'product_id' => $request->product_model_id[$i],
                         'created_by' => Auth::user()->id,
                         'created_at' => Carbon::now(),
                     ]);
+
                     $serial_id = Serials::orderBy('id','DESC')->first();
                     
                     
@@ -120,11 +130,19 @@ class AppliancesDeliveriesController extends Controller
                     $newAppliancesStock->created_at         = Carbon::now();
                     $newAppliancesStock->save();
                                       
-                } //end for loop   
-                                                  
+                } //end for loop                                                  
             }// end else
-        });
+        }catch(\Exception $e){
+            $notification = array(
+                'message' => 'Something Went Wrong!', 
+                'alert-type' => 'error'
+            );
 
+            return redirect()->back()->with($notification);
+        }
+            
+        
+        DB::commit();
         $notification = array(
             'message' => 'Data saved successfully', 
             'alert-type' => 'success'

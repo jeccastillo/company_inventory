@@ -63,4 +63,60 @@ class furnitureProductsController extends Controller
 
         }// end if else       
     }//end of FurnitureProductsStore
+
+    public function FurnitureProductsDelete($id){
+         
+        try{
+            furnitureProducts::findOrFail($id)->delete();
+
+            $notification = array(
+                'message' => 'Deleted successfully!', 
+                'alert-type' => 'success'
+            );
+            return redirect()->route('furnitureProducts.all')->with($notification);
+        }catch(\Exception $e){
+            $notification = array(
+                'message' => 'Failed to delete!', 
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+        }
+        
+    }//end of FurnitureProductsDelete
+
+    public function FurnitureProductsEdit($id){
+        $suppliers          = furnitureSuppliers::all();
+        $categories         = FurnitureCategories::all();
+        $furnitureToEdit    = furnitureProducts::findOrFail($id);
+
+        return view('backend.furnitureProducts.furnitureProducts_edit', compact('furnitureToEdit','suppliers','categories'));
+    }// end furnitureproductsedit
+
+    public function FurnitureProductsUpdate(Request $request){
+        try{
+            furnitureProducts::findOrFail($request->id)->update([
+                'supplier_id'   => $request->supplier_id,
+                'category_id'   => $request->category_id, 
+                'product_model' => $request->name,
+                'description'   => $request->description,
+                'updated_by'    => Auth::user()->id,
+                'updated_at'    => Carbon::now(),
+            ]);
+
+            $notification = array(
+                'message' => 'Updated successfully!', 
+                'alert-type' => 'success'
+            );
+            return redirect()->route('furnitureProducts.all')->with($notification);
+
+        }catch(\Exception $e){
+            //dd($e);
+            $notification = array(
+                'message' => 'Failed to Update!, Something Went Wrong!', 
+                'alert-type' => 'error'
+            );
+            return back()->with($notification);
+
+        }//end try catch                
+    }// end FurnitureProductsUpdate
 }

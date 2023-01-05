@@ -200,7 +200,7 @@
     
     <td>
         <input type="hidden" name="status1[]" value="@{{status1}}" >
-        @{{status1}} 
+        @{{statusText}} 
     </td>
     
     <td>
@@ -268,12 +268,9 @@
             var product_model_id = $('#product_model').val();            
             var serial_number = $('#serial_number').val();
             var status1 = $('#status1').val();     
-
-            if(status1==0){
-                status1 = 'Prestine';
-            }else{
-                status1 = 'Defective';
-            }            
+            var statusText = $('#status1').find('option:selected').text(); 
+            
+                    
             if(date == ''){
                     $.notify("Date is Required" ,  {globalPosition: 'top right', className:'error' }); //(message, {position, className:type})
                     return false;
@@ -298,11 +295,16 @@
                   if(product_model == ''){
                     $.notify("Product Model is Required" ,  {globalPosition: 'top right', className:'error' });
                     return false;
-                 }                 
+                 }  
+                 if(serial_number == ''){
+                    $.notify("Serial Number is Required" ,  {globalPosition: 'top right', className:'error' });
+                    return false;
+                 }               
                  if(status1 == ''){
                     $.notify("Product Status is Required" ,  {globalPosition: 'top right', className:'error' });
                     return false;
                  }
+                                                    
 
 
                  var source = $("#document-template").html();
@@ -317,7 +319,8 @@
                     brand_id:brand_id,                    
                     category_name:category_name, //key : value                   
                     serial_number:serial_number,
-                    status1:status1
+                    status1:status1,
+                    statusText:statusText
                  };
                  var html = template(data);
                  $("#addRow").append(html); 

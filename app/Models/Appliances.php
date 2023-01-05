@@ -9,6 +9,7 @@ class Appliances extends Model
 {
     use HasFactory;
     protected $guarded = []; // to avoid data breach. [] <- means all columns
+    
     public function supplier(){
         return $this->belongsTo(Supplier::class,'supplier_id','id'); // belongsTo(RelatedModel::class,'your_field','field on related model')
     }

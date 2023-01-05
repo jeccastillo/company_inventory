@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\AppliancesCategories;
 use App\Models\Appliances;
 use App\Models\AppliancesWorkingStocks;
-use App\Models\Brands;
+use App\Models\Brands; 
+use App\Models\furnitureProducts; 
+use App\Models\FurnitureCategories;
 
 class DefaultController extends Controller
 {
@@ -21,7 +23,15 @@ class DefaultController extends Controller
 
         return response()->json($allCategories);
         
-    }// end function
+    }// end GetCategory
+
+    public function GetFurnitureCategories(Request $request){
+        $supplier_id = $request->supplier_id;
+
+        $allCategories = furnitureProducts::with('getCategories')->select('category_id')->where('supplier_id', $supplier_id)->groupBy('category_id')->get();
+        //dd($allCategories);
+        return response()->json($allCategories);
+    }//end GetFurnitureCategories
 
     public function GetProduct(Request $request){
         $category_id = $request->category_id;
@@ -34,7 +44,19 @@ class DefaultController extends Controller
         
         //dd($allProducts);
         return response()->json($allProducts);
-    }// end function
+    }// end GetProduct
+
+    public function GetFurnitureProducts(Request $request){
+        $category_id = $request->category_id;
+        $supplier_id = $request->supplier_id;
+        $allProducts = FurnitureCategories::findOrFail($category_id)
+                        ->getProducts()
+                        ->where('supplier_id',$supplier_id)
+                        ->groupBy('product_model')
+                        ->get();
+        
+        return response()->json($allProducts);
+    }
 
     public function GetWorkingProducts(Request $request){
         $category_id = $request->category_id;

@@ -215,6 +215,9 @@ Route::controller(furnitureSupplierController::class)->group(function(){
    Route::get('furniture/products/all', 'FurnitureProductsAll')->name('furnitureProducts.all');
    Route::get('furniture/products/add', 'FurnitureProductsAdd')->name('furnitureProducts.add');
    Route::post('furniture/products/store', 'FurnitureProductsStore')->name('furnitureProduct.store');
+   Route::get('furniture/products/delete/{id}', 'FurnitureProductsDelete')->name('furnitureProduct.delete');
+   Route::get('furniture/products/edit/{id}', 'FurnitureProductsEdit')->name('furnitureProduct.edit');
+   Route::post('furniture/products/update', 'FurnitureProductsUpdate')->name('furnitureProduct.update');
  });
 
 //****************************************************************************** */
@@ -245,11 +248,16 @@ Route::controller(TestCategoryController::class)->group(function(){
 
 //default Controller
 Route::controller(DefaultController::class)->group(function(){
+   //appliances defaults controller
    Route::get('/get-category', 'GetCategory')->name('get-category');
    Route::get('/get-products', 'GetProduct')->name('get-product');
    Route::get('/get-brands', 'GetBrands')->name('get-brands');
    Route::get('/get-serials', 'GetSerials')->name('get-serials');
    Route::get('/get-working-products', 'GetWorkingProducts')->name('get-working-products');
+
+   // furniture defaults controller
+   Route::get('/get-furniture-categories', 'GetFurnitureCategories')->name('get-furniture-categories'); 
+   Route::get('/get-furniture-products', 'GetFurnitureProducts')->name('get-furniture-products');
 });
 
 Route::get('/dashboard', function () {

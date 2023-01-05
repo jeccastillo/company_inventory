@@ -44,11 +44,11 @@
                                         <td>{{ $product->description }}</td>
 
                                         <td>
-                                            <a href="{{ route('appliancesProduct.edit',$product->id) }} "
+                                            <a href="{{ route('furnitureProduct.edit',$product->id) }} "
                                                 class="btn btn-info sm" title="Edit Data"> <i class="fas fa-edit"></i>
                                             </a>
 
-                                            <a href="{{ route('appliancesProduct.delete',$product->id) }}"
+                                            <a href="{{ route('furnitureProduct.delete',$product->id) }}"
                                                 class="btn btn-danger sm " title="Delete Data" id="delete"> <i
                                                     class="fas fa-trash-alt"></i> </a>
                                         </td>

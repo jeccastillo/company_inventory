@@ -10,11 +10,11 @@ class furnituresDeliveries extends Model
     use HasFactory;
     protected $guarded = []; // to avoid data breach. [] <- means all columns
 
-    public function supplier(){
-        return $this->belongsTo(Supplier::class,'supplier_id','id'); // belongsTo(RelatedModel::class,'your_field','field on related model')
+    public function getSupplier(){
+        return $this->belongsTo(furnituresSuppliers::class,'supplier_id','id'); // belongsTo(RelatedModel::class,'your_field','field on related model')
     }
         
-    public function product(){
-        return $this->belongsTo(ProductsCap::class,'product_id','id');
+    public function getProduct(){
+        return $this->belongsTo(furnitureProducts::class,'product_model_id','id');
     }
 }

@@ -31,11 +31,9 @@
                             <th>Sl</th>
                             <th>Date</th>
                             <th>Ref No.</th>                                                          
-                            <th>Supplier</th>                             
-                            <th>Product Name / Desc</th>
-                            <th>Model</th>
-                            <th>Color</th>
-                            <th>Job Order</th>
+                            <th>Supplier</th>
+                            <th>Category</th>                                                             
+                            <th>Model</th>                            
                             <th>Qty</th>
                             <th>Unit Cost</th>                            
                             <th>GDP/SRP</th>
@@ -51,9 +49,10 @@
                         <tr>
                             <td> {{ $key+1}} </td>
                             <td> {{ $item->date_in }} </td>
-                            <td> {{ $item->reference}} </td>                              
-                            <td> {{ $item['supplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->                                                   
-                            <td> {{ $item['product']['name']}} </td>  
+                            <td> {{ $item->reference_name}} </td>                              
+                            <td> {{ $item['getSupplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->                                                   
+                            <td> {{ $item['getProduct']['category_id']}}</td>
+                            <td> {{ $item['getProduct']['name']}}</td>  
                             <td> {{ $item->product_model}} </td>  
                             <td> {{ $item->color}} </td> 
                             <td> {{ $item->job_order}} </td> 
