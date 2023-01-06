@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('product_model');                           
             $table->string('description')->nullable();                                                                             
             $table->integer('updated_by')->nullable();  
-            $table->integer('created_by')->nullable(); 
+            $table->integer('created_by')->nullable();             
             $table->foreign('supplier_id')->references('id')->on('furniture_suppliers')->onDelete('restrict'); // $table->foreign('field on current table')->references('id')->on('related table')->onDelete('restrict')
             $table->foreign('category_id')->references('id')->on('furniture_categories')->onDelete('restrict');                                                                           
             $table->timestamps();

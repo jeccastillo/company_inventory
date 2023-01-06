@@ -17,4 +17,6 @@ class furnitureProducts extends Model
     public function getSuppliers(){
         return $this->belongsTo(furnitureSuppliers::class, 'supplier_id', 'id');
     }
+
+
 }

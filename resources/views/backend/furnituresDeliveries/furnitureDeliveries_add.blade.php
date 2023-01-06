@@ -10,20 +10,20 @@
     <div class="card">
         <div class="card-body">
 
-            <h4 class="card-title">Add Deliveries  </h4><br><br>
+            <h4 class="card-title">Add Furniture Deliveries  </h4><br><br>
             
     <div class="row">
         <div class="col-md-4">
             <div class="md-4">
                 <label for="example-text-input" class="form-label">Date</label>
-                 <input class="form-control example-date-input" name="date" type="date"  id="date">
+                 <input class="form-control example-date-input" name="date_in" type="date"  id="date_in">
             </div>
         </div><!-- end column -->
 
         <div class="col-md-4">
             <div class="md-4">
                 <label for="example-text-input" class="form-label">Reference No</label>
-                <input class="form-control example-date-input" name="reference" type="text"  id="reference_no">
+                <input class="form-control example-date-input" name="reference_name" type="text"  id="reference_name">
             </div>
         </div><!-- end column -->
 
@@ -64,7 +64,7 @@
             <div class="md-4">
                 <label for="example-text-input" class="form-label">Status</label>
                 <select name="status" id="status" class="form-select select2" aria-label="Default select example" disabled>
-                        <option selected="" value="3">Open this select menu</option>                    
+                        <option selected="" value="">Open this select menu</option>                    
                         <option value="0">Pristine</option> 
                         <option value="1">Defective</option>                               
                 </select>
@@ -90,14 +90,13 @@
 <!--  ---------------------------------- -->
 
         <div class="card-body">
-        <form method="post" action="{{route('appliancesDeliveries.store')}}" id="myForm"> 
+        <form method="post" action="{{route('furnitureDeliveries.store')}}" id="myForm"> 
             @csrf
-            <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;">
+            <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;" id="myTable">
                 <thead>
                     <tr>
                         <th>Category</th>                                            
-                        <th>Model</th>
-                        <th>Serial #</th>
+                        <th>Model</th>                        
                         <th>Qty.</th>
                         <th>Unit Price </th> 
                         <th>SRP</th>
@@ -154,10 +153,9 @@
 <script id="document-template" type="text/x-handlebars-template">
      
 <tr class="delete_add_more_item" id="delete_add_more_item">
-        <input type="hidden" name="date[]" value="@{{date}}">
-        <input type="hidden" name="reference[]" value="@{{reference}}">
-        <input type="hidden" name="supplier_id[]" value="@{{supplier_id}}"> 
-        <input type="hidden" name="brand_id[]" value="@{{brand_id}}"> 
+        <input type="hidden" name="date_in[]" value="@{{date_in}}">
+        <input type="hidden" name="reference_name[]" value="@{{reference_name}}">
+        <input type="hidden" name="supplier_id[]" value="@{{supplier_id}}">         
         
     <td>
         <input type="hidden" name="category_id[]" value="@{{category_id}}" >
@@ -165,17 +163,12 @@
     </td>
 
      <td>
-        <input type="hidden" name="product_model_id[]" value="@{{product_model_id}}">
-        <input type="hidden" name="product_model[]" value="@{{product_model}}">
-        @{{ product_model }}  <!--product_model-->
+        <input type="hidden" name="product_model_id[]" value="@{{product_model_id}}" id="product_id">        
+        @{{ product_model_name }}  
     </td>
-
-    <td>
-        <input type="hidden" name="serial[]" value="@{{serial_number}}">
-        @{{ serial_number }}
-    </td>
+    
      <td>
-        <input type="text" value="1" class="form-control buying_qty text-right" name="qty[]" value="" readonly> 
+        <input type="number" class="form-control buying_qty text-right" name="qty[]" value=""> 
     </td>
     
     <td id="append_text">
@@ -187,8 +180,8 @@
     </td>
     
     <td>
-        <input type="hidden" name="status[]" value="@{{status}}" >
-        @{{status}} 
+        <input type="hidden" name="status[]" value="@{{status}}" id="appended_status" >
+        @{{statusText}} 
     </td>
     
     <td>
@@ -211,20 +204,26 @@
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
-                'unit_cost[]': {
+                "unit_cost[]": {
                     required : true,
-                }, 
-                'srp[]':{
-                    required:true,
-                }                
+                },
+                "qty[]":{
+                    required : true,
+                },
+                "srp[]":{
+                    required : true,
+                },           
             },
             messages :{
-                'unit_cost[]': {
+                "unit_cost[]": {
                     required : '',
                 },
-                'srp[]': {
+                "qty[]":{
                     required : '',
-                },                
+                },
+                "srp[]":{
+                    required : '',
+                },            
             },
             errorElement : 'span', 
             errorPlacement: function (error,element) {
@@ -244,77 +243,100 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function(){ //jquery should be written on ready function
         $(document).on("click",".addeventmore", function(){ //(onclic,addClass, function())
-            var date = $('#date').val();            
-            var reference = $('#reference_no').val();
-            var supplier_id = $('#supplier_id').val();
-            var category_id  = $('#category_id').val();
-            var brand_id = $('#brand_id').val();
+            var date_in = $('#date_in').val();            
+            var reference_name = $('#reference_name').val();
+            var supplier_id = $('#supplier_id').val();            
+            var category_id  = $('#category_id').val();            
             var category_name = $('#category_id').find('option:selected').text();            
-            var product_model = $('#product_model').find('option:selected').text();
-            var product_model_id = $('#product_model').val();            
-            var serial_number = $('#serial_number').val();
+            var product_model_name = $('#product_model').find('option:selected').text();
+            var product_model_id = $('#product_model').val();                       
             var status = $('#status').val();   
-            console.log("this is status val>>>>"+$('#status').val()+"<<<<<<<<this is status val")  
-            console.log('>>>> '+status+' <<<<');
+            var statusText = $('#status').find('option:selected').text();
 
-            // if(status1==0){
-            //     status1 = 'Prestine';
-            // }else if(status1=='3'){
-            //     $.notify("Product Status is Required" ,  {globalPosition: 'top right', className:'error' });
-            //     return false;
-            // }else{
-            //     status1 = 'Defective';
-            // }            
-            if(date == ''){
-                    $.notify("Date is Required" ,  {globalPosition: 'top right', className:'error' }); //(message, {position, className:type})
+                       
+            if(date_in == ''){
+                    $.notify("Date is Required" ,  {globalPosition: 'top center', className:'error' }); //(message, {position, className:type})
                     return false;
                  }
-                  if(reference == ''){
-                    $.notify("Reference No. is Required" ,  {globalPosition: 'top right', className:'error' });
-                    return false;
-                 }
+            if(reference_name == ''){
+                $.notify("Reference No. is Required" ,  {globalPosition: 'top center', className:'error' });
+                return false;
+            }
 
-                  if(supplier_id == ''){
-                    $.notify("Supplier is Required" ,  {globalPosition: 'top right', className:'error' });
-                    return false;
-                 }
-                  if(category_id == ''){
-                    $.notify("Category is Required" ,  {globalPosition: 'top right', className:'error' });
-                    return false;
-                 }
-                 if(brand_id == ''){
-                    $.notify("Brand Name is Required" ,  {globalPosition: 'top right', className:'error' });
-                    return false;
-                 }
-                  if(product_model_id == ''){
-                    $.notify("Product Model is Required" ,  {globalPosition: 'top right', className:'error' });
-                    return false;
-                 }
-                 if(status == '3'){
-                    $.notify("Product Status is Required" ,  {globalPosition: 'top right', className:'error' });
-                    return false;
-                 }                   
+            if(supplier_id == ''){
+                $.notify("Supplier is Required" ,  {globalPosition: 'top center', className:'error' });
+                return false;
+            }
+            if(category_id == ''){
+                $.notify("Category is Required" ,  {globalPosition: 'top center', className:'error' });
+                return false;
+            }
                  
+            if(product_model_id == ''){
+                $.notify("Product Model is Required" ,  {globalPosition: 'top center', className:'error' });
+                return false;
+            }
+            if(status == ''){
+                $.notify("Product Status is Required" ,  {globalPosition: 'top center', className:'error' });
+                return false;
+            }                   
+            //*****************************
+            var data1 = [];
+           // var tdContent={};
+            //var appendedStatus=[];
+            
+            var tdContent={};
+            $("#myForm tr td").each(function() {
+                var currentRow = $(this);    
+                var appended_product=currentRow.find("#product_id").val();
+                var appended_status=currentRow.find("#appended_status").val();                                       
+                
+                var obj={};
+                if(appended_product){
+                    obj.appended_product=appended_product;                    
+                }
+                if(appended_status){
+                    obj.appended_status=appended_status;                    
+                }
+                if(!jQuery.isEmptyObject(obj)){
+                   data1.push(obj);
+                };                                       
+                                        
+            });
+            var num = data1.length;
+            for(var i = 0; i < num; i++){ 
+                if(data1[i].appended_product == product_model_id && data1[i+1].appended_status == status){
+                    $.notify("You've already added a \""+statusText+"\"  "+product_model_name ,  {globalPosition: 'top center', className:'error' });
+                    return false;
+                };  
+                i++;               
+            }
 
-                 var source = $("#document-template").html();
-                 var template = Handlebars.compile(source);
-                 var data = {
-                    date:date, //key : value                   
-                    reference:reference,
-                    supplier_id:supplier_id, //key : value
-                    category_id:category_id, //key : value
-                    product_model:product_model,
-                    product_model_id:product_model_id,
-                    brand_id:brand_id,                    
-                    category_name:category_name, //key : value                   
-                    serial_number:serial_number,
-                    status:status
-                 };
-                 var html = template(data);
-                 $("#addRow").append(html); 
-        });
+                                      
+            
+            
+
+            //*****************************
+
+            var source = $("#document-template").html();
+            var template = Handlebars.compile(source);
+            var data = {
+                date_in:date_in, //key : value                   
+                reference_name:reference_name,
+                supplier_id:supplier_id, //key : value
+                category_id:category_id, //key : value
+                category_name:category_name, //key : value    
+                product_model_name:product_model_name,
+                product_model_id:product_model_id,                                                                                 
+                status:status,
+                statusText:statusText,
+            };
+            var html = template(data);
+            $("#addRow").append(html); 
+            
+        });// <<<<<<<<<<<< end .addEventMore
 
         $(document).on("click",".removeeventmore",function(event){//(event,classname, callback function)
             $(this).closest(".delete_add_more_item").remove(); //$(thisDocument).closest(class).remove;
@@ -344,6 +366,33 @@
             });
             $('#estimated_amount').val(sum);
         }  
+
+        
+        
+        // $(document).on("keyup click",".addeventmore", function(){
+        //     var data = [];
+            
+        //     $("#myForm td #test1").each(function() {
+        //         var tdContent = $(this).val();
+        //         data.push(tdContent);                                
+        //     });    
+        //     //3
+        //     for(var i = 0; i < data.length; i++){
+                
+        //         for(var j = i+1; j <data.length; j++){
+        //             if(data[i] == data[j]){
+        //                 $.notify("duplicate value" ,  {globalPosition: 'top right', className:'error' });
+        //                 return false;
+        //             }else{
+        //                 console.log('no dup');
+        //             }
+        //         }
+        //     }
+        //     if (duplicates){
+        //         alert("There were duplicates.");
+        //     }
+        // });
+        
 
     });
 
@@ -436,35 +485,7 @@
 
 </script>
 
-<!-- validation -->
-<script type="text/javascript">
-    $(document).ready(function (){
-        $('#myForm').validate({
-            rules: {
-                "unit_cost[]": {
-                    required : true,
-                },                 
-            },
-            messages :{
-                "unit_cost[]": {
-                    required : 'Please Enter Unit Price',
-                },                
-            },
-            errorElement : 'span', 
-            errorPlacement: function (error,element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight : function(element, errorClass, validClass){
-                $(element).addClass('is-invalid');
-            },
-            unhighlight : function(element, errorClass, validClass){
-                $(element).removeClass('is-invalid');
-            },
-        });
-    });
-    
-</script>
+
 
  
 

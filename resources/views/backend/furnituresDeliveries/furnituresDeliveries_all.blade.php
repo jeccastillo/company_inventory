@@ -51,15 +51,12 @@
                             <td> {{ $item->date_in }} </td>
                             <td> {{ $item->reference_name}} </td>                              
                             <td> {{ $item['getSupplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->                                                   
-                            <td> {{ $item['getProduct']['category_id']}}</td>
-                            <td> {{ $item['getProduct']['name']}}</td>  
-                            <td> {{ $item->product_model}} </td>  
-                            <td> {{ $item->color}} </td> 
-                            <td> {{ $item->job_order}} </td> 
-                            <td> {{ $item->qty}} </td>                                    
-                            <td> {{ $item->unit_cost}}</td>   
-                            <td> {{ $item->srp_gdp}}</td> 
-                            <td> {{ $item->total_gdp}}</td>
+                            <td> {{ $item['getCategory']['name']}}</td>
+                            <td> {{ $item['getProduct']['product_model']}}</td>  
+                            <td> {{ $item->qty}} </td>  
+                            <td> {{ $item->unit_cost}} </td> 
+                            <td> {{ $item->srp}} </td> 
+                            <td> {{ $item->qty*$item->srp}} </td>                                                                                            
                             <td>
                                 @if($item->status == '0')
                                     <span class="btn btn-success" title="Prestine" ><i class="fas fa-check-circle" title="Prestine" onClick="myFunction()"></i></span> 

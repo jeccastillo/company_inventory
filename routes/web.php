@@ -187,6 +187,7 @@ Route::controller(UsersController::class)->group(function(){
 //Supplier Deliveries Controller
 Route::controller(SupplierDeliveriesController::class)->group(function(){
    Route::get('/supplierDeliveries/all', 'SupplierDeliveriesAll')->name('supplierDeliveries.all');
+   
 });
 
 //furniture categories controller
@@ -225,6 +226,7 @@ Route::controller(furnitureSupplierController::class)->group(function(){
 Route::controller(FurnituresDeliveriesController::class)->group(function(){
    Route::get('/furnitures/deliveries/all', 'FurnitureDeliveriesAll')->name('furnitureDeliveries.all');
    Route::get('/furnitures/deliveries/add', 'FurnitureDeliveriesAdd')->name('furnitureDeliveries.add');
+   Route::post('/furnitures/deliveries/store', 'FurnitureDeliveriesStore')->name('furnitureDeliveries.store');
 
 });
 

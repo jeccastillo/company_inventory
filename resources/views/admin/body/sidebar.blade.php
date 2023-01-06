@@ -184,7 +184,7 @@
                         <li><a href={{ route('appliancesWorkingStocks.all') }}>Appliances</a></li>
                     </ul>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('furnitures.all') }}>Furnitures</a></li>
+                        <li><a href={{ route('furnituresWorkingStocks.all') }}>Furnitures</a></li>
                     </ul>
                 </li> 
                 <!-- ____________TO IMPLEMENT ___________________________-->
