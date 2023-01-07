@@ -61,7 +61,7 @@ class DefaultController extends Controller
     public function GetWorkingProducts(Request $request){
         $category_id = $request->category_id;
 
-        $workingProducts = AppliancesWorkingStocks::with('getProduct')->where('category_id',$category_id)->groupBy('product_model_id')->get();                        
+        $workingProducts = AppliancesWorkingStocks::with('getProduct')->where('category_id',$category_id)->groupBy('product_model_id')->where('qty','>=',1)->get();                        
         
         return response()->json($workingProducts);
     }
@@ -86,5 +86,18 @@ class DefaultController extends Controller
     }//end function
 
     
+    public function GetWorkingFurnitures(Request $request){
+        $product = furnitureProducts::select('*')->where([
+                ['category_id','=', $request->category_id],
+                ['qty','>', '0'],
+            ])->get();
 
+        return response()->json($product);
+    }// end GetWorkingFurnitures
+
+    public function GetFurniturePrice(Request $request){
+        $productPrice = furnitureProducts::select('unit_cost', 'srp_gdp')->where('id', $request->product_model_id)->first();
+        
+        return response($productPrice);
+    }
 }

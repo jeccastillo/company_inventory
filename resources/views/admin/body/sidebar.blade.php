@@ -168,7 +168,10 @@
                     </a>                       
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('appliancesSales.all')}}">Appliances Sales</a></li>
-                    </ul>                  
+                    </ul>  
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{route('furnitureSales.all')}}">Furniture Sales</a></li>
+                    </ul>                
                 </li><!-- end list -->
 
                 <li>

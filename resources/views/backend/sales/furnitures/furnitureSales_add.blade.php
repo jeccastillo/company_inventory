@@ -56,36 +56,29 @@
 
         <div class="col-md-4">
             <div class="md-4">
-                <label for="supplier_id" class="form-label">Product Name </label>
+                <label for="supplier_id" class="form-label">Product Model</label>
                 <select id="product_model_id" name="product_model_id" class="form-select select2 " aria-label="Default select example" disabled>
-                        <option selected="" value="" id="no_val_product">Open this select menu</option>
-                        <option hidden value="" id="hidden_option"></option>
+                        <option selected="" value="" id="no_val_product">Open this select menu</option>                        
                 </select>
+                {{-- <input type="hidden" name="unit_price" value="" id="unit_price">
+                <input type="hidden" name="srp_gdp" value="" id="srp_gdp"> --}}
                 
             </div>
         </div><!-- end column -->   
-
-        <div class="col-md-4">
-            <div class="md-4">
-                <label for="example-text-input" class="form-label">Serial Number</label>
-                <select name="serial_number" id="serial_number" class="form-select select2" aria-label="Default select example" disabled>
-                    <option selected="" value="" id='no_val_serial'>Open this select menu</option>                                     
-                </select>
-                <input type="hidden" name="unit_price" value="" id="unit_price">
-
-            </div>
-        </div> <!-- end column -->                                                    
+                                                       
     </div> <!-- end row -->  
     <div class="row">       
         <div class="col-md-4">
             <div class="md-4 ">
-                <label for="example-text-input" class="form-label" style="margin-top:43px;">  </label>        
-                <i class="btn  btn-secondary btn-rounded waves-effect waves-light fas fa-plus-circle addeventmore"> Add </i>           
+                <label for="example-text-input" class="form-label" style="margin-top:43px;">  </label> 
+                        
+                <i class="btn  btn-secondary btn-rounded waves-effect waves-light fas fa-plus-circle addeventmore" id="addeventmore" > Add </i>           
             </div>
         </div><!-- end column -->        
     </div><!-- end row -->    
            
 </div> <!-- End card-body -->
+
 <!--  ---------------------------------- -->
 
         <div class="card-body">
@@ -95,14 +88,12 @@
                 <thead>
                     <tr>
                         <th>Category</th>                                            
-                        <th>Model</th>
-                        <th>Serial #</th>
-                        <th>Qty.</th>
-                        <th>Unit Price </th> 
-                        {{-- <th>SRP</th> --}}
+                        <th>Model</th>                        
+                        <th>Qty.</th>                        
+                        <th>SRP</th>
                         <th>Payment Mode</th>                       
                         <th>Remarks</th>                        
-                        {{-- <th>Total Price</th> --}}
+                        <th>Total Price</th>
                         <th>Action</th> 
                     </tr>
                 </thead>
@@ -112,15 +103,15 @@
                 </tbody>
 
                 <tbody>
-                    {{-- <tr>
-                        <td colspan="8"></td>
+                    <tr>
+                        <td colspan="6"></td>
                             <td>
                                 <input type="text" name="estimated_amount" value="0" id="estimated_amount" class="form-control estimated_amount" readonly style="background-color: #ddd;" >
                             </td>
                         <td>
 
                         </td>
-                    </tr> --}}
+                    </tr>
 
                 </tbody>                
             </table><br>
@@ -161,29 +152,25 @@
     </td>
 
      <td>
-        <input type="hidden" name="product_model_id[]" value="@{{product_model_id}}">
+        <input type="hidden" name="product_model_id[]" value="@{{product_model_id}}" id="productId">
         <input type="hidden" name="product_model[]" value="@{{product_model}}">
         @{{ product_model }}  <!--product_model-->
     </td>
 
-    <td>
-        <input type="hidden" name="serial[]" value="@{{serial_id}}">
-        @{{ serial_id_name }}
-    </td>
      <td>
-        <input type="text" value="1" class="form-control buying_qty text-right" name="qty[]" value="" readonly> 
+        <input type="text"  class="form-control buying_qty text-right" name="qty[]" value=""> 
     </td>
     
-    <td id="append_text">
+    <!-- <td id="append_text">
         <input type="text" class="form-control  form-group unit_price text-right" name="unit_cost[]" value="@{{unit_price}}" id="test" readonly>         
-    </td>
+    </td>  -->
 
-    {{-- <td>
-        <input type="number" class="form-control srp text-right" name="srp[]" value=""  > 
-    </td> --}}
+    <td>
+        <input type="number" class="form-control srp text-right srp" name="srp[]" value="@{{srp_gdp}}"  > 
+    </td>
     
     <td>
-        <input type="hidden" name="payment_mode[]" value="@{{payment_mode}}" >
+        <input type="hidden" name="payment_mode[]" value="@{{payment_mode}}" id="paymentMode">
         @{{product_mode_text}} 
     </td>
     
@@ -191,9 +178,9 @@
         <input type="text" class="form-control" name="remarks[]"> 
     </td>
     
-     {{-- <td>
+     <td>
         <input type="number" class="form-control buying_price text-right" name="buying_price[]" value="0" readonly> 
-    </td> --}}
+    </td>
 
      <td>
         <i class="btn btn-danger btn-sm fas fa-window-close removeeventmore"></i>
@@ -208,7 +195,7 @@
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
-                'unit_cost[]': {
+                'qty[]': {
                     required : true,
                 }, 
                 'srp[]':{
@@ -216,7 +203,7 @@
                 }                
             },
             messages :{
-                'unit_cost[]': {
+                'qty[]': {
                     required : '',
                 },
                 'srp[]': {
@@ -246,14 +233,13 @@
             var date                = $('#date').val();  //checked          
             var reference           = $('#reference_no').val();  //checked                                                      
             var product_model       = $('#product_model_id').find('option:selected').text();//checked    
-            var product_model_id    = $('#product_model_id').val();//checked                
-            var serial_id           = $('#serial_number').val();//checked    
-            var serial_id_name      = $('#serial_number').find('option:selected').text();//checked    
+            var product_model_id    = $('#product_model_id').val();//checked                            
             var payment_mode        = $('#payment_mode').val(); //checked    
             var product_mode_text   = $('#payment_mode').find('option:selected').text(); //checked        
             var category_id         = $('#category_id').val();
             var category_text       = $('#category_id').find('option:selected').text();
-            var unit_price          = $('#unit_price').val();
+            // var unit_price          = $('#unit_price').val();
+            // var srp_gdp             = $('#srp_gdp').val();
                      
             if(date == ''){
                 $.notify("Date is Required" ,  {globalPosition: 'top right', className:'error' }); //(message, {position, className:type})
@@ -263,6 +249,10 @@
                 $.notify("Reference No. is Required" ,  {globalPosition: 'top right', className:'error' });
                 return false;
             }   
+            if(payment_mode == ''){
+                $.notify("Payment Mode is Required" ,  {globalPosition: 'top right', className:'error' });
+                return false;
+            }
             if(category_id == ''){
                 $.notify("Category Required" ,  {globalPosition: 'top right', className:'error' });
                 return false;
@@ -270,15 +260,41 @@
             if(product_model_id == ''){
                 $.notify("Product Model is Required" ,  {globalPosition: 'top right', className:'error' });
                 return false;
-            }  
-            if(serial_id == ''){
-                $.notify("Serial is Required" ,  {globalPosition: 'top right', className:'error' });
-                return false;
-            }               
-            if(payment_mode == ''){
-                $.notify("Payment Mode is Required" ,  {globalPosition: 'top right', className:'error' });
-                return false;
+            }                            
+            
+            //check duplicate ************************
+            var tdContent={};
+            var data1 = [];
+            $("#myForm tr td").each(function() {            
+                var currentRow = $(this);    
+                var appended_product=currentRow.find("#productId").val();
+                var appended_paymentMode=currentRow.find("#paymentMode").val();                                       
+                
+                var obj={};
+                if(appended_product){
+                    obj.appended_product=appended_product;                    
+                }
+                if(appended_paymentMode){
+                    obj.appended_paymentMode=appended_paymentMode;                    
+                }
+                if(!jQuery.isEmptyObject(obj)){
+                    data1.push(obj);
+                };                                       
+                                        
+            });
+            
+            console.log(data1);
+            var num = data1.length;
+            for(var i = 0; i < num; i++){                 
+                if(data1[i].appended_product == product_model_id && data1[i+1].appended_paymentMode == payment_mode){
+                    $.notify("You've already added a \""+product_mode_text+"\"  "+product_model ,  {globalPosition: 'top center', className:'error' });
+                    return false;
+                };  
+                i++;               
             }
+            //end check duplicate *****************
+            
+            
 
 
             var source = $("#document-template").html();
@@ -287,18 +303,19 @@
                 date                :date, //key : value                   
                 reference           :reference,                    
                 product_model       :product_model,
-                product_model_id    :product_model_id,                                                                                        
-                serial_id           :serial_id,
-                serial_id_name      :serial_id_name,
+                product_model_id    :product_model_id,                                                                                                        
                 payment_mode        :payment_mode,
                 product_mode_text   :product_mode_text,
                 category_id         :category_id,
                 category_text       :category_text,
-                unit_price          :unit_price,
+                // unit_price          :unit_price,
+                // srp_gdp             :srp_gdp
             };
             var html = template(data);
             $("#addRow").append(html); 
-        });
+
+            
+        });// end .addeventmore
 
         $(document).on("click",".removeeventmore",function(event){//(event,classname, callback function)
             $(this).closest(".delete_add_more_item").remove(); //$(thisDocument).closest(class).remove;
@@ -306,30 +323,31 @@
             
         });
 
-        $(document).on('keyup click','.unit_price,.buying_qty', function(){ //(event,classname, callback function)
-            var unit_price = $(this).closest("tr").find("input.unit_price").val();
+        
+
+        //table change
+        $('#myTable').on('change', 'input', function () {            
+            var srp = $(this).closest('tr').find('input.srp').val();
             var qty = $(this).closest("tr").find("input.buying_qty").val();
-            var total = unit_price * qty;
+            var total = srp * qty;
             $(this).closest("tr").find("input.buying_price").val(total);
-            totalAmountPrice();
-        });
-        $(document).on('keyup click','.addeventmore', function(){
-            console.log('addeventmore keyup');
-            $('#no_val_category').attr('selected','selected');
-        })
-        $(document).on('change','#serial_number', function(){
-            var data = JSON.parse(localStorage.getItem('data'))
-            var serial_id = $(this).val();
-            
-            $.each(data, function(index,value){
-                // console.log(value);                
-                if(value.serial_id == serial_id){
-                    $('#unit_price').val(value.unit_cost);
-                }
-            })
-            
+            totalAmountPrice();            
         });
 
+
+        // $(document).on('change','.unit_price,.buying_qty', function(){ //(event,classname, callback function)
+        //     var unit_price = $(this).closest("tr").find("input.unit_price").val();
+        //     var qty = $(this).closest("tr").find("input.buying_qty").val();
+        //     var total = unit_price * qty;
+        //     $(this).closest("tr").find("input.buying_price").val(total);
+        //     totalAmountPrice();
+        // });
+
+        $(document).on('keyup click','.addeventmore', function(){                       
+            $('#no_val_category').attr('selected','selected');
+        })
+        
+      
         $(document).on('change','#payment_mode', function(){
             $('#category_id').removeAttr('disabled');
         });
@@ -359,24 +377,25 @@
         $(document).on('change','#category_id',function(){
             var category_id = $('#category_id').val();
             $.ajax({
-                url:"{{ route('get-working-products') }}",
+                url:"{{ route('get-working-furniture') }}",
                 type: "GET",
                 data:{
                     category_id:category_id,                    
                 },
-                success:function(data){                         
+                success:function(data){  
+                    var response =  JSON.stringify(data);
+                    localStorage.setItem('data', response);                       
                      if(data==''){
                         var html = '<option value="">No related products</option>';                                                
                      }else{
                         var html = '<option value="">Select Product</option>';
                      }     
-                     
-                     $.each(data,function(key,v){
-                        //console.log(v.unit_price);               
-                        html += '<option value=" '+v.get_product.id+' "> '+v.get_product.product_model+'</option>';                                              
-                        
+                      
+                     $.each(data,function(key,v){                                   
+                        html += '<option value=" '+v.id+' "> '+v.product_model+'</option>'; 
+                        //html += '<input type="hidden" value="'+v.unit_cost+'">';                                                                                           
                      });
-                     
+                    
                      $('#product_model_id').html(html);
                      $('#product_model_id').removeAttr('disabled');
                 }
@@ -386,67 +405,32 @@
 
 </script>
 
-<!-- get serials -->
-<script type="text/javascript">
+<!-- get product price -->
+{{-- <script type="text/javascript">
     $(function(){
         $(document).on('change','#product_model_id',function(){
             var product_model_id = $(this).val();                
             $.ajax({
-                url:"{{ route('get-serials') }}",
+                url:"{{ route('get-furniture-price') }}",
                 type: "GET",
                 data:{
                     product_model_id:product_model_id,                    
                 },
-                success:function(data){
-                     var response =  JSON.stringify(data);
-                     localStorage.setItem('data', response);
-                    if(data==''){
-                        var html = '<option value="">No related serial number</option>';                        
-                     }else{
-                        var html = '<option value="">Select Serial</option>';
-                     } 
-                    var html = '<option value="">Select Serial</option>';
-                    $.each(data,function(key,v){                                                                                                                                              
-                        html += '<option value=" '+v.get_serial.id+' "> '+v.get_serial.name+'</option>';                                                                                              
-                    });                    
-                    $('#serial_number').html(html);
-                    $('#serial_number').removeAttr('disabled');
+                success:function(data){                     
+                    console.log(data.unit_cost);
+                    console.log(data.srp_gdp);
+                                        
+                    $('#unit_price').val(data.unit_cost);
+                    $('#srp_gdp').val(data.srp_gdp);
+                    $('#addeventmore').removeAttr('disabled');
                 },                
             });
         });
     });
 
-</script>
+</script> --}}
 
-<!-- validation -->
-<script type="text/javascript">
-    $(document).ready(function (){
-        $('#myForm').validate({
-            rules: {
-                "unit_cost[]": {
-                    required : true,
-                },                 
-            },
-            messages :{
-                "unit_cost[]": {
-                    required : 'Please Enter Unit Price',
-                },                
-            },
-            errorElement : 'span', 
-            errorPlacement: function (error,element) {
-                error.addClass('invalid-feedback');
-                element.closest('.form-group').append(error);
-            },
-            highlight : function(element, errorClass, validClass){
-                $(element).addClass('is-invalid');
-            },
-            unhighlight : function(element, errorClass, validClass){
-                $(element).removeClass('is-invalid');
-            },
-        });
-    });
-    
-</script>
+
 
  
 

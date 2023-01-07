@@ -28,16 +28,17 @@
                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                         <tr>
-                            <th>Sl</th>
-                            <th>Date</th>
-                            <th>Ref No.</th>                                                          
-                            <th>Supplier</th>                             
+                            <th>#</th>                            
+                            <th>Supplier</th> 
+                            <th>Category</th>                                                                                                                                             
                             <th>Model</th>                            
                             <th>Qty</th>
                             <th>Unit Cost</th>                            
                             <th>GDP/SRP</th>
                             <th>TOTAL GDP</th>
-                            <th>STATUS</th>                                                                                                                                              
+                            <th>Date In</th>
+                            <th>Ref. In</th>                             
+                            <th>Remarks</th>                                                                                                                                                                     
                         </thead>
 
 
@@ -46,35 +47,40 @@
                         	@foreach($furnitures as $key => $item)
                         <tr>
                             <td> {{ $key+1}} </td>
+                            <td> {{ $item['getSuppliers']['name']}} </td>
+                            <td> {{ $item['getCategories']['name']}}</td> 
+                            <td> {{ $item->product_model}} </td>  
+                            <td> {{ $item->qty}} </td>                                    
+                            <td> {{ $item->unit_cost == null ? '--': number_format($item->unit_cost, 2, '.', ',')}}</td>   
+                            <td> {{ $item->srp_gdp == null ? '--': number_format($item->srp_gdp, 2, '.', ',')}}</td> 
+                            <td> {{ $item->total_gdp == null ? '--': number_format($item->total_gdp, 2, '.', ',')}}</td> 
                             <td> 
-                                <ol>
+                                <ul>
                                     @forelse($item->getDr as $dr)                                    
-                                            <li>{{$dr['date_in']}}</li> 
+                                            <li>{{date('M-d-Y', strtotime($dr['date_in']))}}</li> 
                                     @empty
-                                        <p>no data</p>                                           
+                                        <p>--</p>                                           
                                     @endforelse   
-                                </ol>  
+                                </ul>  
                             </td>
                             <td> 
-                                <ol>
-                                    @foreach($item->getDr as $dr)                                    
-                                            <li>{{$dr['reference_name']}}</li>                                            
-                                    @endforeach   
-                                </ol> 
-                            </td>                              
-                            <td> {{ $item['getSupplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->                                                   
-                            <td> {{ $item['getProduct']['product_model']}} </td>                                                           
-                            <td> {{ $item->qty}} </td>                                    
-                            <td> {{ $item->unit_cost}}</td>   
-                            <td> {{ $item->srp}}</td> 
-                            <td> {{ $item->qty * $item->srp}}</td>
-                            <td>
-                                @if($item->status == '0')
-                                    <span class="btn btn-success" title="Prestine" ><i class="fas fa-check-circle" title="Prestine" onClick="myFunction()"></i></span> 
-                                @elseif($item->status == '1')
-                                <span class="btn btn-success">Approved</span>
-                                @endif
+                                <ul>
+                                    @forelse($item->getDr as $dr)                                    
+                                            <li>{{$dr['reference_name']}}</li> 
+                                    @empty
+                                            <p>--</p>  
+                                    @endforelse   
+                                </ul> 
+                            </td>
+                            <td>                                 
+                                @forelse($item->getDr as $dr)                                                                    
+                                        <p>{{$dr['remarks'] == null ? '--': $dr['remarks']}}</p>                                    
+                                @empty
+                                    <p>--</p>
+                                @endforelse
                             </td> 
+
+                            
                             
                             
 

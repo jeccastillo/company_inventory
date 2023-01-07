@@ -31,10 +31,7 @@ class FurnituresDeliveriesController extends Controller
         return view('backend.furnituresDeliveries.furnitureDeliveries_add', compact('suppliers','products','categories'));
     } //end FurnitureDeliveriesAdd
 
-    public function FurnitureDeliveriesStore(Request $request){
-        
-        
-        
+    public function FurnitureDeliveriesStore(Request $request){                        
         
         DB::beginTransaction();
         try{
@@ -46,81 +43,39 @@ class FurnituresDeliveriesController extends Controller
     
                 return redirect()->back()->with($notification);
             }else{
-                $count_category = count($request->category_id);
-                $addQty = false;
-                for($a = 0; $a < $count_category; $a++){
-                    $checkName = FurnitureWorkingStocks::where('product_model_id',$request->product_model_id[$a])->exists();
-                    if($checkName > 0){
-                        $addQty = true;
-                        break;
-                    }                                
-                }
-                if($addQty){
-                    for($i = 0; $i < $count_category; $i++){ 
-                        
-                        $deliveries = new furnituresDeliveries();
-                        
-                        $deliveries->date_in            = $request->date_in[$i];
-                        $deliveries->category_id        = $request->category_id[$i];
-                        $deliveries->supplier_id        = $request->supplier_id[$i];
-                        $deliveries->product_model_id   = $request->product_model_id[$i];
-                        $deliveries->qty                = $request->qty[$i];
-                        $deliveries->unit_cost          = $request->unit_cost[$i];
-                        $deliveries->srp                = $request->srp[$i];
-                        $deliveries->reference_name     = $request->reference_name[$i];
-                        $deliveries->status             = $request->status[$i];
-                        $deliveries->remarks            = $request->remarks[$i];
-                        $deliveries->created_by         = Auth::user()->id;
-                        $deliveries->created_at         = Carbon::now();
-                        $deliveries->save();
+                $count_category = count($request->category_id);                
+                
+                for($i = 0; $i < $count_category; $i++){ 
+                    
+                    $deliveries = new furnituresDeliveries();
+                    
+                    $deliveries->date_in            = $request->date_in[$i];
+                    $deliveries->category_id        = $request->category_id[$i];
+                    $deliveries->supplier_id        = $request->supplier_id[$i];
+                    $deliveries->product_model_id   = $request->product_model_id[$i];
+                    $deliveries->qty                = $request->qty[$i];
+                    $deliveries->unit_cost          = $request->unit_cost[$i];
+                    $deliveries->srp                = $request->srp[$i];
+                    $deliveries->reference_name     = $request->reference_name[$i];
+                    $deliveries->status             = $request->status[$i];
+                    $deliveries->remarks            = $request->remarks[$i];
+                    $deliveries->created_by         = Auth::user()->id;
+                    $deliveries->created_at         = Carbon::now();
+                    $deliveries->save();
 
-                        $id = $request->product_model_id[$i]; 
-                        //$dr_id = furnituresDeliveries::orderBy('id','DESC')->first();
-                        $product =  FurnitureWorkingStocks::where('product_model_id', $id)->first();
-
-                        FurnitureWorkingStocks::findOrFail($id)->update([
-                            'qty' => $product->qty + $request->qty[$i],
-                            'updated_by' => Auth::user()->id,
-                            'updated_at' => Carbon::now(),
-                        ]);
-                                     
-                        // $furniture->qty                 = $furniture->qty + $request->qty[$i]; 
-                        // $furniture->updated_by          = Auth::user()->id;
-                        // $furniture->updated_at          = Carbon::now();                                               
-                        // $furniture->save();
-                    }
-                }else{
-                    for($i = 0; $i < $count_category; $i++){
-                        $deliveries = new furnituresDeliveries();
-    
-                        $deliveries->date_in            = $request->date_in[$i];
-                        $deliveries->category_id        = $request->category_id[$i];
-                        $deliveries->supplier_id        = $request->supplier_id[$i];
-                        $deliveries->product_model_id   = $request->product_model_id[$i];
-                        $deliveries->qty                = $request->qty[$i];
-                        $deliveries->unit_cost          = $request->unit_cost[$i];
-                        $deliveries->srp                = $request->srp[$i];
-                        $deliveries->reference_name     = $request->reference_name[$i];
-                        $deliveries->status             = $request->status[$i];
-                        $deliveries->remarks            = $request->remarks[$i];
-                        $deliveries->created_by         = Auth::user()->id;
-                        $deliveries->created_at         = Carbon::now();
-                        $deliveries->save();
-
-                        //$dr_id = furnituresDeliveries::orderBy('id','DESC')->first();
-                        $furniture = new FurnitureWorkingStocks();
-
-                        $furniture->product_model_id    = $request->product_model_id[$i];
-                        $furniture->supplier_id         = $request->supplier_id[$i];
-                        $furniture->category_id         = $request->category_id[$i];                        
-                        $furniture->qty                 = $request->qty[$i];
-                        $furniture->unit_cost           = $request->unit_cost[$i];
-                        $furniture->srp                 = $request->srp[$i];                       
-                        $furniture->created_by          = Auth::user()->id;
-                        $furniture->created_at          = Carbon::now();
-                        $furniture->save();
-                    }
-                }// end if else addQty              
+                    $id = $request->product_model_id[$i]; 
+                    
+                    $product =  furnitureProducts::where('id', $id)->first();
+                    
+                    $product->update([
+                        'qty'           => $product->qty + $request->qty[$i],
+                        'unit_cost'     => $request->unit_cost[$i],
+                        'srp_gdp'       => $request->srp[$i],
+                        'updated_by'    => Auth::user()->id,
+                        'updated_at'    => Carbon::now(),
+                    ]);                                                                                    
+                }// end for loop
+                           
             }// end if else $request->category_id
         }catch(\Exception $e){
             //dd($e);
@@ -139,4 +94,41 @@ class FurnituresDeliveriesController extends Controller
         );
         return redirect()->route('furnitureDeliveries.all')->with($notification);    
     }// end FurnitureDeliveriesStore
+
+    public function FurnitureDeliveriesDelete($id){
+        DB::beginTransaction();
+        try{
+            $deliveryToDelete = furnituresDeliveries::findOrFail($id);        
+        
+            $deliverRelatedProductId = $deliveryToDelete->product_model_id;
+            
+            $deliverRelatedProduct = furnitureProducts::findOrFail($deliverRelatedProductId);
+            
+            $quantity = $deliverRelatedProduct->qty - $deliveryToDelete->qty;
+            
+            //update related product qty
+            $deliverRelatedProduct->update([
+                'qty' => $quantity,
+                'updated_by' => Auth::user()->id,
+                'updated_at' => Carbon::now(),
+            ]);
+            
+            $deliveryToDelete->delete();
+        }catch(\Exception $e){
+            //dd($e);
+            $notification = array(
+                'message' => 'Something Went Wrong!', 
+                'alert-type' => 'error'
+            );
+
+            return redirect()->back()->with($notification);
+        }
+
+        DB::commit();
+        $notification = array(
+            'message' => 'Data saved successfully', 
+            'alert-type' => 'success'
+        );
+        return redirect()->route('furnitureDeliveries.all')->with($notification);
+    }// end FurnitureDeliveriesDelete
 }

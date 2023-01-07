@@ -18,5 +18,7 @@ class furnitureProducts extends Model
         return $this->belongsTo(furnitureSuppliers::class, 'supplier_id', 'id');
     }
 
-
+    public function getDr(){
+        return $this->hasMany(furnituresDeliveries::class, 'product_model_id', 'id');
+    }
 }

@@ -24,7 +24,8 @@ use App\Http\Controllers\POS\DefaultController;
 use App\Http\Controllers\POS\FurnitureCategoriesController; 
 use App\Http\Controllers\POS\furnitureProductsController;
 use App\Http\Controllers\POS\furnitureSupplierController;   
-use App\Http\Controllers\POS\FurnitureWorkingStocksController; 
+use App\Http\Controllers\POS\FurnitureWorkingStocksController;
+use App\Http\Controllers\POS\FurnitureSalesController; 
 use Illuminate\Support\Auth;
 
 
@@ -225,8 +226,15 @@ Route::controller(furnitureSupplierController::class)->group(function(){
 Route::controller(FurnituresDeliveriesController::class)->group(function(){
    Route::get('/furnitures/deliveries/all', 'FurnitureDeliveriesAll')->name('furnitureDeliveries.all');
    Route::get('/furnitures/deliveries/add', 'FurnitureDeliveriesAdd')->name('furnitureDeliveries.add');
-   Route::post('/furnitures/deliveries/store', 'FurnitureDeliveriesStore')->name('furnitureDeliveries.store');
+   Route::post('/furnitures/deliveries/store', 'FurnitureDeliveriesStore')->name('furnitureDeliveries.store'); 
+   Route::get('/furnitures/deliveries/delete/{id}', 'FurnitureDeliveriesDelete')->name('furnitureDeliveries.delete');
 
+});
+
+// furniture sales controller
+Route::controller(FurnitureSalesController::class)->group(function(){
+   Route::get('/furniture/sales/all', 'FurnitureSalesAll')->name('furnitureSales.all'); 
+   Route::get('/furniture/sales/ad', 'FurnitureSalesAdd')->name('furnitureSales.add');
 });
 
 // furniture working stocks controller
@@ -256,6 +264,8 @@ Route::controller(DefaultController::class)->group(function(){
    // furniture defaults controller
    Route::get('/get-furniture-categories', 'GetFurnitureCategories')->name('get-furniture-categories'); 
    Route::get('/get-furniture-products', 'GetFurnitureProducts')->name('get-furniture-products');
+   Route::get('/get-working-furnitures', 'GetWorkingFurnitures')->name('get-working-furniture');
+   Route::get('/get-furniture-price', 'GetFurniturePrice')->name('get-furniture-price');
 });
 
 Route::get('/dashboard', function () {

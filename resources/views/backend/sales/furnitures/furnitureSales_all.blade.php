@@ -9,7 +9,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                                    <h4 class="mb-sm-0">Furniture Deliveries Page</h4>
+                                    <h4 class="mb-sm-0">Furniture Sales Page</h4>
                                 </div>
                             </div>
                         </div>
@@ -20,15 +20,15 @@
             <div class="card">
                 <div class="card-body">
 
-    <a href="{{route('furnitureDeliveries.add')}}" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Add Deliveries </a> <br>  <br>               
+    <a href="{{route('furnitureSales.add')}}" class="btn btn-dark btn-rounded waves-effect waves-light" style="float:right;">Add Sales</a> <br>  <br>               
 
-                    <h4 class="card-title">Furniture Deliveries Data </h4>
+                    <h4 class="card-title">Sales Data </h4>
 
 
                     <table id="datatable" class="table table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                         <thead>
                         <tr>
-                            <th>Sl</th>
+                            <th>#</th>
                             <th>Date</th>
                             <th>Ref No.</th>                                                          
                             <th>Supplier</th>
@@ -45,7 +45,7 @@
 
                         <tbody>
 
-                        	@foreach($furnitureDeliveries as $key => $item)
+                        	@foreach($furnitureSales as $key => $item)
                         <tr>
                             <td> {{ $key+1}} </td>
                             <td> {{ date('M-d-Y', strtotime($item->date_in)) }} </td>

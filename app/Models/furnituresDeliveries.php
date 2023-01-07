@@ -17,7 +17,7 @@ class furnituresDeliveries extends Model
     public function getProduct(){
         return $this->belongsTo(furnitureProducts::class,'product_model_id','id');
     }
-
+    
     public function getCategory(){
         return $this->belongsTo(FurnitureCategories::class,'category_id', 'id');
     }
