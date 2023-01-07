@@ -32,15 +32,12 @@
                             <th>Date</th>
                             <th>Ref No.</th>                                                          
                             <th>Supplier</th>                             
-                            <th>Product Name / Desc</th>
-                            <th>Model</th>
-                            <th>Color</th>
-                            <th>Job Order</th>
+                            <th>Model</th>                            
                             <th>Qty</th>
                             <th>Unit Cost</th>                            
                             <th>GDP/SRP</th>
-                            <th>TOTAL GDP</th> 
-                            <th>Action</th>                                                                                                                    
+                            <th>TOTAL GDP</th>
+                            <th>STATUS</th>                                                                                                                                              
                         </thead>
 
 
@@ -49,17 +46,28 @@
                         	@foreach($furnitures as $key => $item)
                         <tr>
                             <td> {{ $key+1}} </td>
-                            <td> {{ $item->date_in }} </td>
-                            <td> {{ $item->reference}} </td>                              
-                            <td> {{ $item['supplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->                                                   
-                            <td> {{ $item['product']['name']}} </td>  
-                            <td> {{ $item->product_model}} </td>  
-                            <td> {{ $item->color}} </td> 
-                            <td> {{ $item->job_order}} </td> 
+                            <td> 
+                                <ol>
+                                    @forelse($item->getDr as $dr)                                    
+                                            <li>{{$dr['date_in']}}</li> 
+                                    @empty
+                                        <p>no data</p>                                           
+                                    @endforelse   
+                                </ol>  
+                            </td>
+                            <td> 
+                                <ol>
+                                    @foreach($item->getDr as $dr)                                    
+                                            <li>{{$dr['reference_name']}}</li>                                            
+                                    @endforeach   
+                                </ol> 
+                            </td>                              
+                            <td> {{ $item['getSupplier']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->                                                   
+                            <td> {{ $item['getProduct']['product_model']}} </td>                                                           
                             <td> {{ $item->qty}} </td>                                    
                             <td> {{ $item->unit_cost}}</td>   
-                            <td> {{ $item->srp_gdp}}</td> 
-                            <td> {{ $item->total_gdp}}</td>
+                            <td> {{ $item->srp}}</td> 
+                            <td> {{ $item->qty * $item->srp}}</td>
                             <td>
                                 @if($item->status == '0')
                                     <span class="btn btn-success" title="Prestine" ><i class="fas fa-check-circle" title="Prestine" onClick="myFunction()"></i></span> 
@@ -68,11 +76,7 @@
                                 @endif
                             </td> 
                             
-                            <td> 
-                                @if(Auth::user()->id == 1) <!-- 1=admin 0=user -->                                                                                           
-                                    <a href="{{route('appliancesDeliveries.delete',$item->id)}}" class="btn btn-danger sm " title="Delete Data" id="delete"> <i class="fas fa-trash-alt"></i> </a>                                                               
-                                @endif
-                            </td>
+                            
 
                         </tr>
                         @endforeach

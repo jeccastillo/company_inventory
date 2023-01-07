@@ -16,16 +16,15 @@ use App\Http\Controllers\POS\SupplierDeliveriesController;
 use App\Http\Controllers\POS\AppliancesDeliveriesController;
 use App\Http\Controllers\POS\BrandsController;
 use App\Http\Controllers\POS\ProductsCapController;  
-use App\Http\Controllers\POS\FurnituresDeliveriesController;
-use App\Http\Controllers\POS\FurnituresController;  
+use App\Http\Controllers\POS\FurnituresDeliveriesController;  
 use App\Http\Controllers\POS\AppliancesSalesController;
-use App\Http\Controllers\POS\TestCategoryController;
 use App\Http\Controllers\POS\AppliancesCategoriesController; 
 use App\Http\Controllers\POS\AppliancesProductsController;    
 use App\Http\Controllers\POS\DefaultController;     
 use App\Http\Controllers\POS\FurnitureCategoriesController; 
 use App\Http\Controllers\POS\furnitureProductsController;
-use App\Http\Controllers\POS\furnitureSupplierController;    
+use App\Http\Controllers\POS\furnitureSupplierController;   
+use App\Http\Controllers\POS\FurnitureWorkingStocksController; 
 use Illuminate\Support\Auth;
 
 
@@ -230,10 +229,10 @@ Route::controller(FurnituresDeliveriesController::class)->group(function(){
 
 });
 
-// furnitures controller
-Route::controller(FurnituresController::class)->group(function(){
-   Route::get('/furnitures/all', 'FurnituresAll')->name('furnitures.all');
-});
+// furniture working stocks controller
+Route::controller(FurnitureWorkingStocksController::class)->group(function(){
+   Route::get('/stocks/furnitures/all', 'FurnituresWorkingStocksAll')->name('furnituresWorkingStocks.all');
+}); // end FurnitureWorkingStocksController
 
 //appliances sales controller
 Route::controller(AppliancesSalesController::class)->group(function(){
@@ -243,10 +242,7 @@ Route::controller(AppliancesSalesController::class)->group(function(){
    Route::get('/appliances/sales/delete/{id}', 'AppliancesSalesDelete')->name('appliancesSales.delete');
 });//end of function
 
-//test category controller
-Route::controller(TestCategoryController::class)->group(function(){
-   Route::get('/test/category/all', 'TestCategoryAll')->name('testCategory.all');
-});
+
 
 //default Controller
 Route::controller(DefaultController::class)->group(function(){
