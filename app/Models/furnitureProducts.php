@@ -21,4 +21,8 @@ class furnitureProducts extends Model
     public function getDr(){
         return $this->hasMany(furnituresDeliveries::class, 'product_model_id', 'id');
     }
+
+    public function getSi(){
+        return $this->hasMany(FurnitureSales::class, 'product_model_id', 'id' );
+    }
 }

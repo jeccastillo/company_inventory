@@ -82,7 +82,7 @@
 <!--  ---------------------------------- -->
 
         <div class="card-body">
-        <form method="post" action="{{route('appliancesSales.store')}}" id="myForm"> 
+        <form method="post" action="{{route('furnitureSales.store')}}" id="myForm"> 
             @csrf
             <table class="table-sm table-bordered" width="100%" style="border-color: #ddd;" id='myTable'>
                 <thead>
@@ -150,7 +150,7 @@
         <input type="hidden" name="category_id[]" value="@{{category_id}}" >
         @{{ category_text }}
     </td>
-
+    
      <td>
         <input type="hidden" name="product_model_id[]" value="@{{product_model_id}}" id="productId">
         <input type="hidden" name="product_model[]" value="@{{product_model}}">

@@ -35,9 +35,9 @@
                                     <th>Date-in</th>
                                     <th>Date-out</th>                             
                                     <th>Ref in</th> 
-                                    <th>Ref out</th> 
-                                    <th>Status</th>
+                                    <th>Ref out</th>                                     
                                     <th>Remarks</th>
+                                    <th>Status</th>
                                     
                                 </tr>
                             </thead>
@@ -59,14 +59,15 @@
                                         <td> {{ $stock->date_in}} </td>
                                         <td> {{ $stock->date_out}} </td>
                                         <td> {{ $stock['getDr']['reference'] }}</td> <!-- NOTE: TO IMPLEMENT DR/SI/TS/MRS -->
-                                        <td> {{ $stock->si_id == null ? '--':$stock['getSi']['reference']}} </td> <!-- NOTE: TO IMPLEMENT DR/SI/TS/MRS -->
+                                        <td> {{ $stock->si_id == null ? '--':$stock['getSi']['reference']}} </td> <!-- NOTE: TO IMPLEMENT DR/SI/TS/MRS -->                                        
+                                        <td> {{ $stock->remarks}} </td>          
                                         <td title="{{$stat == 0 ? 'Prestine':'Defective'}}">
                                             @if($stat == '0')
                                                 <span class="btn btn-success" title="Prestine" ><i class="fas fa-check-circle" title="Prestine" onClick="myFunction()"></i></span> 
                                             @elseif($stat == '1')
                                                 <span class="btn btn-danger">X</span>
-                                            @endif</td>
-                                        <td> {{ $stock->remarks}} </td>                                                                                                            
+                                            @endif
+                                        </td>                                                                                                  
                                     </tr>
                                 @endforeach
                             </tbody>

@@ -234,7 +234,9 @@ Route::controller(FurnituresDeliveriesController::class)->group(function(){
 // furniture sales controller
 Route::controller(FurnitureSalesController::class)->group(function(){
    Route::get('/furniture/sales/all', 'FurnitureSalesAll')->name('furnitureSales.all'); 
-   Route::get('/furniture/sales/ad', 'FurnitureSalesAdd')->name('furnitureSales.add');
+   Route::get('/furniture/sales/add', 'FurnitureSalesAdd')->name('furnitureSales.add');
+   Route::post('/furniture/sales/store', 'FurnitureSalesStore')->name('furnitureSales.store'); 
+   Route::get('/furniture/sales/delete/{id}', 'FurnitureSalesDelete')->name('furnitureSales.delete');
 });
 
 // furniture working stocks controller

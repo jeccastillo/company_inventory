@@ -52,6 +52,10 @@ class AppliancesSalesController extends Controller
             return redirect()->back()->with($notification);
         }
 
+        
+        
+        
+
         // check for duplicates
         $checkDuplicates = false;
         foreach(array_count_values($request->serial) as $val => $c){

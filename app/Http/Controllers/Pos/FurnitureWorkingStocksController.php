@@ -9,7 +9,7 @@ use App\Models\furnitureProducts;
 class FurnitureWorkingStocksController extends Controller
 {
     public function FurnituresWorkingStocksAll(){
-        $furnitures = furnitureProducts::where('qty','!=','0')->latest()->get();
+        $furnitures = furnitureProducts::latest()->get();
 
         return view('backend.stocks.furnitureWorkingStocks_all', compact('furnitures'));
     }

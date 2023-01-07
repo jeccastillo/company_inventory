@@ -37,7 +37,9 @@
                             <th>GDP/SRP</th>
                             <th>TOTAL GDP</th>
                             <th>Date In</th>
-                            <th>Ref. In</th>                             
+                            <th>Ref. In</th> 
+                            <th>Date Out</th> 
+                            <th>Ref. Out</th>                            
                             <th>Remarks</th>                                                                                                                                                                     
                         </thead>
 
@@ -67,6 +69,24 @@
                                 <ul>
                                     @forelse($item->getDr as $dr)                                    
                                             <li>{{$dr['reference_name']}}</li> 
+                                    @empty
+                                            <p>--</p>  
+                                    @endforelse   
+                                </ul> 
+                            </td>
+                            <td> 
+                                <ul>
+                                    @forelse($item->getSi as $si)                                    
+                                            <li>{{date('M-d-Y', strtotime($si['date_out']))}}</li> 
+                                    @empty
+                                        <p>--</p>                                           
+                                    @endforelse   
+                                </ul>  
+                            </td>
+                            <td> 
+                                <ul>
+                                    @forelse($item->getSi as $si)                                    
+                                            <li>{{$si['reference_name']}}</li> 
                                     @empty
                                             <p>--</p>  
                                     @endforelse   

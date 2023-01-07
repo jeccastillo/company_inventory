@@ -37,8 +37,7 @@
                             <th>Qty</th>
                             <th>Unit Cost</th>                            
                             <th>GDP/SRP</th>
-                            <th>TOTAL GDP</th> 
-                            <th>Status</th> 
+                            <th>TOTAL GDP</th>                             
                             <th>Action</th>                                                                                                                    
                         </thead>
 
@@ -54,20 +53,12 @@
                             <td> {{ $item['getCategory']['name']}}</td>
                             <td> {{ $item['getProduct']['product_model']}}</td>  
                             <td> {{ $item->qty}} </td>  
-                            <td> {{ $item->unit_cost}} </td> 
-                            <td> {{ $item->srp}} </td> 
-                            <td> {{ $item->qty*$item->srp}} </td>                                                                                            
-                            <td>
-                                @if($item->status == '0')
-                                    <span class="btn btn-success" title="Prestine" ><i class="fas fa-check-circle" title="Prestine" onClick="myFunction()"></i></span> 
-                                @elseif($item->status == '1')
-                                <span class="btn btn-success">Approved</span>
-                                @endif
-                            </td> 
-                            
+                            <td> {{ number_format($item->unit_cost, 2, '.', ',')}} </td> 
+                            <td> {{ number_format($item->srp, 2, '.', ',')}} </td> 
+                            <td> {{ number_format($item->qty*$item->srp, 2, '.', ',')}} </td>                                                                                                                                                    
                             <td> 
                                 @if(Auth::user()->id == 1) <!-- 1=admin 0=user -->                                                                                           
-                                    <a href="{{route('furnitureDeliveries.delete',$item->id)}}" class="btn btn-danger sm " title="Delete Data" id="delete"> <i class="fas fa-trash-alt"></i> </a>                                                               
+                                    <a href="{{route('furnitureSales.delete',$item->id)}}" class="btn btn-danger sm " title="Delete Data" id="delete"> <i class="fas fa-trash-alt"></i> </a>                                                               
                                 @endif
                             </td>
 
