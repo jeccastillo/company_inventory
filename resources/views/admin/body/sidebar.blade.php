@@ -56,17 +56,7 @@
                     </ul>
                  </li>
                  <!-- end Manage Suppliers -->
-
-                 {{-- <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
-                        <span>Manage Customers</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('customers.all') }}>All Customers</a></li>
-                    </ul>
-                </li> --}}
-                <!-- end Manage Customers -->
+                 
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -92,43 +82,12 @@
                     </ul>
                 </li><!-- end Manage Products -->
                 
-                {{-- <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
-                        <span>Manage Units</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('units.all') }}>All Units</a></li>
-                    </ul>
-                </li> --}}
-                <!-- end Manage Units -->
+               
 
                
 
-                {{-- <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
-                        <span>Manage Products</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('products.all') }}>All Products</a></li>
-                    </ul>
-                </li> --}}
-                <!-- end Manage Products -->
-
-                {{-- <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
-                        <span>Manage Purchases</span>
-                    </a>
-                    
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href={{ route('purchases.all') }}>All Purchases</a></li>
-                        </ul>
-                        <ul class="sub-menu" aria-expanded="false">
-                            <li><a href={{ route('purchases.pending') }}>Approval Purchases</a></li>
-                        </ul>                    
-                </li> --}}
+                
+                
                  <!-- ____________TO IMPLEMENT ___________________________-->
                  {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -180,9 +139,7 @@
                         <span>Manage Working Stocks</span>
                     </a>
 
-                    {{-- <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('stocks.all') }}>All Stocks</a></li>
-                    </ul> --}}
+                    
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{ route('appliancesWorkingStocks.all') }}>Appliances</a></li>
                     </ul>
@@ -201,8 +158,10 @@
                     </ul>                  
                 </li><!-- end list --> --}}
                  
-                 
-                 <li class="menu-title">Pages</li>
+
+                <!-- PAGES -->
+                 <!-- ********************************************************************** -->
+                 {{-- <li class="menu-title">Pages</li>
 
                  <li>
                      <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -215,23 +174,11 @@
                          <li><a href="auth-recoverpw.html">Recover Password</a></li>
                          <li><a href="auth-lock-screen.html">Lock Screen</a></li>
                      </ul>
-                 </li>
+                 </li> --}}
+                 <!-- ********************************************************************** -->
                  
 
-                 <li>
-                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                         <i class="ri-profile-line"></i>
-                         <span>Utility</span>
-                     </a>
-                     <ul class="sub-menu" aria-expanded="false">
-                         <li><a href="pages-starter.html">Starter Page</a></li>
-                         <li><a href="pages-timeline.html">Timeline</a></li>
-                         <li><a href="pages-directory.html">Directory</a></li>
-                         <li><a href="pages-invoice.html">Invoice</a></li>
-                         <li><a href="pages-404.html">Error 404</a></li>
-                         <li><a href="pages-500.html">Error 500</a></li>
-                     </ul>
-                 </li>
+                 
 
 
 

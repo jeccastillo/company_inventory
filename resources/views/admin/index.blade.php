@@ -10,13 +10,7 @@
             <div class="col-12">
                 <div class="page-title-box d-sm-flex align-items-center justify-content-between">
                     <h4 class="mb-sm-0">Dashboard</h4>
-
-                    <div class="page-title-right">
-                        <ol class="breadcrumb m-0">
-                            <li class="breadcrumb-item"><a href="javascript: void(0);">Upcube</a></li>
-                            <li class="breadcrumb-item active">Dashboard</li>
-                        </ol>
-                    </div>
+                    
 
                 </div>
             </div>
@@ -29,8 +23,8 @@
                     <div class="card-body">
                         <div class="d-flex">
                             <div class="flex-grow-1">
-                                <p class="text-truncate font-size-14 mb-2">Total Appliances Sales</p>
-                                <h4 class="mb-2">1452</h4>
+                                <p class="text-truncate font-size-14 mb-2">Total Appliances Sold</p>
+                                <h4 class="mb-2">500</h4>
                                 <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i
                                             class="ri-arrow-right-up-line me-1 align-middle"></i>9.23%</span>from
                                     previous period</p>
@@ -50,7 +44,7 @@
                         <div class="d-flex">
                             <div class="flex-grow-1">
                                 <p class="text-truncate font-size-14 mb-2">Total Furniture Sales</p>
-                                <h4 class="mb-2">938</h4>
+                                <h4 class="mb-2">400</h4>
                                 <p class="text-muted mb-0"><span class="text-danger fw-bold font-size-12 me-2"><i
                                             class="ri-arrow-right-down-line me-1 align-middle"></i>1.09%</span>from
                                     previous period</p>
@@ -70,7 +64,7 @@
                         <div class="d-flex">
                             <div class="flex-grow-1">
                                 <p class="text-truncate font-size-14 mb-2">Total Defective Appliances</p>
-                                <h4 class="mb-2">8246</h4>
+                                <h4 class="mb-2">15</h4>
                                 <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i
                                             class="ri-arrow-right-up-line me-1 align-middle"></i>16.2%</span>from
                                     previous period</p>
@@ -90,7 +84,7 @@
                         <div class="d-flex">
                             <div class="flex-grow-1">
                                 <p class="text-truncate font-size-14 mb-2">Total Defective Furnitures</p>
-                                <h4 class="mb-2">29670</h4>
+                                <h4 class="mb-2">25</h4>
                                 <p class="text-muted mb-0"><span class="text-success fw-bold font-size-12 me-2"><i
                                             class="ri-arrow-right-up-line me-1 align-middle"></i>11.7%</span>from
                                     previous period</p>
@@ -127,146 +121,137 @@
                                 <table class="table table-centered mb-0 align-middle table-hover table-nowrap">
                                     <thead class="table-light">
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Status</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th style="width: 120px;">Salary</th>
+                                            <th>Product Model </th>
+                                            <th>Supplier</th>
+                                            <th>Category</th>
+                                            <th>Brand</th>
+                                            <th>Description </th>
+                                            <th style="width: 120px;">Qty Sold</th>
                                         </tr>
                                     </thead><!-- end thead -->
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <h6 class="mb-0">Charles Casey</h6>
+                                                <h6 class="mb-0">MF-5000V</h6>                                                
+                                            </td>
+                                            <td>SUNTOUCH</td>
+                                            <td>
+                                                TELEVISION
+                                            </td>
+                                            <td>
+                                                XTREME
+                                            </td>
+                                            <td>
+                                                TELEVISION
+                                            </td>
+                                            <td>25</td>
+                                        </tr> <!-- end tr-->
+                                       
+                                        <tr>
+                                            <td>
+                                                <h6 class="mb-0">JSD-801</h6>                                                
+                                            </td>
+                                            <td>EXATECH</td>
+                                            <td>
+                                                WASHING MACHINE
+                                            </td>
+                                            <td>
+                                                FUJIDENZO
+                                            </td>
+                                            <td>
+                                                WASHING MACHINE
+                                            </td>
+                                            <td>24</td>
+                                        </tr>
+                                        <!-- end -->
+                                        <tr>
+                                            <td>
+                                                <h6 class="mb-0">SB-280AG</h6>                                                
+                                            </td>
+                                            <td>STANDARD</td>
+                                            
+                                            <td>
+                                                GAS RANGE
+                                            </td>
+                                            <td>
+                                                STANDARD
+                                            </td>
+                                            <td>
+                                                GAS RANGE
+                                            </td>
+                                            <td>22</td>
+                                        </tr>
+                                        <!-- end -->
+                                        <tr>
+                                            <td>
+                                                <h6 class="mb-0">XH-RCDRUM5BLUE</h6>  
+                                                                                              
+                                            </td>
+                                            <td>SUNTOUCH</td>
+                                            <td>
+                                                RICE COOKER
+                                            </td>
+                                            <td>
+                                                XTREME
+                                            </td>
+                                            <td>
+                                                RICE COOKER
+                                            </td>
+                                            <td>20</td>
+                                        </tr>
+                                        <!-- end -->
+                                        <tr>
+                                            <td>
+                                                <h6 class="mb-0">MF-5000V</h6>                                                
                                             </td>
                                             <td>Web Developer</td>
                                             <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i>Active
-                                                </div>
+                                                SUNTOUCH
                                             </td>
                                             <td>
-                                                23
+                                                XTREME
                                             </td>
                                             <td>
-                                                04 Apr, 2021
+                                                TELEVISION
                                             </td>
-                                            <td>$42,450</td>
+                                            <td>18</td>
+                                        <!-- end -->
+                                        <tr>
+                                            <td>
+                                                <h6 class="mb-0">OSF-16 (EG1)</h6>  
+                                                                                              
+                                            </td>
+                                            <td>OROFAN</td>
+                                            
+                                            <td>
+                                                OROFAN 
+                                            </td>
+                                            <td>
+                                                OROFAN
+                                            </td>
+                                            <td>
+                                                ELECTRIC FAN
+                                            </td>
+                                            <td>15</td>
                                         </tr>
                                         <!-- end -->
                                         <tr>
                                             <td>
-                                                <h6 class="mb-0">Alex Adams</h6>
+                                                <h6 class="mb-0">WAM-632IGT</h6>                                                                                                
                                             </td>
-                                            <td>Python Developer</td>
+                                            <td>SUNTOUCH</td>
+                                            
+                                            
                                             <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2"></i>Deactive
-                                                </div>
-                                            </td>
-                                            <td>
-                                                28
+                                                AIRCON
                                             </td>
                                             <td>
-                                                01 Aug, 2021
-                                            </td>
-                                            <td>$25,060</td>
-                                        </tr>
-                                        <!-- end -->
-                                        <tr>
-                                            <td>
-                                                <h6 class="mb-0">Prezy Kelsey</h6>
-                                            </td>
-                                            <td>Senior Javascript Developer</td>
-                                            <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i>Active
-                                                </div>
+                                                FUJIDENZO
                                             </td>
                                             <td>
-                                                35
+                                                AIRCON
                                             </td>
-                                            <td>
-                                                15 Jun, 2021
-                                            </td>
-                                            <td>$59,350</td>
-                                        </tr>
-                                        <!-- end -->
-                                        <tr>
-                                            <td>
-                                                <h6 class="mb-0">Ruhi Fancher</h6>
-                                            </td>
-                                            <td>React Developer</td>
-                                            <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i>Active
-                                                </div>
-                                            </td>
-                                            <td>
-                                                25
-                                            </td>
-                                            <td>
-                                                01 March, 2021
-                                            </td>
-                                            <td>$23,700</td>
-                                        </tr>
-                                        <!-- end -->
-                                        <tr>
-                                            <td>
-                                                <h6 class="mb-0">Juliet Pineda</h6>
-                                            </td>
-                                            <td>Senior Web Designer</td>
-                                            <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i>Active
-                                                </div>
-                                            </td>
-                                            <td>
-                                                38
-                                            </td>
-                                            <td>
-                                                01 Jan, 2021
-                                            </td>
-                                            <td>$69,185</td>
-                                        </tr>
-                                        <!-- end -->
-                                        <tr>
-                                            <td>
-                                                <h6 class="mb-0">Den Simpson</h6>
-                                            </td>
-                                            <td>Web Designer</td>
-                                            <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2"></i>Deactive
-                                                </div>
-                                            </td>
-                                            <td>
-                                                21
-                                            </td>
-                                            <td>
-                                                01 Sep, 2021
-                                            </td>
-                                            <td>$37,845</td>
-                                        </tr>
-                                        <!-- end -->
-                                        <tr>
-                                            <td>
-                                                <h6 class="mb-0">Mahek Torres</h6>
-                                            </td>
-                                            <td>Senior Laravel Developer</td>
-                                            <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i>Active
-                                                </div>
-                                            </td>
-                                            <td>
-                                                32
-                                            </td>
-                                            <td>
-                                                20 May, 2021
-                                            </td>
-                                            <td>$55,100</td>
+                                            <td>14</td>
                                         </tr>
                                         <!-- end -->
                                     </tbody><!-- end tbody -->
@@ -286,154 +271,131 @@
                                     <i class="mdi mdi-dots-vertical"></i>
                                 </a>
 
-                            </div>
-
+                            </div><!-- end of table -->
+                            
                             <h4 class="card-title mb-4">Furnitures Best Sellers</h4>
 
                             <div class="table-responsive">
                                 <table class="table table-centered mb-0 align-middle table-hover table-nowrap">
                                     <thead class="table-light">
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Status</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
-                                            <th style="width: 120px;">Salary</th>
+                                            <tr>
+                                                <th>Product Model </th>
+                                                <th>Supplier</th>
+                                                <th>Category</th>                                                
+                                                <th>Description </th>
+                                                <th style="width: 120px;">Qty Sold</th>
+                                            </tr>
                                         </tr>
                                     </thead><!-- end thead -->
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <h6 class="mb-0">Charles Casey</h6>
+                                                <h6 class="mb-0">UF 4X36X75</h6>                                                                                                                                                
                                             </td>
-                                            <td>Web Developer</td>
+                                            <td>POLY FOAM</td>
                                             <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i>Active
-                                                </div>
-                                            </td>
+                                                FOAM
+                                            </td>                                            
                                             <td>
-                                                23
+                                                FOAM
                                             </td>
+                                            <td>30</td>
+                                        </tr> <!-- end tr-->
+                                       
+                                        <tr>
                                             <td>
-                                                04 Apr, 2021
+                                                <h6 class="mb-0">UF 4X48X75</h6>
+                                                                                                
                                             </td>
-                                            <td>$42,450</td>
+                                            <td>POLY FOAM</td>
+                                            <td>
+                                                FOAM
+                                            </td>                                            
+                                            <td>
+                                                FOAM
+                                            </td>
+                                            
+                                            <td>25</td>
                                         </tr>
                                         <!-- end -->
                                         <tr>
                                             <td>
-                                                <h6 class="mb-0">Alex Adams</h6>
+                                                <h6 class="mb-0">COMPUTER TABLE</h6>
+                                                                                                
                                             </td>
-                                            <td>Python Developer</td>
+                                            <td>MEGABOOM</td>
                                             <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2"></i>Deactive
-                                                </div>
-                                            </td>
-                                            <td>
-                                                28
+                                                CENTER TABLE
                                             </td>
                                             <td>
-                                                01 Aug, 2021
+                                                CENTER TABLE
                                             </td>
-                                            <td>$25,060</td>
+                                            
+                                            <td>23</td>
                                         </tr>
                                         <!-- end -->
                                         <tr>
                                             <td>
-                                                <h6 class="mb-0">Prezy Kelsey</h6>
+                                                <h6 class="mb-0">STARTER 4S</h6>
+                                                                                                
                                             </td>
-                                            <td>Senior Javascript Developer</td>
+                                            <td>MEGABOOM</td>
                                             <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i>Active
-                                                </div>
-                                            </td>
-                                            <td>
-                                                35
+                                                DINNING SET
                                             </td>
                                             <td>
-                                                15 Jun, 2021
+                                                DINNING SET
                                             </td>
-                                            <td>$59,350</td>
+                                            
+                                            <td>24</td>
                                         </tr>
                                         <!-- end -->
                                         <tr>
                                             <td>
-                                                <h6 class="mb-0">Ruhi Fancher</h6>
+                                                <h6 class="mb-0">STOOL L 24'</h6>
+                                                                                                
                                             </td>
-                                            <td>React Developer</td>
+                                            <td>PJC</td>
                                             <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i>Active
-                                                </div>
-                                            </td>
-                                            <td>
-                                                25
+                                                STOOL
                                             </td>
                                             <td>
-                                                01 March, 2021
+                                                STOOL
                                             </td>
-                                            <td>$23,700</td>
+                                            
+                                            <td>22</td>
+                                        <!-- end -->
+                                        <tr>
+                                            <td>
+                                                <h6 class="mb-0">RUBY PILLOWS</h6>
+                                                                                                
+                                            </td>
+                                            <td>PJC</td>
+                                            <td>
+                                                PILLOWS
+                                            </td>
+                                            <td>
+                                                PILLOWS
+                                            </td>
+                                            
+                                            <td>21</td>
                                         </tr>
                                         <!-- end -->
                                         <tr>
                                             <td>
-                                                <h6 class="mb-0">Juliet Pineda</h6>
+                                                <h6 class="mb-0">JAMAICA 311 SS</h6> 
+                                                                                                
                                             </td>
-                                            <td>Senior Web Designer</td>
+                                            <td>PJC</td>
                                             <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i>Active
-                                                </div>
-                                            </td>
-                                            <td>
-                                                38
+                                                SOFA SET
                                             </td>
                                             <td>
-                                                01 Jan, 2021
+                                                SOFA SET
                                             </td>
-                                            <td>$69,185</td>
-                                        </tr>
-                                        <!-- end -->
-                                        <tr>
-                                            <td>
-                                                <h6 class="mb-0">Den Simpson</h6>
-                                            </td>
-                                            <td>Web Designer</td>
-                                            <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-warning align-middle me-2"></i>Deactive
-                                                </div>
-                                            </td>
-                                            <td>
-                                                21
-                                            </td>
-                                            <td>
-                                                01 Sep, 2021
-                                            </td>
-                                            <td>$37,845</td>
-                                        </tr>
-                                        <!-- end -->
-                                        <tr>
-                                            <td>
-                                                <h6 class="mb-0">Mahek Torres</h6>
-                                            </td>
-                                            <td>Senior Laravel Developer</td>
-                                            <td>
-                                                <div class="font-size-13"><i
-                                                        class="ri-checkbox-blank-circle-fill font-size-10 text-success align-middle me-2"></i>Active
-                                                </div>
-                                            </td>
-                                            <td>
-                                                32
-                                            </td>
-                                            <td>
-                                                20 May, 2021
-                                            </td>
-                                            <td>$55,100</td>
+                                            
+                                            <td>10</td>
                                         </tr>
                                         <!-- end -->
                                     </tbody><!-- end tbody -->

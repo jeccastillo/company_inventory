@@ -9,13 +9,7 @@ use App\Models\Appliances;
 use App\Models\AppliancesWorkingStocks;
 
 class StocksController extends Controller
-{
-    public function StocksAll(){
-
-        $workingStocks = Stock::all();
-        return view('backend.stocks.stocks_all',compact('workingStocks'));
-    }
-
+{    
     public function AppliancesWorkingStocks(){
         $appliancesWorkingStocks = AppliancesWorkingStocks::all();
 

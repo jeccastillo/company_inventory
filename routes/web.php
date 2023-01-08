@@ -6,10 +6,7 @@ use App\Http\Controllers\Demo\DemoController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\POS\SupplierController;
 use App\Http\Controllers\POS\CustomerController;
-use App\Http\Controllers\POS\UnitsController;
 use App\Http\Controllers\POS\CategoriesController;
-use App\Http\Controllers\POS\ProductsController;
-use App\Http\Controllers\POS\PurchasesController;
 use App\Http\Controllers\POS\StocksController;
 use App\Http\Controllers\POS\UsersController;
 use App\Http\Controllers\POS\SupplierDeliveriesController;
@@ -27,6 +24,8 @@ use App\Http\Controllers\POS\furnitureSupplierController;
 use App\Http\Controllers\POS\FurnitureWorkingStocksController;
 use App\Http\Controllers\POS\FurnitureSalesController; 
 use Illuminate\Support\Auth;
+use App\Models\AppliancesSales; 
+use App\Models\FurnitureSales;
 
 
 
@@ -35,9 +34,9 @@ Route::get('/', function () {
 });
 
 // handles error 404 incorrect url
-Route::fallback(function (){
-   return view('admin.index');
-});
+// Route::fallback(function (){
+//    return view('admin.index');
+// });
 // end of handles error 404 incorrect url
 
 
@@ -81,26 +80,10 @@ Route::controller(UsersController::class)->group(function(){
     Route::get('/supplier/delete/{id}','SupplierDelete')->name('supplier.delete');
 }); //get('URL', 'function name') parameters
 
-// Customer All Route 
- Route::controller(CustomerController::class)->group(function(){
-    Route::get('/customer/all','CustomersAll')->name('customers.all');
-    Route::get('/customer/add','CustomersAdd')->name('customer.add');
-    Route::post('/customer/store','CustomerStore')->name('customer.store');
-    Route::get('/customer/delete/{id}','CustomerDelete')->name('customer.delete');
-    Route::get('/customer/edit/{id}', 'CustomerEdit')->name('customer.edit');
-    Route::post('/customer/update', 'CustomerUpdate')->name('customer.update');
- });
 
- // Units All Route 
- Route::controller(UnitsController::class)->group(function(){
-    Route::get('/units/all','UnitsAll')->name('units.all');
-    Route::get('/unit/add', 'UnitAdd')->name('unit.add');
-    Route::post('/unit/store', 'UnitStore')->name('unit.store');
-    Route::get('/unit/edit/{id}', 'UnitEdit')->name('unit.edit');
-    Route::post('/unit/edit', 'UnitUpdate')->name('unit.update');
-    Route::get('/unit/delete/{id}', 'UnitDelete')->name('unit.delete');
 
- });
+
+ 
 
  // Categories All Route 
  Route::controller(CategoriesController::class)->group(function(){
@@ -112,15 +95,7 @@ Route::controller(UsersController::class)->group(function(){
     Route::get('/categories/delete/{id}', 'CategoryDelete')->name('category.delete');
  });
 
- // Products All Route 
- Route::controller(ProductsController::class)->group(function(){
-    Route::get('/products/all', 'ProductsAll')->name('products.all');
-    Route::get('/products/add', 'ProductAdd')->name('product.add');
-    Route::post('/products/store', 'ProductStore')->name('product.store');
-    Route::get('/products/edit/{id}', 'ProductEdit')->name('product.edit');
-    Route::post('/products/update', 'ProductUpdate')->name('product.update');
-    Route::get('/products/delete/{id}', 'ProductDelete')->name('product.delete');
- });
+
 
  //Products Cap all Route
  Route::controller(ProductsCapController::class)->group(function(){
@@ -132,18 +107,9 @@ Route::controller(UsersController::class)->group(function(){
    Route::get('/caparal/products/delete/{id}', 'ProductCapDelete')->name('productCap.delete');
  });
 
-//  Route::controller(PurchasesController::class)->group(function(){
-//     Route::get('/purchases/all', 'PurchasesAll')->name('purchases.all');
-//     Route::get('/purchase/add', 'PurchaseAdd')->name('purchase.add');
-//     Route::post('/purchase/store', 'PurchaseStore')->name('purchase.store');
-//     Route::get('/purchase/delete/{id}', 'PurchaseDelete')->name('purchase.delete');
-//     Route::get('/purchase/pending', 'PurchasePending')->name('purchases.pending');
-//     Route::get('/purchase/approve/{id}', 'PurchaseApprove')->name('purchase.approve');
-//  });
 
 //StocksController
- Route::controller(StocksController::class)->group(function(){
-   Route::get('/stocks/all','StocksAll')->name('stocks.all');
+ Route::controller(StocksController::class)->group(function(){   
    Route::get('/stocks/appliances/all', 'AppliancesWorkingStocks')->name('appliancesWorkingStocks.all');
 });//end controller
 
@@ -271,7 +237,10 @@ Route::controller(DefaultController::class)->group(function(){
 });
 
 Route::get('/dashboard', function () {
-    return view('admin.index');
+    $appliancesSold = AppliancesSales::sum('qty');
+    $furnitureSold = FurnitureSales::sum('qty');
+   
+    return view('admin.index', compact('appliancesSold', 'furnitureSold'));
 })->middleware(['auth'])->name('dashboard'); // middleware is used to authenticate user and redirect to a specific location in app.
 
 require __DIR__.'/auth.php';
