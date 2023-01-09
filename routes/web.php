@@ -9,10 +9,10 @@ use App\Http\Controllers\POS\CustomerController;
 use App\Http\Controllers\POS\CategoriesController;
 use App\Http\Controllers\POS\StocksController;
 use App\Http\Controllers\POS\UsersController;
-use App\Http\Controllers\POS\SupplierDeliveriesController;
+
 use App\Http\Controllers\POS\AppliancesDeliveriesController;
 use App\Http\Controllers\POS\BrandsController;
-use App\Http\Controllers\POS\ProductsCapController;  
+ 
 use App\Http\Controllers\POS\FurnituresDeliveriesController;  
 use App\Http\Controllers\POS\AppliancesSalesController;
 use App\Http\Controllers\POS\AppliancesCategoriesController; 
@@ -94,20 +94,7 @@ Route::controller(UsersController::class)->group(function(){
     Route::post('/categories/update', 'CategoryUpdate')->name('category.update');
     Route::get('/categories/delete/{id}', 'CategoryDelete')->name('category.delete');
  });
-
-
-
- //Products Cap all Route
- Route::controller(ProductsCapController::class)->group(function(){
-   Route::get('/caparal/products/all', 'ProductsCapAll')->name('productsCap.all');
-   Route::get('/caparal/products/add', 'ProductsCapAdd')->name('productCap.add');
-   Route::post('/caparal/products/store', 'ProductCapStore')->name('productCap.store');
-   Route::get('/caparal/products/edit/{id}', 'ProductCapEdit')->name('productCap.edit');
-   Route::post('/caparal/products/update', 'ProductCapUpdate')->name('productCap.update');
-   Route::get('/caparal/products/delete/{id}', 'ProductCapDelete')->name('productCap.delete');
- });
-
-
+ 
 //StocksController
  Route::controller(StocksController::class)->group(function(){   
    Route::get('/stocks/appliances/all', 'AppliancesWorkingStocks')->name('appliancesWorkingStocks.all');
@@ -150,11 +137,7 @@ Route::controller(UsersController::class)->group(function(){
    Route::post('appliances/categories/update', 'AppliancesCategoriesUpdate')->name('appliancesCategory.update');
  });
 
-//Supplier Deliveries Controller
-Route::controller(SupplierDeliveriesController::class)->group(function(){
-   Route::get('/supplierDeliveries/all', 'SupplierDeliveriesAll')->name('supplierDeliveries.all');
-   
-});
+
 
 //furniture categories controller
 Route::controller(FurnitureCategoriesController::class)->group(function(){

@@ -20,6 +20,8 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="card-title">Appliances Data </h4>
+
+                        
                         <table id="datatable" class="table table-bordered dt-responsive  text-break" style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                             <thead>
                                 <tr>
@@ -45,8 +47,7 @@
 
                             <tbody id="example">
                                 @foreach($appliancesWorkingStocks as $key => $stock)
-                                    <tr>
-                                        {{$stat = $stock->status;}}
+                                    <tr>                                        
                                         <td> {{ $key+1}} </td>
                                         <td> {{ $stock['getSupplier']['name']}} </td>                              
                                         <td> {{ $stock['getBrand']['name']}} </td>    <!--$product['eloquent function name'][fieldName from related table]   -->
@@ -61,10 +62,10 @@
                                         <td> {{ $stock['getDr']['reference'] }}</td> <!-- NOTE: TO IMPLEMENT DR/SI/TS/MRS -->
                                         <td> {{ $stock->si_id == null ? '--':$stock['getSi']['reference']}} </td> <!-- NOTE: TO IMPLEMENT DR/SI/TS/MRS -->                                        
                                         <td> {{ $stock->remarks}} </td>          
-                                        <td title="{{$stat == 0 ? 'Prestine':'Defective'}}">
-                                            @if($stat == '0')
+                                        <td title="{{$stock->status == 0 ? 'Prestine':'Defective'}}">
+                                            @if($stock->status == '0')
                                                 <span class="btn btn-success" title="Prestine" ><i class="fas fa-check-circle" title="Prestine" onClick="myFunction()"></i></span> 
-                                            @elseif($stat == '1')
+                                            @elseif($stock->status == '1')
                                                 <span class="btn btn-danger">X</span>
                                             @endif
                                         </td>                                                                                                  

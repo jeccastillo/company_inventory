@@ -12,25 +12,28 @@
                  <li class="menu-title">Menu</li>
 
                  <li>
+                    
                      <a href="{{ url('/dashboard') }}" class="waves-effect">
-                         <i class="ri-dashboard-line"></i><span class="badge rounded-pill bg-success float-end">3</span>
+                        <i class="fas fa-tachometer-alt"></i>
+                         {{-- <i class="ri-dashboard-line"></i><span class="badge rounded-pill bg-success float-end">3</span> --}}
                          <span>Dashboard</span>
                      </a>
                  </li>
+                 <hr>
                  <!-- ____________TO IMPLEMENT ___________________________-->
                  <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
+                        <i class="fas fa-user-cog"></i>
                         <span>Manage Users</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href={{ route('users.all') }}>All Users</a></li>
                     </ul>
                 </li><!-- end Manage Users -->
-
+                <hr>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
+                        <i class="fas fa-tasks"></i>
                         <span>Manage Categories</span>
                     </a>                    
                     <ul class="sub-menu" aria-expanded="false">
@@ -43,10 +46,21 @@
                 
                 
                 <!-- ____________TO IMPLEMENT ___________________________-->
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-tasks"></i>
+                        <span>Manage Brands</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href={{ route('brands.all') }}>All Brands</a></li>
+                    </ul>
+                </li>
+                <!-- end Manage Brands -->
+
                  <li>
                      <a href="javascript: void(0);" class="has-arrow waves-effect">
-                         <i class="ri-mail-send-line"></i>
-                         <span>Manage Suppliers</span>
+                        <i class="fas fa-tasks"></i>
+                        <span>Manage Suppliers</span>
                      </a>
                      <ul class="sub-menu" aria-expanded="false">
                          <li><a href={{ route('appLiancesSupplier.all') }}>Appliances Suppliers</a></li>
@@ -58,58 +72,25 @@
                  <!-- end Manage Suppliers -->
                  
 
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
-                        <span>Manage Brands</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('brands.all') }}>All Brands</a></li>
-                    </ul>
-                </li>
-                <!-- end Manage Brands -->
+              
 
                 <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect" >
+                        <i class="fas fa-tasks"></i>
                         <span>Manage Products</span>
                     </a>
-                    <ul class="sub-menu" aria-expanded="false">
+                    <ul class="sub-menu" aria-expanded="true">
                         <li><a href={{ route('appliancesProducts.all') }}>Appliances</a></li>
                     </ul>
-                    <ul class="sub-menu" aria-expanded="false">
+                    <ul class="sub-menu" aria-expanded="true">
                         <li><a href={{ route('furnitureProducts.all') }}>Furnitures</a></li>
                     </ul>
                 </li><!-- end Manage Products -->
                 
-               
-
-               
-
-                
-                
-                 <!-- ____________TO IMPLEMENT ___________________________-->
-                 {{-- <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
-                        <span>Manage Stock Transfers</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('purchases.all') }}>All Purchases</a></li>
-                    </ul>
-                </li>
+                <hr>
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
-                        <span>Manage Deliveries</span>
-                    </a>
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href={{ route('purchases.all') }}>All Purchases</a></li>
-                    </ul>
-                </li> --}}
-                <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
+                        <i class="fas fa-truck-loading"></i>
                         <span>Inbound Stocks</span>
                     </a>                       
                     <ul class="sub-menu" aria-expanded="false">
@@ -118,11 +99,11 @@
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('furnitureDeliveries.all')}}">Furniture Deliveries</a></li>
                     </ul>                 
-                </li><!-- end list -->
+                </li><!-- end Inbound Stocks -->
                 <!-- to implement -->
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
+                        <i class="fas fa-truck"></i>
                         <span>Outbound Stocks</span>
                     </a>                       
                     <ul class="sub-menu" aria-expanded="false">
@@ -135,8 +116,8 @@
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
-                        <span>Manage Working Stocks</span>
+                        <i class="fas fa-boxes"></i>
+                        <span>Working Stocks</span>
                     </a>
 
                     
@@ -147,16 +128,9 @@
                         <li><a href={{ route('furnituresWorkingStocks.all') }}>Furnitures</a></li>
                     </ul>
                 </li> 
+                <hr>
                 <!-- ____________TO IMPLEMENT ___________________________-->
-                {{-- <li>
-                    <a href="javascript: void(0);" class="has-arrow waves-effect">
-                        <i class="ri-mail-send-line"></i>
-                        <span>Test Category</span>
-                    </a>                       
-                    <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{route('testCategory.all')}}">testCategory all</a></li>
-                    </ul>                  
-                </li><!-- end list --> --}}
+                
                  
 
                 <!-- PAGES -->
@@ -175,16 +149,7 @@
                          <li><a href="auth-lock-screen.html">Lock Screen</a></li>
                      </ul>
                  </li> --}}
-                 <!-- ********************************************************************** -->
-                 
-
-                 
-
-
-
-
-
-
+                 <!-- ********************************************************************** -->                                 
              </ul>
          </div>
          <!-- Sidebar -->
