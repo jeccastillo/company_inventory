@@ -6,10 +6,20 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\AppliancesSales; 
+use App\Models\FurnitureSales;
 
 class AdminController extends Controller
-{
-     public function destroy(Request $request)
+{    
+    public function dashboard(){       
+        if(Auth::user()->role == 0)
+            return redirect('/');    
+        $appliancesSold = AppliancesSales::sum('qty');
+        $furnitureSold = FurnitureSales::sum('qty');
+        return view('admin.index', compact('appliancesSold', 'furnitureSold'));
+    }
+    
+    public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
 

@@ -19,7 +19,7 @@ use Auth;
 use Illuminate\Support\Carbon;
 
 class AppliancesDeliveriesController extends Controller
-{
+{        
     public function AppliancesDeliveriesAll(){
         $appliancesDeliveries = AppliancesDeliveries::latest()->get();
         

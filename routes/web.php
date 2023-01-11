@@ -48,14 +48,16 @@ Route::controller(DemoController::class)->group(function () {
 
  // Admin All Route 
 Route::controller(AdminController::class)->group(function () {
-    Route::get('/admin/logout', 'destroy')->name('admin.logout');
-    Route::get('/admin/profile', 'Profile')->name('admin.profile');
-    Route::get('/edit/profile', 'EditProfile')->name('edit.profile');
-    Route::post('/store/profile', 'StoreProfile')->name('store.profile');
+   Route::group(['middleware' => ['auth']], function () {
+      Route::get('/dashboard', 'dashboard')->name('dashboard'); // middleware is used to authenticate user and redirect to a specific location in app.
+      Route::get('/admin/logout', 'destroy')->name('admin.logout');
+      Route::get('/admin/profile', 'Profile')->name('admin.profile');
+      Route::get('/edit/profile', 'EditProfile')->name('edit.profile');
+      Route::post('/store/profile', 'StoreProfile')->name('store.profile');
 
-    Route::get('/change/password', 'ChangePassword')->name('change.password');
-    Route::post('/update/password', 'UpdatePassword')->name('update.password');
-     
+      Route::get('/change/password', 'ChangePassword')->name('change.password');
+      Route::post('/update/password', 'UpdatePassword')->name('update.password');
+   });
 });
 
 // Users All Route 
@@ -219,12 +221,7 @@ Route::controller(DefaultController::class)->group(function(){
    Route::get('/get-furniture-price', 'GetFurniturePrice')->name('get-furniture-price');
 });
 
-Route::get('/dashboard', function () {
-    $appliancesSold = AppliancesSales::sum('qty');
-    $furnitureSold = FurnitureSales::sum('qty');
-   
-    return view('admin.index', compact('appliancesSold', 'furnitureSold'));
-})->middleware(['auth'])->name('dashboard'); // middleware is used to authenticate user and redirect to a specific location in app.
+
 
 require __DIR__.'/auth.php';
 
