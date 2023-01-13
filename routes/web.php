@@ -4,8 +4,9 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Demo\DemoController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\POS\SupplierController;
-use App\Http\Controllers\POS\CustomerController;
+use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\POS\CategoriesController;
 use App\Http\Controllers\POS\StocksController;
 use App\Http\Controllers\POS\UsersController;
@@ -28,9 +29,8 @@ use App\Models\AppliancesSales;
 use App\Models\FurnitureSales;
 
 
-
-Route::get('/', function () {
-    return view('welcome');
+Route::controller(WebsiteController::class)->group(function () {
+   Route::get('/', 'home')->name('homepage');
 });
 
 // handles error 404 incorrect url
@@ -38,6 +38,9 @@ Route::get('/', function () {
 //    return view('admin.index');
 // });
 // end of handles error 404 incorrect url
+
+Route::middleware('auth')->get('/customer', [CustomerController::class, 'customerData']);	
+Route::middleware('auth')->get('/appliances', [AppliancesProductsController::class, 'AppliancesProductsApiAll']);	
 
 
 Route::controller(DemoController::class)->group(function () {

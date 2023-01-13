@@ -20,6 +20,12 @@ class AppliancesProductsController extends Controller
         return view('backend.appliancesProducts.appliancesProducts_all', compact('appliances'));
     }//end function 
 
+    public function AppliancesProductsApiAll(){
+        $appliances = Appliances::latest()->get();
+
+        return $appliances;
+    }
+
     public function AppliancesProductsAdd(){
         $appliancesCategories = AppliancesCategories::all();
         $suppliers = Supplier::all();
