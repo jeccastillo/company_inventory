@@ -10,6 +10,7 @@ use App\Models\Appliances;
 use App\Models\AppliancesCategories;
 use App\Models\Supplier;
 use App\Models\Brands;
+use App\Http\Resources\AppliancesResource;
 
 
 class AppliancesProductsController extends Controller
@@ -23,7 +24,7 @@ class AppliancesProductsController extends Controller
     public function AppliancesProductsApiAll(){
         $appliances = Appliances::latest()->get();
 
-        return $appliances;
+        return AppliancesResource::collection($appliances);
     }
 
     public function AppliancesProductsAdd(){

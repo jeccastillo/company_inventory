@@ -23,7 +23,7 @@ class Appliances extends Model
     // }
     
     public function getDeliveries(){
-        return $this->belongsTo(AppliancesDeliveries::class,'product_model_id','id');
+        return $this->belongsTo(AppliancesDeliveries::class,'id','product_model_id');
     }
     
     public function getSerials(){

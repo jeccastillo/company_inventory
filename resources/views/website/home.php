@@ -48,30 +48,7 @@
                     </div>
                 </div>
             </header>
-            <!-- Features section-->
-            <section class="py-5 border-bottom" id="features">
-                <div class="container px-5 my-5">
-                    <div class="row gx-5">
-                        <div v-for="appliance in appliances" class="col-lg-4 mb-5 mb-lg-0">
-                            <div class="feature bg-primary bg-gradient text-white rounded-3 mb-3"><i class="bi bi-collection"></i></div>
-                            <h2 class="h4 fw-bolder">{{ appliance.product_model }}</h2>
-                            <p>{{ appliance.description }}</p>
-                            <button class="text-decoration-none" @click="addToCart(appliance.id)">
-                                Add
-                                <i class="bi bi-arrow-right"></i>
-                            </button>
-                            <button v-if="checkIfInCart(appliance.id)" class="text-decoration-none" @click="removeFromCart(appliance.id)">
-                                Remove
-                            </button>
-                        </div>                        
-                    </div>
-                </div>
-                <ul>
-                    <li v-for="item in cart">
-                        {{ item }}
-                    </li>
-                </ul>
-            </section>
+            
             <!-- Pricing section-->
             <section class="bg-light py-5 border-bottom">
                 <div class="container px-5 my-5">
@@ -81,151 +58,35 @@
                     </div>
                     <div class="row gx-5 justify-content-center">
                         <!-- Pricing card free-->
-                        <div class="col-lg-6 col-xl-4">
+                        <div v-for="appliance in appliances" class="col-lg-6 col-xl-4">
                             <div class="card mb-5 mb-xl-0">
                                 <div class="card-body p-5">
                                     <div class="small text-uppercase fw-bold text-muted">Free</div>
                                     <div class="mb-3">
-                                        <span class="display-4 fw-bold">$0</span>
-                                        <span class="text-muted">/ mo.</span>
+                                        <span class="display-4 fw-bold">P{{ appliance.price }}</span>                                        
                                     </div>
                                     <ul class="list-unstyled mb-4">
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            <strong>1 users</strong>
+                                        <li class="mb-2">                                            
+                                            <strong>{{ appliance.product_model }}</strong>
                                         </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            5GB storage
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            Unlimited public projects
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            Community access
-                                        </li>
-                                        <li class="mb-2 text-muted">
-                                            <i class="bi bi-x"></i>
-                                            Unlimited private projects
-                                        </li>
-                                        <li class="mb-2 text-muted">
-                                            <i class="bi bi-x"></i>
-                                            Dedicated support
-                                        </li>
-                                        <li class="mb-2 text-muted">
-                                            <i class="bi bi-x"></i>
-                                            Free linked domain
-                                        </li>
+                                        
                                         <li class="text-muted">
-                                            <i class="bi bi-x"></i>
-                                            Monthly status reports
+                                            <strong>{{ appliance.description }}</strong>
                                         </li>
                                     </ul>
-                                    <div class="d-grid"><a class="btn btn-outline-primary" href="#!">Choose plan</a></div>
+                                    <div class="d-grid mb-3"><a @click.prevent.stop="addToCart(appliance.id)" class="btn btn-outline-primary" href="#!">Add To Cart</a></div>
+                                    <div class="d-grid"><a @click.prevent.stop="removeFromCart(appliance.id)" v-if="checkIfInCart(appliance.id)" class="btn btn-outline-primary" href="#!">Remove</a></div>
                                 </div>
                             </div>
-                        </div>
-                        <!-- Pricing card pro-->
-                        <div class="col-lg-6 col-xl-4">
-                            <div class="card mb-5 mb-xl-0">
-                                <div class="card-body p-5">
-                                    <div class="small text-uppercase fw-bold">
-                                        <i class="bi bi-star-fill text-warning"></i>
-                                        Pro
-                                    </div>
-                                    <div class="mb-3">
-                                        <span class="display-4 fw-bold">$9</span>
-                                        <span class="text-muted">/ mo.</span>
-                                    </div>
-                                    <ul class="list-unstyled mb-4">
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            <strong>5 users</strong>
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            5GB storage
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            Unlimited public projects
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            Community access
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            Unlimited private projects
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            Dedicated support
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            Free linked domain
-                                        </li>
-                                        <li class="text-muted">
-                                            <i class="bi bi-x"></i>
-                                            Monthly status reports
-                                        </li>
-                                    </ul>
-                                    <div class="d-grid"><a class="btn btn-primary" href="#!">Choose plan</a></div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Pricing card enterprise-->
-                        <div class="col-lg-6 col-xl-4">
-                            <div class="card">
-                                <div class="card-body p-5">
-                                    <div class="small text-uppercase fw-bold text-muted">Enterprise</div>
-                                    <div class="mb-3">
-                                        <span class="display-4 fw-bold">$49</span>
-                                        <span class="text-muted">/ mo.</span>
-                                    </div>
-                                    <ul class="list-unstyled mb-4">
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            <strong>Unlimited users</strong>
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            5GB storage
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            Unlimited public projects
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            Community access
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            Unlimited private projects
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            Dedicated support
-                                        </li>
-                                        <li class="mb-2">
-                                            <i class="bi bi-check text-primary"></i>
-                                            <strong>Unlimited</strong>
-                                            linked domains
-                                        </li>
-                                        <li class="text-muted">
-                                            <i class="bi bi-check text-primary"></i>
-                                            Monthly status reports
-                                        </li>
-                                    </ul>
-                                    <div class="d-grid"><a class="btn btn-outline-primary" href="#!">Choose plan</a></div>
-                                </div>
-                            </div>
-                        </div>
+                        </div>                       
                     </div>
+                </div>
+            </section>
+            <!-- Features section-->
+            <section class="py-5 border-bottom" id="features">
+                <div class="container px-5 my-5">                    
+                    <h3>Cart Items: {{ cart.length }}</h3>
+                    <a href="/checkout">View Cart Items</a>
                 </div>
             </section>
             <!-- Testimonials section-->
@@ -362,6 +223,9 @@
                     user: {},
                     cart: [],
                     appliances: [],
+                    request: {
+                        product_id: undefined,                        
+                    },
                 },
                 
                 // on mount
@@ -370,11 +234,13 @@
                     axios.get(api_url + 'customer')
                     .then((data) => {                        
                         this.user = data.data;
+                        for(i in data.data.cart)
+                            this.cart.push(data.data.cart[i].product_id);
                     })
 
                     axios.get(api_url + 'appliances')
                     .then((data) => {                        
-                        this.appliances = data.data;
+                        this.appliances = data.data.data;
                     })
 
                     .catch((error) => {
@@ -386,9 +252,20 @@
                     addToCart: function(id){
                         this.cart.push(id);
                         console.log(this.cart);
+                        this.request.product_id = id;
+                        axios.post(api_url + 'add-to-cart',this.request)
+                        .then((data) => {                        
+                            console.log(data.data);
+                        })
                     },
                     removeFromCart: function(id){
                         this.cart.splice(this.cart.indexOf(id), 1);
+
+                        this.request.product_id = id;
+                        axios.post(api_url + 'remove-from-cart',this.request)
+                        .then((data) => {                        
+                            console.log(data.data);
+                        })
                     },
                     checkIfInCart: function(id){
                         if(this.cart.includes(id))

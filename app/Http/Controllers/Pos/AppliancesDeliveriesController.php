@@ -133,12 +133,14 @@ class AppliancesDeliveriesController extends Controller
                 } //end for loop                                                  
             }// end else
         }catch(\Exception $e){
-            $notification = array(
-                'message' => 'Something Went Wrong!', 
-                'alert-type' => 'error'
-            );
 
-            return redirect()->back()->with($notification);
+            dd($e);
+            // $notification = array(
+            //     'message' => 'Something Went Wrong!', 
+            //     'alert-type' => 'error'
+            // );
+
+            // return redirect()->back()->with($notification);
         }
             
         

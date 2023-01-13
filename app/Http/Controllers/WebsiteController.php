@@ -13,7 +13,9 @@ class WebsiteController extends Controller
         return view('website.home');
     }
     
-    
+    public function checkout(){
+        return view('website.checkout');
+    }
 
 
 

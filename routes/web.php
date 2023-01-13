@@ -31,6 +31,8 @@ use App\Models\FurnitureSales;
 
 Route::controller(WebsiteController::class)->group(function () {
    Route::get('/', 'home')->name('homepage');
+   Route::get('/checkout', 'checkout')->name('checkout'); 
+   
 });
 
 // handles error 404 incorrect url
@@ -41,6 +43,13 @@ Route::controller(WebsiteController::class)->group(function () {
 
 Route::middleware('auth')->get('/customer', [CustomerController::class, 'customerData']);	
 Route::middleware('auth')->get('/appliances', [AppliancesProductsController::class, 'AppliancesProductsApiAll']);	
+Route::middleware('auth')->post('/add-to-cart', [CustomerController::class, 'addToCart']);
+Route::middleware('auth')->post('/remove-from-cart', [CustomerController::class, 'deleteFromCart']);
+Route::middleware('auth')->post('/submit-cart-items', [CustomerController::class, 'submitCheckout']);
+Route::middleware('auth')->get('/payment', [CustomerController::class, 'customerPayment']);
+
+
+
 
 
 Route::controller(DemoController::class)->group(function () {
